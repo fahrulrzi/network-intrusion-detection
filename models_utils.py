@@ -608,3 +608,30 @@ def preprocess_data_for_model(new_data, target_encoder, config, model_type='bina
     logger.debug(f"Final features: {list(processed_data.columns)}")
     
     return processed_data
+
+
+class CustomUnpickler(pickle.Unpickler):
+    def find_class(self, module, name):
+        # Solusi untuk model yang disimpan saat skrip training adalah __main__
+        if module == "__main__":
+            # Dapatkan referensi ke modul saat ini (models_utils)
+            # dan cari kelas di dalamnya.
+            current_module = sys.modules[__name__]
+            if hasattr(current_module, name):
+                return getattr(current_module, name)
+        return super().find_class(module, name)
+
+def load_model_with_fix(filepath):
+    """
+    Memuat file. Menggunakan CustomUnpickler untuk file .pkl
+    dan joblib.load untuk file .joblib.
+    """
+    # Periksa ekstensi file
+    if filepath.endswith('.pkl'):
+        # Gunakan unpickler khusus untuk file .pkl (biasanya untuk encoder/class kustom)
+        with open(filepath, 'rb') as f:
+            return CustomUnpickler(f).load()
+    else:
+        # Gunakan joblib.load untuk file lain (biasanya model .joblib)
+        # Joblib lebih baik dalam menangani array numpy besar dan kompresi.
+        return joblib.load(filepath)
