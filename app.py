@@ -67,7 +67,13 @@ def initialize_models():
 def create_app():
     """Create and configure Flask application"""
     app = Flask(__name__)
-    CORS(app)
+    CORS(app, resources={
+        r"/*": {
+            "origins": "*", # Untuk production, lebih baik ganti "*" dengan domain frontend Anda, misal: "https://aplikasi-nextjs-anda.vercel.app"
+            "methods": ["GET", "POST", "OPTIONS"],
+            "allow_headers": ["Content-Type", "Authorization"] # Tambahkan header lain jika perlu
+        }
+    })
     app.config['SECRET_KEY'] = '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'
     
     # Initialize models
