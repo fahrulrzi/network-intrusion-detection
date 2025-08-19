@@ -18,7 +18,7 @@ RUN git config --global url."https://oauth2:${GIT_TOKEN}@github.com/".insteadOf 
 
 # KlONING repositori di dalam container, BUKAN di-COPY
 # GANTI DENGAN URL REPO ANDA. Tanda titik (.) di akhir berarti kloning ke direktori saat ini (/app)
-RUN git clone https://github.com/fahrulrzi/network-detection.git .
+RUN git clone https://github.com/fahrulrzi/network-intrusion-detection.git .
 
 # Jalankan perintah penting ini untuk mengunduh file LFS yang sebenarnya
 # Perintah ini sekarang akan berhasil karena kita berada di dalam repo Git.
