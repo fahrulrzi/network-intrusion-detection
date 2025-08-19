@@ -67,7 +67,7 @@ def initialize_models():
 def create_app():
     """Create and configure Flask application"""
     app = Flask(__name__)
-    CORS(app, resources={r"/*": {"origins": "*"}})
+    CORS(app)
     app.config['SECRET_KEY'] = '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'
     
     # Initialize models
