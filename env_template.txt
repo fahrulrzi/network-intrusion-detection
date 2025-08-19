@@ -1,0 +1,14 @@
+# Network Intrusion Detection System - Environment Variables
+# Copy this file to .env and fill in your actual values
+
+# Groq API Configuration (Optional - for LLM-powered mitigation recommendations)
+# Get your free API key from: https://console.groq.com/
+GROQ_API_KEY=your_groq_api_key_here
+
+# Flask Configuration
+FLASK_DEBUG=True
+FLASK_HOST=0.0.0.0
+FLASK_PORT=5000
+
+# Security
+SECRET_KEY=your-secret-key-here

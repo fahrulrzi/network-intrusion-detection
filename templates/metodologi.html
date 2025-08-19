@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metodologi Pengembangan - CyberGuard AI</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for glassmorphism and animations */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #05020a;
+        }
+        
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, rgba(192, 132, 252, 1) 0%, rgba(124, 58, 237, 1) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(90deg, rgba(192, 132, 252, 1) 0%, rgba(124, 58, 237, 1) 100%);
+        }
+        
+        .hero-bg {
+            background: radial-gradient(ellipse at center, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .fade-in-delay-1 { animation-delay: 0.2s; }
+        .fade-in-delay-2 { animation-delay: 0.4s; }
+        .fade-in-delay-3 { animation-delay: 0.6s; }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hover-glow:hover {
+            box-shadow: 0 0 30px rgba(192, 132, 252, 0.3);
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+
+        /* Table styling */
+        .methodology-table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .methodology-table th {
+            background: rgba(192, 132, 252, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .methodology-table td {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Navigation styles */
+        .nav-toc {
+            position: sticky;
+            top: 100px;
+        }
+
+        .nav-toc a.active {
+            background: rgba(192, 132, 252, 0.2);
+            border-left: 3px solid #c084fc;
+        }
+    </style>
+    
+    <!-- MathJax for formula rendering -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+    <body class="bg-[#05020a] text-[#f0f0f0] overflow-x-hidden">
+    <!-- Header & Navigation -->
+    <header class="fixed top-0 w-full z-50 glassmorphism">
+        <div id="navbar-placeholder"></div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-12 hero-bg">
+        <div class="container mx-auto px-6 text-center">
+            <!-- Methodology Icon -->
+            <div class="w-20 h-20 mx-auto mb-6 fade-in">
+                <svg viewBox="0 0 80 80" class="w-full h-full text-[#c084fc]" fill="none">
+                    <!-- Central Node -->
+                    <circle cx="40" cy="40" r="8" fill="currentColor"/>
+                    
+                    <!-- Surrounding Nodes -->
+                    <circle cx="20" cy="20" r="6" fill="rgba(192, 132, 252, 0.6)"/>
+                    <circle cx="60" cy="20" r="6" fill="rgba(192, 132, 252, 0.6)"/>
+                    <circle cx="20" cy="60" r="6" fill="rgba(192, 132, 252, 0.6)"/>
+                    <circle cx="60" cy="60" r="6" fill="rgba(192, 132, 252, 0.6)"/>
+                    
+                    <!-- Connecting Lines -->
+                    <path d="M 26 26 L 34 34" stroke="currentColor" stroke-width="2"/>
+                    <path d="M 54 26 L 46 34" stroke="currentColor" stroke-width="2"/>
+                    <path d="M 26 54 L 34 46" stroke="currentColor" stroke-width="2"/>
+                    <path d="M 54 54 L 46 46" stroke="currentColor" stroke-width="2"/>
+                    
+                    <!-- Data Flow Arrows -->
+                    <path d="M 40 15 L 40 32" stroke="currentColor" stroke-width="2" marker-end="url(#arrowhead-small)"/>
+                    <path d="M 65 40 L 48 40" stroke="currentColor" stroke-width="2" marker-end="url(#arrowhead-small)"/>
+                    <path d="M 40 65 L 40 48" stroke="currentColor" stroke-width="2" marker-end="url(#arrowhead-small)"/>
+                    <path d="M 15 40 L 32 40" stroke="currentColor" stroke-width="2" marker-end="url(#arrowhead-small)"/>
+                    
+                    <defs>
+                        <marker id="arrowhead-small" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                            <polygon points="0 0, 8 3, 0 6" fill="currentColor"/>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight fade-in fade-in-delay-1">
+                <span class="gradient-text">Metode Pengembangan:</span><br>
+                Membangun Model dari Data
+            </h1>
+            <p class="text-lg md:text-xl text-[#a0a0a0] mb-8 max-w-4xl mx-auto leading-relaxed fade-in fade-in-delay-2">
+                Bagian ini akan membawa Anda menelusuri perjalanan teknis kami, mulai dari data mentah hingga menjadi model machine learning yang siap beraksi. Setiap langkah diambil secara strategis untuk memastikan solusi yang kami bangun tidak hanya akurat, tetapi juga andal dan efisien.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-12">
+        <div class="grid lg:grid-cols-4 gap-8">
+            <!-- Table of Contents Navigation -->
+            <div class="lg:col-span-1">
+                <div class="nav-toc glassmorphism rounded-lg p-6 lg:sticky lg:top-24 lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto">
+                    <h3 class="text-lg font-semibold mb-4 gradient-text">Daftar Isi</h3>
+                    <nav class="space-y-2">
+                        <a href="#data-preparation" class="block px-3 py-2 rounded text-[#a0a0a0] hover:text-[#f0f0f0] hover:bg-rgba(255,255,255,0.05) transition-all duration-300 nav-link">
+                            <i class="fas fa-database mr-2"></i>Data Preparation
+                        </a>
+                        <a href="#scaling" class="block px-3 py-2 ml-4 rounded text-[#a0a0a0] hover:text-[#f0f0f0] hover:bg-rgba(255,255,255,0.05) transition-all duration-300 nav-link">
+                            <i class="fas fa-balance-scale mr-2"></i>Scaling
+                        </a>
+                        <a href="#encoding" class="block px-3 py-2 ml-4 rounded text-[#a0a0a0] hover:text-[#f0f0f0] hover:bg-rgba(255,255,255,0.05) transition-all duration-300 nav-link">
+                            <i class="fas fa-code mr-2"></i>Encoding
+                        </a>
+                        <a href="#feature-selection" class="block px-3 py-2 ml-4 rounded text-[#a0a0a0] hover:text-[#f0f0f0] hover:bg-rgba(255,255,255,0.05) transition-all duration-300 nav-link">
+                            <i class="fas fa-filter mr-2"></i>Seleksi Fitur
+                        </a>
+                        <a href="#data-balancing" class="block px-3 py-2 rounded text-[#a0a0a0] hover:text-[#f0f0f0] hover:bg-rgba(255,255,255,0.05) transition-all duration-300 nav-link">
+                            <i class="fas fa-balance-scale-right mr-2"></i>Data Balancing
+                        </a>
+                        <a href="#binaryclass-balancing" class="block px-3 py-2 ml-4 rounded text-[#a0a0a0] hover:text-[#f0f0f0] hover:bg-rgba(255,255,255,0.05) transition-all duration-300 nav-link">
+                            <i class="fas fa-shield-alt mr-2"></i>Model Biner
+                        </a>
+                        <a href="#multiclass-balancing" class="block px-3 py-2 ml-4 rounded text-[#a0a0a0] hover:text-[#f0f0f0] hover:bg-rgba(255,255,255,0.05) transition-all duration-300 nav-link">
+                            <i class="fas fa-layer-group mr-2"></i>Model Multikelas
+                        </a>
+                        <a href="#modeling" class="block px-3 py-2 rounded text-[#a0a0a0] hover:text-[#f0f0f0] hover:bg-rgba(255,255,255,0.05) transition-all duration-300 nav-link">
+                            <i class="fas fa-brain mr-2"></i>Pemodelan
+                        </a>
+                        <a href="#algorithms" class="block px-3 py-2 ml-4 rounded text-[#a0a0a0] hover:text-[#f0f0f0] hover:bg-rgba(255,255,255,0.05) transition-all duration-300 nav-link">
+                            <i class="fas fa-cogs mr-2"></i>Kandidat Algoritma
+                        </a>
+                        <a href="#hyperparameter-tuning" class="block px-3 py-2 ml-4 rounded text-[#a0a0a0] hover:text-[#f0f0f0] hover:bg-rgba(255,255,255,0.05) transition-all duration-300 nav-link">
+                            <i class="fas fa-sliders-h mr-2"></i>Hyperparameter Tuning
+                        </a>
+                        <a href="#evaluation-metrics" class="block px-3 py-2 rounded text-[#a0a0a0] hover:text-[#f0f0f0] hover:bg-rgba(255,255,255,0.05) transition-all duration-300 nav-link">
+                            <i class="fas fa-clipboard-check mr-2"></i>Metriks Evaluasi
+                        </a>
+                        <a href="#eval-binary" class="block px-3 py-2 ml-4 rounded text-[#a0a0a0] hover:text-[#f0f0f0] hover:bg-rgba(255,255,255,0.05) transition-all duration-300 nav-link">
+                            <i class="fas fa-shield-alt mr-2"></i>Model Biner
+                        </a>
+                        <a href="#eval-multiclass" class="block px-3 py-2 ml-4 rounded text-[#a0a0a0] hover:text-[#f0f0f0] hover:bg-rgba(255,255,255,0.05) transition-all duration-300 nav-link">
+                            <i class="fas fa-sliders-h mr-2"></i>Model Multikelas
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="lg:col-span-3">
+                <!-- Data Preparation Section -->
+                <section id="data-preparation" class="mb-16 fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8 gradient-text">
+                        <span class="text-[#a0a0a0] font-normal">3.1</span> Data Preparation: Fondasi untuk Model yang Kuat
+                    </h2>
+                    
+                    <div class="glassmorphism rounded-lg p-8 mb-8">
+                        <p class="text-[#f0f0f0] leading-relaxed text-lg mb-6">
+                            Model machine learning yang hebat lahir dari data yang berkualitas. Tahap <span class="text-[#c084fc] font-semibold">Data Preparation</span> adalah fondasi penting di mana kami membersihkan, mengubah, dan menyempurnakan data mentah agar siap untuk dilatih. Setiap langkah dalam proses ini diambil secara strategis untuk memaksimalkan potensi informasi dalam data dan memastikan model kami belajar dari sinyal yang paling relevan.
+                        </p>
+                    </div>
+
+                    <!-- Scaling Subsection -->
+                    <div id="scaling" class="mb-12">
+                        <div class="glassmorphism rounded-lg p-8">
+                            <h3 class="text-2xl font-bold mb-6 text-[#f0f0f0]">
+                                <span class="gradient-text">3.1.1</span> Scaling: Menangani Nilai Ekstrem (Outliers)
+                            </h3>
+                            
+                            <p class="text-[#f0f0f0] leading-relaxed mb-6 text-lg">
+                                Analisis awal kami menunjukkan keberadaan outliers dalam jumlah besar pada banyak fitur numerik. Untuk memastikan nilai-nilai ini tidak mendistorsi proses pembelajaran, kami menerapkan <span class="text-[#c084fc] font-semibold">RobustScaler</span>. Berbeda dengan metode scaling biasa, RobustScaler menggunakan median dan Interquartile Range (IQR) untuk mengubah skala data, membuatnya lebih 'tahan banting'. Tabel di bawah menunjukkan beberapa fitur dengan jumlah outliers tertinggi, menggarisbawahi pentingnya metode scaling yang robust.
+                            </p>
+
+                            <!-- Outliers Table -->
+                            <div class="glassmorphism rounded-lg p-6">
+                                <h4 class="text-lg font-semibold mb-4 text-center gradient-text">
+                                    Fitur dengan Outliers Tertinggi
+                                </h4>
+                                
+                                <div class="overflow-x-auto">
+                                    <table class="methodology-table w-full text-sm">
+                                        <thead>
+                                            <tr>
+                                                <th class="px-4 py-3 text-left text-[#f0f0f0] font-semibold">Fitur</th>
+                                                <th class="px-4 py-3 text-left text-[#f0f0f0] font-semibold">Outlier Dataset Biner (%)</th>
+                                                <th class="px-4 py-3 text-left text-[#f0f0f0] font-semibold">Outlier Dataset Subset Serangan (%)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="border-b border-gray-700">
+                                                <td class="px-4 py-3 text-[#c084fc] font-semibold">dload</td>
+                                                <td class="px-4 py-3 text-[#f0f0f0]">38.143</td>
+                                                <td class="px-4 py-3 text-[#f0f0f0]">15.029</td>
+                                            </tr>
+                                            <tr class="border-b border-gray-700">
+                                                <td class="px-4 py-3 text-[#f0f0f0]">ct_dst_sport_ltm</td>
+                                                <td class="px-4 py-3 text-[#f0f0f0]">37.337</td>
+                                                <td class="px-4 py-3 text-[#f0f0f0]">110</td>
+                                            </tr>
+                                            <tr class="border-b border-gray-700">
+                                                <td class="px-4 py-3 text-[#f0f0f0]">ct_src_dport_ltm</td>
+                                                <td class="px-4 py-3 text-[#f0f0f0]">33.423</td>
+                                                <td class="px-4 py-3 text-[#f0f0f0]">2.111</td>
+                                            </tr>
+                                            <tr class="border-b border-gray-700">
+                                                <td class="px-4 py-3 text-[#f0f0f0]">synack</td>
+                                                <td class="px-4 py-3 text-[#f0f0f0]">31.462</td>
+                                                <td class="px-4 py-3 text-[#f0f0f0]">6.006</td>
+                                            </tr>
+                                            <tr class="border-b border-gray-700">
+                                                <td class="px-4 py-3 text-[#f0f0f0]">dloss</td>
+                                                <td class="px-4 py-3 text-[#f0f0f0]">28.388</td>
+                                                <td class="px-4 py-3 text-[#f0f0f0]">14.164</td>
+                                            </tr>
+                                            <tr class="border-b border-gray-700">
+                                                <td class="px-4 py-3 text-[#f0f0f0]">dbytes</td>
+                                                <td class="px-4 py-3 text-[#f0f0f0]">28.131</td>
+                                                <td class="px-4 py-3 text-[#f0f0f0]">17.035</td>
+                                            </tr>
+                                            <tr class="border-b border-gray-700">
+                                                <td class="px-4 py-3 text-[#f0f0f0]">spkts</td>
+                                                <td class="px-4 py-3 text-[#f0f0f0]">24.675</td>
+                                                <td class="px-4 py-3 text-[#f0f0f0]">9.558</td>
+                                            </tr>
+                                            <tr class="border-b border-gray-700">
+                                                <td class="px-4 py-3 text-[#f0f0f0]">dmean</td>
+                                                <td class="px-4 py-3 text-[#f0f0f0]">23.359</td>
+                                                <td class="px-4 py-3 text-[#f0f0f0]">11.471</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-4 py-3 text-[#f0f0f0]">sbytes</td>
+                                                <td class="px-4 py-3 text-[#f0f0f0]">22.873</td>
+                                                <td class="px-4 py-3 text-[#f0f0f0]">12.882</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Encoding Subsection -->
+                    <div id="encoding" class="mb-12">
+                        <div class="glassmorphism rounded-lg p-8">
+                            <h3 class="text-2xl font-bold mb-6 text-[#f0f0f0]">
+                                <span class="gradient-text">3.1.2</span> Encoding: Menerjemahkan Data Kategoris
+                            </h3>
+                            
+                            <p class="text-[#f0f0f0] leading-relaxed mb-6 text-lg">
+                                Model machine learning bekerja dengan angka. Proses encoding adalah langkah kami untuk 'menerjemahkan' fitur-fitur kategoris menjadi format numerik. Untuk sebagian besar fitur, kami menggunakan <span class="text-[#c084fc] font-semibold">OneHotEncoder</span>. Namun, untuk fitur 'proto' yang memiliki 129 kategori unik, kami menerapkan <span class="text-[#c084fc] font-semibold">Target Encoding</span>, sebuah teknik canggih yang mengganti setiap kategori dengan nilai numerik yang merepresentasikan hubungannya dengan target, solusi efisien untuk fitur kardinalitas tinggi.
+                            </p>
+
+                            <!-- Categorical Features Table -->
+                            <div class="glassmorphism rounded-lg p-6">
+                                <h4 class="text-lg font-semibold mb-4 text-center gradient-text">
+                                    Fitur Kategoris dan Metode Encoding
+                                </h4>
+                                
+                                <div class="overflow-x-auto">
+                                    <table class="methodology-table w-full text-sm">
+                                        <thead>
+                                            <tr>
+                                                <th class="px-4 py-3 text-left text-[#f0f0f0] font-semibold">Nama Fitur</th>
+                                                <th class="px-4 py-3 text-left text-[#f0f0f0] font-semibold">Jumlah Nilai Unik</th>
+                                                <th class="px-4 py-3 text-left text-[#f0f0f0] font-semibold">Contoh Nilai Unik</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="border-b border-gray-700">
+                                                <td class="px-4 py-3 text-[#c084fc] font-semibold">proto</td>
+                                                <td class="px-4 py-3 text-[#f0f0f0]">129</td>
+                                                <td class="px-4 py-3 text-[#a0a0a0]">udp, tcp, unas, ospf, ...</td>
+                                            </tr>
+                                            <tr class="border-b border-gray-700">
+                                                <td class="px-4 py-3 text-[#f0f0f0]">service</td>
+                                                <td class="px-4 py-3 text-[#f0f0f0]">13</td>
+                                                <td class="px-4 py-3 text-[#a0a0a0]">-, dns, http, smtp, ...</td>
+                                            </tr>
+                                            <tr class="border-b border-gray-700">
+                                                <td class="px-4 py-3 text-[#f0f0f0]">state</td>
+                                                <td class="px-4 py-3 text-[#f0f0f0]">5</td>
+                                                <td class="px-4 py-3 text-[#a0a0a0]">INT, FIN, REQ, CON, RST</td>
+                                            </tr>
+                                            <tr class="border-b border-gray-700">
+                                                <td class="px-4 py-3 text-[#f0f0f0]">is_sm_ips_ports</td>
+                                                <td class="px-4 py-3 text-[#f0f0f0]">2 (Biner) / 1 (Multikelas)</td>
+                                                <td class="px-4 py-3 text-[#a0a0a0]">0, 1</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-4 py-3 text-[#f0f0f0]">is_ftp_login</td>
+                                                <td class="px-4 py-3 text-[#f0f0f0]">4</td>
+                                                <td class="px-4 py-3 text-[#a0a0a0]">0, 1, 2, 4</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Feature Selection Subsection -->
+                    <div id="feature-selection" class="mb-12">
+                        <div class="glassmorphism rounded-lg p-8">
+                            <h3 class="text-2xl font-bold mb-6 text-[#f0f0f0]">
+                                <span class="gradient-text">3.1.3</span> Seleksi Fitur: Fokus pada Informasi Paling Penting
+                            </h3>
+                            
+                            <div class="flex items-start space-x-6">
+                                <div class="flex-shrink-0 mt-2">
+                                    <!-- Feature Selection Icon -->
+                                    <div class="w-16 h-16 text-[#c084fc]">
+                                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <!-- Funnel shape -->
+                                            <path d="M 12 12 L 52 12 L 36 28 L 36 52 L 28 52 L 28 28 Z" fill="currentColor" opacity="0.3"/>
+                                            <path d="M 12 12 L 52 12 L 36 28 L 36 52 L 28 52 L 28 28 Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                                            
+                                            <!-- Data points going through funnel -->
+                                            <circle cx="20" cy="8" r="2" fill="currentColor"/>
+                                            <circle cx="32" cy="8" r="2" fill="currentColor"/>
+                                            <circle cx="44" cy="8" r="2" fill="currentColor"/>
+                                            
+                                            <circle cx="32" cy="40" r="2" fill="currentColor"/>
+                                            <circle cx="32" cy="56" r="2" fill="currentColor"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-[#f0f0f0] leading-relaxed text-lg">
+                                        Tidak semua fitur memberikan kontribusi yang sama. Untuk efisiensi, kami melakukan seleksi fitur menggunakan <span class="text-[#c084fc] font-semibold">Metode Filter berbasis Uji Hipotesis Statistik</span> (seperti T-Test dan ANOVA). Hanya fitur yang menunjukkan hubungan signifikan secara statistik yang dipertahankan, memastikan model kami belajar dari sinyal terkuat.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Data Balancing Section -->
+                <section id="data-balancing" class="mb-16 fade-in fade-in-delay-1">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8 gradient-text">
+                        <span class="text-[#a0a0a0] font-normal">3.2</span> Strategi Menyeimbangkan Data
+                    </h2>
+
+                    <div id="binaryclass-balancing" class="glassmorphism rounded-lg p-8">
+                        <h3 class="text-2xl font-bold mb-6 text-[#f0f0f0]">
+                            <span class="gradient-text">3.2.1</span> Model Biner: Memperkuat Sinyal Kelas Minoritas
+                        </h3>
+                        
+                        <div class="grid md:grid-cols-2 gap-8 items-center">
+                            <div>
+                                <p class="text-[#f0f0f0] leading-relaxed text-lg mb-6">
+                                    Data latih kami tidak seimbang (31.9% 'Normal' vs 68.1% 'Attack'). Untuk mengatasi ini, kami menerapkan strategi oversampling dengan <span class="text-[#c084fc] font-semibold">SMOTE (Synthetic Minority Over-sampling Technique)</span>. SMOTE secara cerdas menciptakan sampel 'Normal' sintetis baru, menyeimbangkan dataset, dan 'memaksa' model untuk mempelajari pola dari kedua kelas secara adil, yang krusial untuk 'Penjaga Gerbang' yang andal.
+                                </p>
+                            </div>
+                            
+                            <!-- Class Imbalance Chart -->
+                            <div class="glassmorphism rounded-lg p-6">
+                                <h4 class="text-lg font-semibold mb-4 text-center gradient-text">
+                                    Distribusi Kelas Dataset
+                                </h4>
+                                
+                                <div class="flex justify-center">
+                                    <svg viewBox="0 0 200 200" class="w-48 h-48">
+                                        <!-- Attack Slice (68.1%) -->
+                                        <path d="M 100 100 L 100 20 A 80 80 0 1 1 45.86 163.18 Z" 
+                                              fill="rgba(239, 68, 68, 0.7)" 
+                                              stroke="#ef4444" 
+                                              stroke-width="2"/>
+                                        
+                                        <!-- Normal Slice (31.9%) -->
+                                        <path d="M 100 100 L 45.86 163.18 A 80 80 0 0 1 100 20 Z" 
+                                              fill="rgba(34, 197, 94, 0.7)" 
+                                              stroke="#22c55e" 
+                                              stroke-width="2"/>
+                                        
+                                        <!-- Labels -->
+                                        <text x="130" y="70" text-anchor="middle" fill="#ef4444" font-size="12" font-family="Inter" font-weight="600">Attack</text>
+                                        <text x="130" y="85" text-anchor="middle" fill="#ef4444" font-size="11" font-family="Inter">68.1%</text>
+                                        
+                                        <text x="70" y="150" text-anchor="middle" fill="#22c55e" font-size="12" font-family="Inter" font-weight="600">Normal</text>
+                                        <text x="70" y="165" text-anchor="middle" fill="#22c55e" font-size="11" font-family="Inter">31.9%</text>
+                                    </svg>
+                                </div>
+                                
+                                <div class="mt-4 text-center">
+                                    <p class="text-[#a0a0a0] text-sm">
+                                        Dataset tidak seimbang memerlukan teknik SMOTE untuk menyeimbangkan kelas minoritas
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Model Multikelas Section -->
+                    <div id="multiclass-balancing" class="glassmorphism rounded-lg p-8 mt-8">
+                        <h3 class="text-2xl font-bold mb-6 text-[#f0f0f0]">
+                            <span class="gradient-text">3.2.2</span> Model Multikelas: Strategi Hibrida untuk Keseimbangan Ekstrem
+                        </h3>
+                        <p class="text-[#f0f0f0] leading-relaxed text-lg mb-4">
+                            Tantangan pada model multikelas jauh lebih kompleks. Seperti terlihat pada grafik, distribusi kelas serangan sangat timpang, mulai dari puluhan ribu sampel 'Generic' hingga hanya seratusan 'Worms'. Menggunakan satu metode penyeimbangan saja tidak akan efektif.
+                        </p>
+                        <p class="text-[#a0a0a0] leading-relaxed mb-6">
+                            Untuk mengatasi ini, kami merancang strategi <span class="text-[#c084fc] font-semibold">Hybrid Multi-Tier Rebalancing</span>, sebuah pendekatan tiga langkah yang cerdas: <span class="text-[#f0f0f0]">Undersampling Ringan</span>, <span class="text-[#f0f0f0]">Oversampling Bertingkat (SMOTE)</span>, dan <span class="text-[#f0f0f0]">Pembersihan (Tomek Links)</span>. Hasilnya adalah distribusi kelas yang jauh lebih seimbang dan ideal untuk melatih model spesialis yang akurat, seperti yang ditunjukkan pada grafik 'Sesudah' di bawah ini.
+                        </p>
+
+                        <!-- Sebelum Rebalancing: Pie Chart -->
+                        <div class="bg-rgba(255,255,255,0.05) backdrop-blur-lg rounded-xl p-6 mb-8 border border-rgba(255,255,255,0.1)">
+                            <h4 class="text-lg font-semibold text-[#f0f0f0] mb-4">Distribusi Kelas Serangan (Sebelum Rebalancing)</h4>
+                            <div class="flex flex-col lg:flex-row gap-6">
+                                <div class="flex-1 flex items-center justify-center">
+                                    <!-- Donut Pie built with stroke-dasharray segments -->
+                                    <svg viewBox="0 0 260 260" width="100%" height="260" class="max-w-md">
+                                        <defs>
+                                            <linearGradient id="pieGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                <stop offset="0%" stop-color="#c084fc" stop-opacity="0.25"/>
+                                                <stop offset="100%" stop-color="#7c3aed" stop-opacity="0.25"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <circle cx="130" cy="130" r="90" fill="none" stroke="url(#pieGlow)" stroke-width="26" />
+                                        <!-- Circumference ~ 565; using precomputed segment lengths & rotations -->
+                                        <!-- Generic 33.5% -->
+                                        <circle cx="130" cy="130" r="90" fill="none" stroke="#8b5cf6" stroke-width="26" stroke-dasharray="168.4 397" transform="rotate(-90 130 130)" />
+                                        <!-- Exploits 28.0% -->
+                                        <circle cx="130" cy="130" r="90" fill="none" stroke="#22c55e" stroke-width="26" stroke-dasharray="140.7 425" transform="rotate(30.6 130 130)" />
+                                        <!-- Fuzzers 15.2% -->
+                                        <circle cx="130" cy="130" r="90" fill="none" stroke="#06b6d4" stroke-width="26" stroke-dasharray="76.4 490" transform="rotate(131.4 130 130)" />
+                                        <!-- DoS 10.3% -->
+                                        <circle cx="130" cy="130" r="90" fill="none" stroke="#ef4444" stroke-width="26" stroke-dasharray="51.8 515" transform="rotate(186 130 130)" />
+                                        <!-- Reconnaissance 8.8% -->
+                                        <circle cx="130" cy="130" r="90" fill="none" stroke="#f59e0b" stroke-width="26" stroke-dasharray="44.2 523" transform="rotate(223.1 130 130)" />
+                                        <!-- Analysis 1.7% -->
+                                        <circle cx="130" cy="130" r="90" fill="none" stroke="#a78bfa" stroke-width="26" stroke-dasharray="8.5 559" transform="rotate(254.8 130 130)" />
+                                        <!-- Backdoor 1.46% -->
+                                        <circle cx="130" cy="130" r="90" fill="none" stroke="#fde047" stroke-width="26" stroke-dasharray="7.3 560" transform="rotate(261 130 130)" />
+                                        <!-- Shellcode 0.95% -->
+                                        <circle cx="130" cy="130" r="90" fill="none" stroke="#34d399" stroke-width="26" stroke-dasharray="4.8 563" transform="rotate(266.3 130 130)" />
+                                        <!-- Worms 0.11% -->
+                                        <circle cx="130" cy="130" r="90" fill="none" stroke="#f97316" stroke-width="26" stroke-dasharray="0.6 567" transform="rotate(269.7 130 130)" />
+                                        
+                                        <!-- Center labels -->
+                                        <text x="130" y="122" text-anchor="middle" fill="#f0f0f0" font-size="14" font-weight="700">Total</text>
+                                        <text x="130" y="142" text-anchor="middle" fill="#c084fc" font-size="16" font-weight="800">119,341</text>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="grid grid-cols-1 gap-2">
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center">
+                                                <span class="w-4 h-4 rounded mr-3 inline-block" style="background:#8b5cf6"></span>
+                                                <span class="text-[#f0f0f0]">Generic</span>
+                                            </div>
+                                            <span class="text-[#a0a0a0]">33.5% • 40,000</span>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center">
+                                                <span class="w-4 h-4 rounded mr-3 inline-block" style="background:#22c55e"></span>
+                                                <span class="text-[#f0f0f0]">Exploits</span>
+                                            </div>
+                                            <span class="text-[#a0a0a0]">28.0% • 33,393</span>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center">
+                                                <span class="w-4 h-4 rounded mr-3 inline-block" style="background:#06b6d4"></span>
+                                                <span class="text-[#f0f0f0]">Fuzzers</span>
+                                            </div>
+                                            <span class="text-[#a0a0a0]">15.2% • 18,184</span>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center">
+                                                <span class="w-4 h-4 rounded mr-3 inline-block" style="background:#ef4444"></span>
+                                                <span class="text-[#f0f0f0]">DoS</span>
+                                            </div>
+                                            <span class="text-[#a0a0a0]">10.3% • 12,264</span>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center">
+                                                <span class="w-4 h-4 rounded mr-3 inline-block" style="background:#f59e0b"></span>
+                                                <span class="text-[#f0f0f0]">Reconnaissance</span>
+                                            </div>
+                                            <span class="text-[#a0a0a0]">8.8% • 10,491</span>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center">
+                                                <span class="w-4 h-4 rounded mr-3 inline-block" style="background:#a78bfa"></span>
+                                                <span class="text-[#f0f0f0]">Analysis</span>
+                                            </div>
+                                            <span class="text-[#a0a0a0]">1.7% • 2,000</span>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center">
+                                                <span class="w-4 h-4 rounded mr-3 inline-block" style="background:#fde047"></span>
+                                                <span class="text-[#f0f0f0]">Backdoor</span>
+                                            </div>
+                                            <span class="text-[#a0a0a0]">1.46% • 1,746</span>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center">
+                                                <span class="w-4 h-4 rounded mr-3 inline-block" style="background:#34d399"></span>
+                                                <span class="text-[#f0f0f0]">Shellcode</span>
+                                            </div>
+                                            <span class="text-[#a0a0a0]">0.95% • 1,133</span>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center">
+                                                <span class="w-4 h-4 rounded mr-3 inline-block" style="background:#f97316"></span>
+                                                <span class="text-[#f0f0f0]">Worms</span>
+                                            </div>
+                                            <span class="text-[#a0a0a0]">0.11% • 130</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Hybrid Multi-Tier Rebalancing Explanation -->
+                        <div class="bg-rgba(255,255,255,0.05) backdrop-blur-lg rounded-xl p-6 border border-rgba(255,255,255,0.1)">
+                            <h4 class="text-lg font-semibold text-[#f0f0f0] mb-4">Hybrid Multi-Tier Rebalancing</h4>
+                            <div class="grid md:grid-cols-3 gap-6">
+                                <div>
+                                    <h5 class="text-md font-semibold text-[#c084fc] mb-2">1) Undersampling Ringan</h5>
+                                    <p class="text-[#a0a0a0] text-sm">Mengurangi sebagian contoh dari kelas dominan untuk menurunkan bias tanpa kehilangan informasi penting.</p>
+                                </div>
+                                <div>
+                                    <h5 class="text-md font-semibold text-[#c084fc] mb-2">2) SMOTE Bertingkat</h5>
+                                    <p class="text-[#a0a0a0] text-sm">Menambah sampel sintetis untuk kelas minoritas secara bertahap mengikuti kedekatan tetangga (k-NN).</p>
+                                </div>
+                                <div>
+                                    <h5 class="text-md font-semibold text-[#c084fc] mb-2">3) Tomek Links Cleanup</h5>
+                                    <p class="text-[#a0a0a0] text-sm">Menghapus pasangan sampel yang saling tumpang tindih (noise) untuk memperjelas batas kelas.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <!-- Perbandingan: Before vs After Rebalancing (Horizontal Bars) -->
+                        <div class="bg-rgba(255,255,255,0.05) backdrop-blur-lg rounded-xl p-6 mb-8 border border-rgba(255,255,255,0.1)">
+                            <h4 class="text-lg font-semibold text-[#f0f0f0] mb-6">Perbandingan Distribusi Kelas (Sebelum & Sesudah Rebalancing)</h4>
+                            <div class="grid md:grid-cols-2 gap-8">
+                                <!-- Left: Before -->
+                                <div>
+                                    <div class="text-[#a0a0a0] text-sm mb-2">Jumlah Awal</div>
+                                    <svg viewBox="0 0 420 290" width="100%" height="290" class="rounded">
+                                        <!-- y labels and bars -->
+                                        <g font-family="Inter" font-size="12" fill="#a0a0a0">
+                                            <!-- Use 28px row height -->
+                                            <g transform="translate(0,20)">
+                                                <text x="0" y="10">Analysis</text>
+                                                <rect x="110" y="0" width="16" height="14" fill="#7c3aed" opacity="0.8"/>
+                                                <text x="110" y="-4" fill="#7c3aed">2000</text>
+                                            </g>
+                                            <g transform="translate(0,48)">
+                                                <text x="0" y="10">Backdoor</text>
+                                                <rect x="110" y="0" width="14" height="14" fill="#7c3aed" opacity="0.8"/>
+                                                <text x="110" y="-4" fill="#7c3aed">1746</text>
+                                            </g>
+                                            <g transform="translate(0,76)">
+                                                <text x="0" y="10">DoS</text>
+                                                <rect x="110" y="0" width="98" height="14" fill="#7c3aed" opacity="0.8"/>
+                                                <text x="110" y="-4" fill="#7c3aed">12264</text>
+                                            </g>
+                                            <g transform="translate(0,104)">
+                                                <text x="0" y="10">Exploits</text>
+                                                <rect x="110" y="0" width="267" height="14" fill="#7c3aed" opacity="0.8"/>
+                                                <text x="110" y="-4" fill="#7c3aed">33377</text>
+                                            </g>
+                                            <g transform="translate(0,132)">
+                                                <text x="0" y="10">Fuzzers</text>
+                                                <rect x="110" y="0" width="145" height="14" fill="#7c3aed" opacity="0.8"/>
+                                                <text x="110" y="-4" fill="#7c3aed">18180</text>
+                                            </g>
+                                            <g transform="translate(0,160)">
+                                                <text x="0" y="10">Generic</text>
+                                                <rect x="110" y="0" width="320" height="14" fill="#7c3aed" opacity="0.8"/>
+                                                <text x="110" y="-4" fill="#7c3aed">40000</text>
+                                            </g>
+                                            <g transform="translate(0,188)">
+                                                <text x="0" y="10">Reconnaissance</text>
+                                                <rect x="110" y="0" width="84" height="14" fill="#7c3aed" opacity="0.8"/>
+                                                <text x="110" y="-4" fill="#7c3aed">10491</text>
+                                            </g>
+                                            <g transform="translate(0,216)">
+                                                <text x="0" y="10">Shellcode</text>
+                                                <rect x="110" y="0" width="9" height="14" fill="#7c3aed" opacity="0.8"/>
+                                                <text x="110" y="-4" fill="#7c3aed">1133</text>
+                                            </g>
+                                            <g transform="translate(0,244)">
+                                                <text x="0" y="10">Worms</text>
+                                                <rect x="110" y="0" width="1" height="14" fill="#7c3aed" opacity="0.8"/>
+                                                <text x="110" y="-4" fill="#7c3aed">130</text>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                                <!-- Right: After -->
+                                <div>
+                                    <div class="text-[#a0a0a0] text-sm mb-2">Jumlah Final</div>
+                                    <svg viewBox="0 0 420 290" width="100%" height="290" class="rounded">
+                                        <g font-family="Inter" font-size="12" fill="#a0a0a0">
+                                            <g transform="translate(0,20)">
+                                                <text x="0" y="10">Analysis</text>
+                                                <rect x="110" y="0" width="50" height="14" fill="#10b981" opacity="0.85"/>
+                                                <text x="110" y="-4" fill="#10b981">5700</text>
+                                            </g>
+                                            <g transform="translate(0,48)">
+                                                <text x="0" y="10">Backdoor</text>
+                                                <rect x="110" y="0" width="41" height="14" fill="#10b981" opacity="0.85"/>
+                                                <text x="110" y="-4" fill="#10b981">4727</text>
+                                            </g>
+                                            <g transform="translate(0,76)">
+                                                <text x="0" y="10">DoS</text>
+                                                <rect x="110" y="0" width="210" height="14" fill="#10b981" opacity="0.85"/>
+                                                <text x="110" y="-4" fill="#10b981">24192</text>
+                                            </g>
+                                            <g transform="translate(0,104)">
+                                                <text x="0" y="10">Exploits</text>
+                                                <rect x="110" y="0" width="312" height="14" fill="#10b981" opacity="0.85"/>
+                                                <text x="110" y="-4" fill="#10b981">36026</text>
+                                            </g>
+                                            <g transform="translate(0,132)">
+                                                <text x="0" y="10">Fuzzers</text>
+                                                <rect x="110" y="0" width="213" height="14" fill="#10b981" opacity="0.85"/>
+                                                <text x="110" y="-4" fill="#10b981">24574</text>
+                                            </g>
+                                            <g transform="translate(0,160)">
+                                                <text x="0" y="10">Generic</text>
+                                                <rect x="110" y="0" width="320" height="14" fill="#10b981" opacity="0.85"/>
+                                                <text x="110" y="-4" fill="#10b981">36866</text>
+                                            </g>
+                                            <g transform="translate(0,188)">
+                                                <text x="0" y="10">Reconnaissance</text>
+                                                <rect x="110" y="0" width="127" height="14" fill="#10b981" opacity="0.85"/>
+                                                <text x="110" y="-4" fill="#10b981">14591</text>
+                                            </g>
+                                            <g transform="translate(0,216)">
+                                                <text x="0" y="10">Shellcode</text>
+                                                <rect x="110" y="0" width="21" height="14" fill="#10b981" opacity="0.85"/>
+                                                <text x="110" y="-4" fill="#10b981">2409</text>
+                                            </g>
+                                            <g transform="translate(0,244)">
+                                                <text x="0" y="10">Worms</text>
+                                                <rect x="110" y="0" width="4" height="14" fill="#10b981" opacity="0.85"/>
+                                                <text x="110" y="-4" fill="#10b981">500</text>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Modeling Section -->
+                <section id="modeling" class="mb-16 fade-in fade-in-delay-2">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">
+                        <span class="text-[#a0a0a0] font-normal">3.3</span> Pemodelan: Mencari Algoritma Terbaik
+                    </h2>
+                    <p class="text-[#a0a0a0] mb-8">Setelah data disiapkan dengan matang, tahap selanjutnya adalah melatih dan memilih algoritma machine learning yang paling efektif.</p>
+
+                    <!-- Algorithm Candidates (Table only as requested) -->
+                    <div id="algorithms" class="glassmorphism rounded-lg p-8 mb-8">
+                        <h3 class="text-2xl font-bold mb-6 text-[#f0f0f0]">
+                            <span class="gradient-text">3.3.1</span> Kandidat Algoritma
+                        </h3>
+                        <p class="text-[#f0f0f0] leading-relaxed text-lg mb-6">
+                            Kami melakukan seleksi komprehensif dengan menguji tujuh kandidat algoritma yang mewakili berbagai pendekatan dalam machine learning. Semua kandidat ini diuji pada kedua skenario (biner dan multikelas) untuk menemukan yang berkinerja paling tinggi.
+                        </p>
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full bg-rgba(255,255,255,0.05) backdrop-blur-lg rounded-xl border border-rgba(255,255,255,0.1)">
+                                <thead>
+                                    <tr class="border-b border-gray-700">
+                                        <th class="px-6 py-4 text-left text-[#c084fc] font-semibold">No</th>
+                                        <th class="px-6 py-4 text-left text-[#c084fc] font-semibold">Algoritma</th>
+                                        <th class="px-6 py-4 text-left text-[#c084fc] font-semibold">Pustaka/Library</th>
+                                        <th class="px-6 py-4 text-left text-[#c084fc] font-semibold">Parameter Utama</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-gray-700">
+                                        <td class="px-6 py-4 text-[#a0a0a0]">1</td>
+                                        <td class="px-6 py-4 text-[#f0f0f0]">Logistic Regression</td>
+                                        <td class="px-6 py-4 text-[#a0a0a0]">scikit-learn</td>
+                                        <td class="px-6 py-4 text-[#a0a0a0]">random_state=42; max_iter=1000</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-700">
+                                        <td class="px-6 py-4 text-[#a0a0a0]">2</td>
+                                        <td class="px-6 py-4 text-[#f0f0f0]">Decision Tree Classifier</td>
+                                        <td class="px-6 py-4 text-[#a0a0a0]">scikit-learn</td>
+                                        <td class="px-6 py-4 text-[#a0a0a0]">random_state=42</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-700">
+                                        <td class="px-6 py-4 text-[#a0a0a0]">3</td>
+                                        <td class="px-6 py-4 text-[#f0f0f0]">Gaussian Naive Bayes</td>
+                                        <td class="px-6 py-4 text-[#a0a0a0]">scikit-learn</td>
+                                        <td class="px-6 py-4 text-[#a0a0a0]">-</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-700">
+                                        <td class="px-6 py-4 text-[#a0a0a0]">4</td>
+                                        <td class="px-6 py-4 text-[#f0f0f0]">Random Forest Classifier</td>
+                                        <td class="px-6 py-4 text-[#a0a0a0]">scikit-learn</td>
+                                        <td class="px-6 py-4 text-[#a0a0a0]">random_state=42; n_jobs=-1</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-700">
+                                        <td class="px-6 py-4 text-[#a0a0a0]">5</td>
+                                        <td class="px-6 py-4 text-[#f0f0f0]">XGBoost Classifier</td>
+                                        <td class="px-6 py-4 text-[#a0a0a0]">xgboost</td>
+                                        <td class="px-6 py-4 text-[#a0a0a0]">random_state=42; use_label_encoder=False; eval_metric='logloss'</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-700">
+                                        <td class="px-6 py-4 text-[#a0a0a0]">6</td>
+                                        <td class="px-6 py-4 text-[#f0f0f0]">LightGBM Classifier</td>
+                                        <td class="px-6 py-4 text-[#a0a0a0]">lightgbm</td>
+                                        <td class="px-6 py-4 text-[#a0a0a0]">random_state=42; verbose=-1</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 text-[#a0a0a0]">7</td>
+                                        <td class="px-6 py-4 text-[#f0f0f0]">Extra Trees Classifier</td>
+                                        <td class="px-6 py-4 text-[#a0a0a0]">scikit-learn</td>
+                                        <td class="px-6 py-4 text-[#a0a0a0]">random_state=42; n_jobs=-1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Hyperparameter Tuning (Icon only, no metrics) -->
+                    <div id="hyperparameter-tuning" class="glassmorphism rounded-lg p-8">
+                        <h3 class="text-2xl font-bold mb-6 text-[#f0f0f0]">
+                            <span class="gradient-text">3.3.2</span> Hyperparameter Tuning: Mengoptimalkan Performa Model Terbaik
+                        </h3>
+                        <div class="grid md:grid-cols-3 gap-6 items-center">
+                            <div class="md:col-span-2">
+                                <p class="text-[#f0f0f0] leading-relaxed text-lg mb-4">
+                                    Setelah memilih algoritma terbaik, kami melakukan hyperparameter tuning untuk menyempurnakan pengaturan. Untuk model biner, kami menerapkan <span class="text-[#c084fc] font-semibold">Randomized Search</span> dan <span class="text-[#c084fc] font-semibold">Bayesian Optimization</span>.
+                                </p>
+                                <p class="text-[#a0a0a0] text-sm">
+                                    Untuk model multikelas, tuning tidak dilakukan karena pertimbangan biaya komputasi dan waktu (estimasi >16 jam), sehingga sumber daya difokuskan pada optimasi model biner yang menjadi garda terdepan sistem deteksi.
+                                </p>
+                            </div>
+                            <div class="flex items-center justify-center">
+                                <!-- Simple optimization/tuning icon (sliders + gear) -->
+                                <svg viewBox="0 0 120 120" width="140" height="140" class="text-[#c084fc]">
+                                    <g fill="none" stroke="currentColor" stroke-width="3">
+                                        <!-- sliders -->
+                                        <line x1="20" y1="30" x2="100" y2="30" opacity="0.6"/>
+                                        <circle cx="55" cy="30" r="6" fill="currentColor"/>
+                                        <line x1="20" y1="60" x2="100" y2="60" opacity="0.6"/>
+                                        <circle cx="80" cy="60" r="6" fill="currentColor"/>
+                                        <line x1="20" y1="90" x2="100" y2="90" opacity="0.6"/>
+                                        <circle cx="35" cy="90" r="6" fill="currentColor"/>
+                                        <!-- gear -->
+                                        <g transform="translate(90,25)">
+                                            <circle cx="0" cy="0" r="10"/>
+                                            <circle cx="0" cy="0" r="3" fill="currentColor"/>
+                                            <g>
+                                                <rect x="-1" y="-18" width="2" height="6"/>
+                                                <rect x="-1" y="12" width="2" height="6"/>
+                                                <rect x="12" y="-1" width="6" height="2"/>
+                                                <rect x="-18" y="-1" width="6" height="2"/>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Evaluation Metrics Section -->
+                <section id="evaluation-metrics" class="mb-16 fade-in fade-in-delay-3">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8 gradient-text">
+                        <span class="text-[#a0a0a0] font-normal">4</span> Metriks Evaluasi: Mengukur Keberhasilan Model
+                    </h2>
+                    <div class="glassmorphism rounded-lg p-8 mb-8">
+                        <p class="text-[#f0f0f0] leading-relaxed text-lg">
+                            Setelah model dilatih, kami melakukan evaluasi performa yang ketat untuk memastikan model tersebut andal dan akurat. Karena arsitektur kami terdiri dari dua model dengan tujuan yang berbeda, metrik evaluasi yang digunakan pun disesuaikan secara spesifik untuk setiap tugas.
+                        </p>
+                    </div>
+
+                    <!-- 4.1 Binary Model -->
+                    <div id="eval-binary" class="glassmorphism rounded-lg p-8 mb-8">
+                        <h3 class="text-2xl font-bold mb-4 text-[#f0f0f0]"><span class="gradient-text">4.1</span> Model Biner: Prioritas Utama adalah Keandalan Deteksi</h3>
+                        <p class="text-[#f0f0f0] leading-relaxed mb-4">
+                            Untuk model biner yang berfungsi sebagai 'penjaga gerbang', metrik evaluasi yang kami prioritaskan adalah <span class="text-[#c084fc] font-semibold">Recall</span>. Keputusan ini didasarkan pada tujuan utama sistem: meminimalkan risiko serangan yang terlewat. Dalam keamanan siber, kesalahan paling fatal adalah <span class="text-[#f87171] font-semibold">False Negative</span> (serangan nyata dianggap normal). Recall secara langsung mengukur kemampuan model untuk menekan jumlah False Negative, memastikan sebanyak mungkin ancaman berhasil terdeteksi.
+                        </p>
+                        <div class="bg-rgba(255,255,255,0.05) backdrop-blur-lg rounded-xl p-6 border border-rgba(255,255,255,0.1)">
+                            <div class="text-[#a0a0a0] text-sm mb-2">Formula</div>
+                            <div class="text-[#f0f0f0] text-lg">
+                                $$\text{Recall} = \frac{TP}{TP + FN}$$
+                            </div>
+                            <p class="text-[#a0a0a0] text-sm mt-3">Di mana TP (True Positive) adalah serangan yang diprediksi benar, dan FN (False Negative) adalah serangan yang salah diprediksi sebagai normal.</p>
+                        </div>
+                    </div>
+
+                    <!-- 4.2 Multiclass Model -->
+                    <div id="eval-multiclass" class="glassmorphism rounded-lg p-8">
+                        <h3 class="text-2xl font-bold mb-4 text-[#f0f0f0]"><span class="gradient-text">4.2</span> Model Multikelas: Mengukur Performa Secara Adil dan Praktis</h3>
+                        <p class="text-[#f0f0f0] leading-relaxed mb-4">
+                            Untuk model multikelas yang bertugas mengidentifikasi jenis serangan, kami memilih <span class="text-[#c084fc] font-semibold">Weighted F1-score</span> sebagai metrik utama. Pilihan ini didasarkan pada kondisi data serangan yang sangat tidak seimbang. Metrik ini representatif karena memberikan bobot lebih pada kelas serangan yang paling umum (mencerminkan ancaman nyata) dan menghindari distorsi dari performa pada kelas yang sangat langka.
+                        </p>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-rgba(255,255,255,0.05) backdrop-blur-lg rounded-xl p-6 border border-rgba(255,255,255,0.1)">
+                                <div class="text-[#a0a0a0] text-sm mb-2">F1-score per Kelas</div>
+                                <div class="text-[#f0f0f0] text-lg overflow-x-auto">
+                                    $$\text{F1-score}_{\text{class}} = 2 \times \frac{\text{Precision}_{\text{class}} \times \text{Recall}_{\text{class}}}{\text{Precision}_{\text{class}} + \text{Recall}_{\text{class}}}$$
+                                </div>
+                                <p class="text-[#a0a0a0] text-sm mt-3">Pertama, F1-score dihitung untuk setiap kelas individu.</p>
+                            </div>
+                            <div class="bg-rgba(255,255,255,0.05) backdrop-blur-lg rounded-xl p-6 border border-rgba(255,255,255,0.1)">
+                                <div class="text-[#a0a0a0] text-sm mb-2">Weighted F1-score</div>
+                                <div class="text-[#f0f0f0] text-lg overflow-x-auto">
+                                    $$\text{Weighted F1-score} = \sum_{i=1}^{k} (w_i \times \text{F1-score}_i)$$
+                                </div>
+                                <p class="text-[#a0a0a0] text-sm mt-3">Kemudian, dihitung rata-rata terbobot dari F1-score semua kelas, di mana <em>w_i</em> adalah proporsi jumlah sampel kelas tersebut.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Mobile menu toggle (guarded; main.js will wire after navbar injection)
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                // Close mobile menu if open
+                if (mobileMenu) { mobileMenu.classList.add('hidden'); }
+            });
+        });
+        
+        // Table of Contents navigation highlighting
+        function updateActiveNavLink() {
+            const sections = document.querySelectorAll('section[id], div[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let currentSection = '';
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 120 && rect.bottom >= 120) {
+                    currentSection = section.id;
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // Update active nav link on scroll
+        window.addEventListener('scroll', updateActiveNavLink);
+        
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Initialize active nav link
+        updateActiveNavLink();
+    </script>
+    <script src="/static/js/main.js"></script>
+    </body>
+</html>

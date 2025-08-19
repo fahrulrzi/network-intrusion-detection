@@ -1,0 +1,36 @@
+<nav class="container mx-auto px-6 py-4">
+  <div class="flex items-center justify-between">
+    <!-- Logo -->
+    <div class="text-2xl font-bold gradient-text">
+      <a href="/" data-route="/">CyberGuard AI</a>
+    </div>
+
+    <!-- Desktop Links -->
+    <div class="hidden md:flex space-x-8">
+      <a href="/" data-route="/" class="text-[#f0f0f0] hover:text-[#c084fc] transition-colors duration-300">Home</a>
+      <a href="/predict" data-route="/predict" class="text-[#f0f0f0] hover:text-[#c084fc] transition-colors duration-300">Platform</a>
+      <a href="/inovasi" data-route="/inovasi" class="text-[#f0f0f0] hover:text-[#c084fc] transition-colors duration-300">Inovasi & Teknologi</a>
+      <a href="/metodologi" data-route="/metodologi" class="text-[#f0f0f0] hover:text-[#c084fc] transition-colors duration-300">Metodologi</a>
+      <a href="/instructions" data-route="/instructions" class="text-[#f0f0f0] hover:text-[#c084fc] transition-colors duration-300">Instructions</a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button class="md:hidden text-[#f0f0f0]" id="mobile-menu-btn" aria-label="Toggle menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="md:hidden mt-4 hidden" id="mobile-menu">
+    <div class="flex flex-col space-y-4">
+      <a href="/" data-route="/" class="text-[#f0f0f0] hover:text-[#c084fc] transition-colors duration-300">Home</a>
+      <a href="/predict" data-route="/predict" class="text-[#f0f0f0] hover:text-[#c084fc] transition-colors duration-300">Platform</a>
+      <a href="/inovasi" data-route="/inovasi" class="text-[#f0f0f0] hover:text-[#c084fc] transition-colors duration-300">Inovasi Teknologi</a>
+      <a href="/metodologi" data-route="/metodologi" class="text-[#f0f0f0] hover:text-[#c084fc] transition-colors duration-300">Metodologi</a>
+      <a href="/instructions" data-route="/instructions" class="text-[#f0f0f0] hover:text-[#c084fc] transition-colors duration-300">Instructions</a>
+      <a href="#kontak" data-route="#kontak" class="text-[#f0f0f0] hover:text-[#c084fc] transition-colors duration-300">Kontak</a>
+    </div>
+  </div>
+</nav>

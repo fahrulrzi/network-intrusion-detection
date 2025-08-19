@@ -1,0 +1,36 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+.ENV/
+
+# Log files
+*.log
+app.log
+
+# Jupyter Notebook checkpoints (kalau ada)
+.ipynb_checkpoints
+
+# VSCode & IDE settings
+.vscode/
+.idea/
+
+# MacOS
+.DS_Store
+
+# Model files & cache (opsional, kalau mau disimpan lokal doang)
+# *.joblib
+# *.pkl
+
+# Cache
+*.cache
+*.pyc
+
+# pyenv
+.python-version

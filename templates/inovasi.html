@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inovasi Teknologi - CyberGuard AI</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for glassmorphism and animations */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #05020a;
+        }
+        
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, rgba(192, 132, 252, 1) 0%, rgba(124, 58, 237, 1) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(90deg, rgba(192, 132, 252, 1) 0%, rgba(124, 58, 237, 1) 100%);
+        }
+        
+        .hero-bg {
+            background: radial-gradient(ellipse at center, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .fade-in-delay-1 { animation-delay: 0.2s; }
+        .fade-in-delay-2 { animation-delay: 0.4s; }
+        .fade-in-delay-3 { animation-delay: 0.6s; }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hover-glow:hover {
+            box-shadow: 0 0 30px rgba(192, 132, 252, 0.3);
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+
+        /* Navigation styles */
+        .nav-toc {
+            position: sticky;
+            top: 100px;
+        }
+
+        .nav-toc a.active {
+            background: rgba(192, 132, 252, 0.2);
+            border-left: 3px solid #c084fc;
+        }
+
+        /* Diagram container styling */
+        .diagram-container {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body class="bg-[#05020a] text-[#f0f0f0] overflow-x-hidden">
+    
+    <!-- Header & Navigation -->
+    <header class="fixed top-0 w-full z-50 glassmorphism"><div id="navbar-placeholder"></div></header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-12 hero-bg">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight fade-in">
+                <span class="gradient-text">Inovasi Teknologi</span>
+            </h1>
+            <p class="text-lg md:text-xl text-[#a0a0a0] mb-8 max-w-3xl mx-auto leading-relaxed fade-in fade-in-delay-1">
+                Arsitektur cerdas dan teknologi terdepan yang mengubah cara deteksi serangan siber dilakukan
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-12">
+        <div class="grid lg:grid-cols-4 gap-8">
+            <!-- Table of Contents Navigation -->
+            <div class="lg:col-span-1">
+                <div class="nav-toc glassmorphism rounded-lg p-6">
+                    <h3 class="text-lg font-semibold mb-4 gradient-text">Daftar Isi</h3>
+                    <nav class="space-y-2">
+                        <a href="#arsitektur-cerdas" class="block px-3 py-2 rounded text-[#a0a0a0] hover:text-[#f0f0f0] hover:bg-rgba(255,255,255,0.05) transition-all duration-300 nav-link">
+                            <i class="fas fa-sitemap mr-2"></i>Arsitektur Cerdas
+                        </a>
+                        <a href="#rekomendasi-llm" class="block px-3 py-2 rounded text-[#a0a0a0] hover:text-[#f0f0f0] hover:bg-rgba(255,255,255,0.05) transition-all duration-300 nav-link">
+                            <i class="fas fa-robot mr-2"></i>Rekomendasi LLM
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="lg:col-span-3">
+                <!-- Two-Stage Classifier -->
+                <section id="arsitektur-cerdas" class="mb-16 fade-in">
+                    <div class="glassmorphism rounded-lg p-8">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6 gradient-text">
+                            Arsitektur Cerdas: Merancang Two-Stage Classifier
+                        </h2>
+                        
+                        <div class="space-y-6 text-[#f0f0f0] leading-relaxed">
+                            <p class="text-lg">
+                                Pendekatan umum dalam deteksi intrusi adalah menggunakan satu model multikelas untuk semua tugas. Namun, model seperti ini seringkali kurang fokus karena harus mempelajari pola lalu lintas normal dan berbagai jenis serangan secara bersamaan. Untuk mengatasi hal ini, kami merancang sebuah arsitektur inovatif yang lebih cerdas dan andal, yaitu <span class="text-[#c084fc] font-semibold">Two-Stage Classifier</span>.
+                            </p>
+                            
+                            <p class="text-lg">
+                                Arsitektur kami memisahkan proses deteksi menjadi dua tahap spesialis. <span class="text-[#c084fc] font-semibold">Tahap Pertama</span> berfungsi sebagai 'Penjaga Gerbang' yang sangat andal. Model biner ini dilatih secara khusus untuk satu tugas: menyaring semua lalu lintas jaringan dan membedakan antara aktivitas 'Normal' dan potensi 'Serangan'. Dengan tingkat keandalan deteksi yang sangat tinggi, tahap ini memastikan hampir tidak ada ancaman yang lolos.
+                            </p>
+                            
+                            <p class="text-lg">
+                                Jika sebuah ancaman terdeteksi, data akan diteruskan ke <span class="text-[#c084fc] font-semibold">Tahap Kedua</span>, yaitu model 'Spesialis'. Model multikelas ini tidak lagi terganggu oleh data normal dan dapat memfokuskan seluruh kemampuannya untuk satu tugas: mengidentifikasi jenis serangan secara spesifik, misalnya 'DoS', 'Exploits', atau 'Fuzzers'. Pendekatan ini tidak hanya meningkatkan keandalan deteksi awal, tetapi juga akurasi identifikasi serangan secara keseluruhan, menghasilkan sistem yang lebih kuat dan modular.
+                            </p>
+                        </div>
+
+                        <!-- Training Flow Diagram -->
+                        <div class="mt-8">
+                            <h4 class="text-xl font-semibold mb-4 text-[#c084fc]">Alur Pelatihan Model</h4>
+                            <div class="diagram-container">
+                                <svg viewBox="0 0 800 600" class="w-full h-auto text-[#f0f0f0]">
+                                    <!-- Dataset Asli -->
+                                    <rect x="320" y="20" width="160" height="40" rx="8" fill="rgba(192, 132, 252, 0.2)" stroke="#c084fc" stroke-width="2"/>
+                                    <text x="400" y="45" text-anchor="middle" fill="#f0f0f0" font-size="12" font-family="Inter">Dataset Asli UNSW-NB15</text>
+                                    
+                                    <!-- Pemisahan Data -->
+                                    <rect x="320" y="100" width="160" height="40" rx="8" fill="rgba(124, 58, 237, 0.2)" stroke="#7c3aed" stroke-width="2"/>
+                                    <text x="400" y="120" text-anchor="middle" fill="#f0f0f0" font-size="11" font-family="Inter">Pemisahan Data</text>
+                                    <text x="400" y="135" text-anchor="middle" fill="#f0f0f0" font-size="11" font-family="Inter">Latih & Uji</text>
+                                    
+                                    <!-- Binary Path -->
+                                    <g id="binary-path">
+                                        <rect x="50" y="180" width="120" height="30" rx="6" fill="rgba(34, 197, 94, 0.2)" stroke="#22c55e" stroke-width="1"/>
+                                        <text x="110" y="200" text-anchor="middle" fill="#22c55e" font-size="10" font-family="Inter">Data Lengkap</text>
+                                        
+                                        <rect x="50" y="230" width="120" height="30" rx="6" fill="rgba(34, 197, 94, 0.1)" stroke="#22c55e" stroke-width="1"/>
+                                        <text x="110" y="250" text-anchor="middle" fill="#f0f0f0" font-size="10" font-family="Inter">EDA Biner</text>
+                                        
+                                        <rect x="50" y="280" width="120" height="30" rx="6" fill="rgba(34, 197, 94, 0.1)" stroke="#22c55e" stroke-width="1"/>
+                                        <text x="110" y="300" text-anchor="middle" fill="#f0f0f0" font-size="10" font-family="Inter">Seleksi Fitur</text>
+                                        
+                                        <rect x="50" y="330" width="120" height="30" rx="6" fill="rgba(34, 197, 94, 0.1)" stroke="#22c55e" stroke-width="1"/>
+                                        <text x="110" y="350" text-anchor="middle" fill="#f0f0f0" font-size="10" font-family="Inter">Preprocessing</text>
+                                        
+                                        <rect x="50" y="380" width="120" height="30" rx="6" fill="rgba(34, 197, 94, 0.1)" stroke="#22c55e" stroke-width="1"/>
+                                        <text x="110" y="400" text-anchor="middle" fill="#f0f0f0" font-size="10" font-family="Inter">Modeling</text>
+                                        
+                                        <rect x="50" y="430" width="120" height="30" rx="6" fill="rgba(34, 197, 94, 0.2)" stroke="#22c55e" stroke-width="1"/>
+                                        <text x="110" y="450" text-anchor="middle" fill="#22c55e" font-size="10" font-family="Inter">Model Biner</text>
+                                    </g>
+                                    
+                                    <!-- Multiclass Path -->
+                                    <g id="multiclass-path">
+                                        <rect x="630" y="180" width="120" height="30" rx="6" fill="rgba(251, 146, 60, 0.2)" stroke="#fb923c" stroke-width="1"/>
+                                        <text x="690" y="200" text-anchor="middle" fill="#fb923c" font-size="10" font-family="Inter">Data Lengkap</text>
+                                        
+                                        <rect x="630" y="230" width="120" height="30" rx="6" fill="rgba(251, 146, 60, 0.1)" stroke="#fb923c" stroke-width="1"/>
+                                        <text x="690" y="250" text-anchor="middle" fill="#f0f0f0" font-size="9" font-family="Inter">Hapus Data Normal</text>
+                                        
+                                        <rect x="630" y="280" width="120" height="30" rx="6" fill="rgba(251, 146, 60, 0.1)" stroke="#fb923c" stroke-width="1"/>
+                                        <text x="690" y="300" text-anchor="middle" fill="#f0f0f0" font-size="10" font-family="Inter">EDA Multikelas</text>
+                                        
+                                        <rect x="630" y="330" width="120" height="30" rx="6" fill="rgba(251, 146, 60, 0.1)" stroke="#fb923c" stroke-width="1"/>
+                                        <text x="690" y="350" text-anchor="middle" fill="#f0f0f0" font-size="10" font-family="Inter">Seleksi Fitur</text>
+                                        
+                                        <rect x="630" y="380" width="120" height="30" rx="6" fill="rgba(251, 146, 60, 0.1)" stroke="#fb923c" stroke-width="1"/>
+                                        <text x="690" y="400" text-anchor="middle" fill="#f0f0f0" font-size="10" font-family="Inter">Modeling</text>
+                                        
+                                        <rect x="630" y="430" width="120" height="30" rx="6" fill="rgba(251, 146, 60, 0.2)" stroke="#fb923c" stroke-width="1"/>
+                                        <text x="690" y="450" text-anchor="middle" fill="#fb923c" font-size="9" font-family="Inter">Model Multikelas</text>
+                                    </g>
+                                    
+                                    <!-- Arrows and Labels -->
+                                    <path d="M 400 60 L 400 100" stroke="#c084fc" stroke-width="2" marker-end="url(#arrowhead)"/>
+                                    <path d="M 360 120 L 200 180" stroke="#22c55e" stroke-width="2" marker-end="url(#arrowhead)"/>
+                                    <path d="M 440 120 L 600 180" stroke="#fb923c" stroke-width="2" marker-end="url(#arrowhead)"/>
+                                    
+                                    <!-- Binary flow arrows -->
+                                    <path d="M 110 210 L 110 230" stroke="#22c55e" stroke-width="1" marker-end="url(#arrowhead-small)"/>
+                                    <path d="M 110 260 L 110 280" stroke="#22c55e" stroke-width="1" marker-end="url(#arrowhead-small)"/>
+                                    <path d="M 110 310 L 110 330" stroke="#22c55e" stroke-width="1" marker-end="url(#arrowhead-small)"/>
+                                    <path d="M 110 360 L 110 380" stroke="#22c55e" stroke-width="1" marker-end="url(#arrowhead-small)"/>
+                                    <path d="M 110 410 L 110 430" stroke="#22c55e" stroke-width="1" marker-end="url(#arrowhead-small)"/>
+                                    
+                                    <!-- Multiclass flow arrows -->
+                                    <path d="M 690 210 L 690 230" stroke="#fb923c" stroke-width="1" marker-end="url(#arrowhead-small)"/>
+                                    <path d="M 690 260 L 690 280" stroke="#fb923c" stroke-width="1" marker-end="url(#arrowhead-small)"/>
+                                    <path d="M 690 310 L 690 330" stroke="#fb923c" stroke-width="1" marker-end="url(#arrowhead-small)"/>
+                                    <path d="M 690 360 L 690 380" stroke="#fb923c" stroke-width="1" marker-end="url(#arrowhead-small)"/>
+                                    <path d="M 690 410 L 690 430" stroke="#fb923c" stroke-width="1" marker-end="url(#arrowhead-small)"/>
+                                    
+                                    <!-- Labels -->
+                                    <text x="110" y="170" text-anchor="middle" fill="#22c55e" font-size="12" font-family="Inter" font-weight="600">Alur Biner (Tahap 1)</text>
+                                    <text x="690" y="170" text-anchor="middle" fill="#fb923c" font-size="12" font-family="Inter" font-weight="600">Alur Multikelas (Tahap 2)</text>
+                                    
+                                    <!-- Arrow marker definitions -->
+                                    <defs>
+                                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                            <polygon points="0 0, 10 3.5, 0 7" fill="#c084fc"/>
+                                        </marker>
+                                        <marker id="arrowhead-small" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                                            <polygon points="0 0, 8 3, 0 6" fill="currentColor"/>
+                                        </marker>
+                                    </defs>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Usage Flow Diagram -->
+                        <div class="mt-8">
+                            <h4 class="text-xl font-semibold mb-4 text-[#c084fc]">Alur Penggunaan Sistem</h4>
+                            <div class="diagram-container">
+                                <svg viewBox="0 0 800 400" class="w-full h-auto text-[#f0f0f0]">
+                                    <!-- Input Data -->
+                                    <rect x="50" y="180" width="140" height="40" rx="8" fill="rgba(192, 132, 252, 0.2)" stroke="#c084fc" stroke-width="2"/>
+                                    <text x="120" y="196" text-anchor="middle" fill="#f0f0f0" font-size="11" font-family="Inter">Input Data Lalu</text>
+                                    <text x="120" y="212" text-anchor="middle" fill="#f0f0f0" font-size="11" font-family="Inter">Lintas Jaringan</text>
+                                    
+                                    <!-- Binary Classification -->
+                                    <rect x="250" y="160" width="140" height="80" rx="8" fill="rgba(34, 197, 94, 0.2)" stroke="#22c55e" stroke-width="2"/>
+                                    <text x="320" y="185" text-anchor="middle" fill="#22c55e" font-size="12" font-family="Inter" font-weight="600">Klasifikasi Biner</text>
+                                    <text x="320" y="205" text-anchor="middle" fill="#f0f0f0" font-size="11" font-family="Inter">(Tahap 1)</text>
+                                    <text x="320" y="225" text-anchor="middle" fill="#f0f0f0" font-size="10" font-family="Inter">Normal vs Attack</text>
+                                    
+                                    <!-- Normal Output -->
+                                    <rect x="450" y="100" width="120" height="40" rx="8" fill="rgba(34, 197, 94, 0.3)" stroke="#22c55e" stroke-width="2"/>
+                                    <text x="510" y="125" text-anchor="middle" fill="#22c55e" font-size="12" font-family="Inter" font-weight="600">Output: Normal</text>
+                                    
+                                    <!-- Multiclass Classification -->
+                                    <rect x="450" y="200" width="140" height="80" rx="8" fill="rgba(251, 146, 60, 0.2)" stroke="#fb923c" stroke-width="2"/>
+                                    <text x="520" y="225" text-anchor="middle" fill="#fb923c" font-size="12" font-family="Inter" font-weight="600">Klasifikasi</text>
+                                    <text x="520" y="245" text-anchor="middle" fill="#fb923c" font-size="12" font-family="Inter" font-weight="600">Multikelas</text>
+                                    <text x="520" y="265" text-anchor="middle" fill="#f0f0f0" font-size="11" font-family="Inter">(Tahap 2)</text>
+                                    
+                                    <!-- Attack Output -->
+                                    <rect x="630" y="200" width="120" height="80" rx="8" fill="rgba(239, 68, 68, 0.2)" stroke="#ef4444" stroke-width="2"/>
+                                    <text x="690" y="225" text-anchor="middle" fill="#ef4444" font-size="11" font-family="Inter" font-weight="600">Output:</text>
+                                    <text x="690" y="245" text-anchor="middle" fill="#ef4444" font-size="11" font-family="Inter" font-weight="600">Serangan</text>
+                                    <text x="690" y="265" text-anchor="middle" fill="#ef4444" font-size="11" font-family="Inter" font-weight="600">Terdeteksi (DoS)</text>
+                                    
+                                    <!-- Arrows -->
+                                    <path d="M 190 200 L 250 200" stroke="#c084fc" stroke-width="2" marker-end="url(#arrowhead)"/>
+                                    <path d="M 390 180 L 450 120" stroke="#22c55e" stroke-width="2" marker-end="url(#arrowhead)"/>
+                                    <path d="M 390 220 L 450 240" stroke="#fb923c" stroke-width="2" marker-end="url(#arrowhead)"/>
+                                    <path d="M 590 240 L 630 240" stroke="#ef4444" stroke-width="2" marker-end="url(#arrowhead)"/>
+                                    
+                                    <!-- Labels on arrows -->
+                                    <text x="420" y="145" text-anchor="middle" fill="#22c55e" font-size="10" font-family="Inter">Normal</text>
+                                    <text x="420" y="255" text-anchor="middle" fill="#fb923c" font-size="10" font-family="Inter">Attack</text>
+                                    
+                                    <!-- Arrow marker definitions -->
+                                    <defs>
+                                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                            <polygon points="0 0, 10 3.5, 0 7" fill="currentColor"/>
+                                        </marker>
+                                    </defs>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- LLM Recommendations -->
+                <section id="rekomendasi-llm" class="mb-16 fade-in fade-in-delay-1">
+                    <div class="glassmorphism rounded-lg p-8">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6 gradient-text">
+                            Dari Deteksi ke Aksi: Rekomendasi Mitigasi Otomatis berbasis LLM
+                        </h2>
+                        
+                        <p class="text-[#f0f0f0] leading-relaxed mb-8 text-lg">
+                            Mengetahui adanya serangan adalah satu hal, tetapi mengetahui apa yang harus dilakukan selanjutnya adalah hal yang paling penting. Kami menyadari bahwa jeda waktu antara deteksi dan respons adalah momen kritis. Untuk menjembatani kesenjangan ini, kami mengintegrasikan <span class="text-[#c084fc] font-semibold">Large Language Model (LLM)</span> untuk memberikan panduan mitigasi secara instan, mengubah data deteksi menjadi aksi yang terarah.
+                        </p>
+
+                        <!-- How It Works -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-semibold mb-4 text-[#c084fc]">
+                                <i class="fas fa-cogs mr-2"></i>Bagaimana Cara Kerjanya?
+                            </h3>
+                            <div class="glassmorphism rounded-lg p-6 mb-6">
+                                <p class="text-[#f0f0f0] leading-relaxed">
+                                    Ketika platform kami berhasil mengidentifikasi jenis serangan spesifik melalui arsitektur Two-Stage Classifier, sistem secara otomatis memicu panggilan API (API Call) ke model <span class="text-[#c084fc] font-semibold">Llama 3 8B</span>. Model ini diakses melalui platform inferensi berkecepatan tinggi, <span class="text-[#c084fc] font-semibold">Groq</span>. LLM kemudian menganalisis konteks serangan tersebut dan menghasilkan daftar rekomendasi langkah-langkah mitigasi yang relevan dan dapat ditindaklanjuti, disajikan langsung kepada pengguna dalam hitungan detik.
+                                </p>
+                            </div>
+
+                            <!-- LLM Flow Diagram -->
+                            <div class="diagram-container">
+                                <svg viewBox="0 0 800 300" class="w-full h-auto text-[#f0f0f0]">
+                                    <!-- Attack Detected -->
+                                    <rect x="50" y="120" width="130" height="60" rx="8" fill="rgba(239, 68, 68, 0.2)" stroke="#ef4444" stroke-width="2"/>
+                                    <text x="115" y="140" text-anchor="middle" fill="#ef4444" font-size="11" font-family="Inter" font-weight="600">Serangan Terdeteksi</text>
+                                    <text x="115" y="160" text-anchor="middle" fill="#f0f0f0" font-size="11" font-family="Inter">(misal: DoS)</text>
+                                    
+                                    <!-- API Call -->
+                                    <rect x="220" y="120" width="130" height="60" rx="8" fill="rgba(124, 58, 237, 0.2)" stroke="#7c3aed" stroke-width="2"/>
+                                    <text x="285" y="140" text-anchor="middle" fill="#7c3aed" font-size="11" font-family="Inter" font-weight="600">Sistem Memicu</text>
+                                    <text x="285" y="160" text-anchor="middle" fill="#f0f0f0" font-size="11" font-family="Inter">API Call</text>
+                                    
+                                    <!-- Groq API -->
+                                    <rect x="390" y="100" width="130" height="100" rx="8" fill="rgba(192, 132, 252, 0.2)" stroke="#c084fc" stroke-width="2"/>
+                                    <text x="455" y="130" text-anchor="middle" fill="#c084fc" font-size="16" font-family="Inter">🖥️</text>
+                                    <text x="455" y="155" text-anchor="middle" fill="#c084fc" font-size="11" font-family="Inter" font-weight="600">Groq API</text>
+                                    <text x="455" y="175" text-anchor="middle" fill="#f0f0f0" font-size="11" font-family="Inter">(Llama 3 8B)</text>
+                                    <text x="455" y="190" text-anchor="middle" fill="#a0a0a0" font-size="9" font-family="Inter">Menganalisis Konteks</text>
+                                    
+                                    <!-- Recommendations -->
+                                    <rect x="560" y="120" width="130" height="60" rx="8" fill="rgba(34, 197, 94, 0.2)" stroke="#22c55e" stroke-width="2"/>
+                                    <text x="625" y="140" text-anchor="middle" fill="#22c55e" font-size="16" font-family="Inter">📋</text>
+                                    <text x="625" y="160" text-anchor="middle" fill="#22c55e" font-size="11" font-family="Inter" font-weight="600">Rekomendasi</text>
+                                    <text x="625" y="175" text-anchor="middle" fill="#f0f0f0" font-size="11" font-family="Inter">Dihasilkan</text>
+                                    
+                                    <!-- User Display -->
+                                    <rect x="320" y="240" width="130" height="40" rx="8" fill="rgba(168, 85, 247, 0.2)" stroke="#a855f7" stroke-width="2"/>
+                                    <text x="385" y="255" text-anchor="middle" fill="#a855f7" font-size="16" font-family="Inter">👤</text>
+                                    <text x="385" y="275" text-anchor="middle" fill="#a855f7" font-size="11" font-family="Inter" font-weight="600">Ditampilkan ke Pengguna</text>
+                                    
+                                    <!-- Arrows -->
+                                    <path d="M 180 150 L 220 150" stroke="#c084fc" stroke-width="2" marker-end="url(#arrowhead)"/>
+                                    <path d="M 350 150 L 390 150" stroke="#c084fc" stroke-width="2" marker-end="url(#arrowhead)"/>
+                                    <path d="M 520 150 L 560 150" stroke="#c084fc" stroke-width="2" marker-end="url(#arrowhead)"/>
+                                    <path d="M 625 180 L 385 240" stroke="#c084fc" stroke-width="2" marker-end="url(#arrowhead)"/>
+                                    
+                                    <!-- Arrow marker definitions -->
+                                    <defs>
+                                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                            <polygon points="0 0, 10 3.5, 0 7" fill="#c084fc"/>
+                                        </marker>
+                                    </defs>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Reliability System -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-semibold mb-4 text-[#c084fc]">
+                                <i class="fas fa-shield-alt mr-2"></i>Keandalan Sistem: Rencana Cadangan untuk Keterbatasan API
+                            </h3>
+                            <div class="glassmorphism rounded-lg p-6 flex items-start space-x-4">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 flex items-center justify-center">
+                                        <i class="fas fa-sync-alt text-white text-lg"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-[#f0f0f0] leading-relaxed">
+                                        Jika karena alasan apapun panggilan API ke LLM gagal—misalnya karena batas permintaan tercapai atau terjadi gangguan jaringan—sistem tidak akan berhenti. Sebagai gantinya, platform akan secara otomatis menyajikan sebuah templat rekomendasi mitigasi umum yang telah kami siapkan sebelumnya. Pendekatan ini menjamin bahwa pengguna akan selalu mendapatkan panduan yang berguna untuk merespons ancaman, menjaga fungsionalitas dan keandalan platform setiap saat.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Mobile menu toggle (guarded; will also be wired by global main.js after injection)
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                // Close mobile menu if open
+                if (mobileMenu) { mobileMenu.classList.add('hidden'); }
+            });
+        });
+        
+        // Table of Contents navigation highlighting
+        function updateActiveNavLink() {
+            const sections = document.querySelectorAll('section[id], div[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let currentSection = '';
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 120 && rect.bottom >= 120) {
+                    currentSection = section.id;
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // Update active nav link on scroll
+        window.addEventListener('scroll', updateActiveNavLink);
+        
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Initialize active nav link
+        updateActiveNavLink();
+    </script>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

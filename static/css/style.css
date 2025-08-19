@@ -1,0 +1,31 @@
+/* Global Styles for CyberGuard AI */
+:root {
+  --bg: #05020a;
+  --fg: #f0f0f0;
+  --muted: #a0a0a0;
+  --primary: #c084fc;
+  --primary-strong: #7c3aed;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--fg); font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+
+.glassmorphism { background: var(--glass-bg); backdrop-filter: blur(12px); border: 1px solid var(--glass-border); }
+.gradient-text { background: linear-gradient(90deg, var(--primary) 0%, var(--primary-strong) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.gradient-bg { background: linear-gradient(90deg, var(--primary) 0%, var(--primary-strong) 100%); }
+
+/* Custom Scrollbar */
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #05020a; }
+::-webkit-scrollbar-thumb { background: rgba(124, 58, 237, 0.6); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(192, 132, 252, 0.8); }
+
+/* Firefox */
+* { scrollbar-width: thin; scrollbar-color: rgba(124, 58, 237, 0.6) #05020a; }
+
+/* Utility */
+.hover-glow:hover { box-shadow: 0 0 30px rgba(192, 132, 252, 0.3); transform: translateY(-2px); transition: all 0.3s ease; }
+.nav-toc a.active { background: rgba(192, 132, 252, 0.2); border-left: 3px solid var(--primary); }

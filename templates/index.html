@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberGuard AI - Platform Prediksi</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for glassmorphism and animations */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #05020a;
+        }
+        
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, rgba(192, 132, 252, 1) 0%, rgba(124, 58, 237, 1) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(90deg, rgba(192, 132, 252, 1) 0%, rgba(124, 58, 237, 1) 100%);
+        }
+        
+        .hero-bg {
+            background: radial-gradient(ellipse at center, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .fade-in-delay-1 { animation-delay: 0.2s; }
+        .fade-in-delay-2 { animation-delay: 0.4s; }
+        .fade-in-delay-3 { animation-delay: 0.6s; }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hover-glow:hover {
+            box-shadow: 0 0 30px rgba(192, 132, 252, 0.3);
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+
+        .input-field {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            border-color: #c084fc;
+            box-shadow: 0 0 20px rgba(192, 132, 252, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .result-card {
+            transition: all 0.5s ease-in-out;
+        }
+
+        /* Markdown styling for better readability */
+        .markdown-content {
+            line-height: 1.6;
+        }
+        .markdown-content h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem 0;
+            color: #c084fc;
+            border-bottom: 2px solid rgba(192, 132, 252, 0.3);
+            padding-bottom: 0.5rem;
+        }
+        .markdown-content h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin: 1rem 0 0.5rem 0;
+            color: #c084fc;
+        }
+        .markdown-content ul {
+            margin: 0.5rem 0 1rem 1.5rem;
+            list-style-type: disc;
+        }
+        .markdown-content li {
+            margin: 0.25rem 0;
+            padding-left: 0.25rem;
+        }
+        .markdown-content p {
+            margin: 0.75rem 0;
+        }
+        .markdown-content strong {
+            font-weight: 600;
+            color: #c084fc;
+        }
+
+        /* Typewriter cursor */
+        .type-cursor {
+            display: inline-block;
+            margin-left: 2px;
+            color: #c084fc;
+            animation: cursorBlink 1s steps(1, end) infinite;
+        }
+        @keyframes cursorBlink { 50% { opacity: 0; } }
+    </style>
+</head>
+<body class="bg-[#05020a] text-[#f0f0f0] overflow-x-hidden">
+    
+    <!-- Header & Navigation -->
+    <header class="fixed top-0 w-full z-50 glassmorphism"><div id="navbar-placeholder"></div></header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-24 hero-bg">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight fade-in">
+                Platform <span class="gradient-text">Deteksi Intrusi</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-[#a0a0a0] mb-8 max-w-3xl mx-auto leading-relaxed fade-in fade-in-delay-1">
+                Sistem AI canggih dengan arsitektur Two-Stage Classifier untuk deteksi dan klasifikasi serangan siber secara real-time
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto fade-in fade-in-delay-2">
+                <div class="glassmorphism rounded-lg p-4 text-center">
+                    <div class="w-12 h-12 mx-auto mb-3 text-[#c084fc]">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-[#f0f0f0] mb-2">Binary Classification</h3>
+                    <p class="text-sm text-[#a0a0a0]">Normal vs Attack Detection</p>
+                </div>
+                
+                <div class="glassmorphism rounded-lg p-4 text-center">
+                    <div class="w-12 h-12 mx-auto mb-3 text-[#c084fc]">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-[#f0f0f0] mb-2">Attack Classification</h3>
+                    <p class="text-sm text-[#a0a0a0]">9 Jenis Serangan Spesifik</p>
+                </div>
+                
+                <div class="glassmorphism rounded-lg p-4 text-center">
+                    <div class="w-12 h-12 mx-auto mb-3 text-[#c084fc]">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-[#f0f0f0] mb-2">AI Recommendations</h3>
+                    <p class="text-sm text-[#a0a0a0]">Rekomendasi Mitigasi Otomatis</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detection Pipeline Info -->
+    <section class="py-5 relative">
+        <div class="container mx-auto px-6">
+            <div class="glassmorphism rounded-xl p-8 max-w-4xl mx-auto fade-in">
+                <h2 class="text-2xl font-bold text-center mb-6 gradient-text">Pipeline Deteksi Cerdas</h2>
+                
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="text-center">
+                        <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-[#c084fc] to-[#7c3aed] rounded-full flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">1</span>
+                        </div>
+                        <h3 class="font-semibold text-[#f0f0f0] mb-2">Deteksi Anomali</h3>
+                        <p class="text-sm text-[#a0a0a0]">Sistem menganalisis traffic jaringan untuk mendeteksi pola anomali dengan akurasi tinggi</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-[#c084fc] to-[#7c3aed] rounded-full flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">2</span>
+                        </div>
+                        <h3 class="font-semibold text-[#f0f0f0] mb-2">Klasifikasi Serangan</h3>
+                        <p class="text-sm text-[#a0a0a0]">Jika terdeteksi serangan, sistem mengidentifikasi jenis serangan spesifik dari 9 kategori</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-[#c084fc] to-[#7c3aed] rounded-full flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">3</span>
+                        </div>
+                        <h3 class="font-semibold text-[#f0f0f0] mb-2">Rekomendasi AI</h3>
+                        <p class="text-sm text-[#a0a0a0]">Large Language Model memberikan panduan mitigasi yang dapat ditindaklanjuti</p>
+                    </div>
+                </div>
+                
+                <div class="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
+                    <p class="text-blue-300 text-sm">
+                        <strong>Attack Types:</strong> Analysis, Backdoor, DoS, Exploits, Fuzzers, Generic, Reconnaissance, Shellcode, Worms
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sample Data Section -->
+    <section class="py-5 relative">
+        <div class="container mx-auto px-6">
+            <div class="glassmorphism rounded-xl p-8 max-w-4xl mx-auto fade-in">
+                <h2 class="text-2xl font-bold text-center mb-6 text-[#f0f0f0]">🎯 Coba dengan Data Contoh</h2>
+                
+                <div class="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 mb-6">
+                    <p class="text-blue-300 font-medium mb-2">📊 Data dari UNSW-NB15 Testing Dataset</p>
+                    <p class="text-blue-200 text-sm">
+                        Data contoh diambil secara random dari dataset testing UNSW-NB15 yang tidak pernah digunakan selama pelatihan model. 
+                        Setiap klik akan memuat data yang berbeda untuk demonstrasi yang lebih variatif.
+                    </p>
+                </div>
+                
+                <div class="flex flex-wrap gap-4 justify-center">
+                    <button id="loadNormalData" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 transform hover:scale-105 hover-glow">
+                        📈 Load Normal Traffic
+                        <span class="block text-xs text-green-100">Random data traffic normal</span>
+                    </button>
+                    <button id="loadAttackData" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 transform hover:scale-105 hover-glow">
+                        ⚠️ Load Attack Traffic
+                        <span class="block text-xs text-red-100">Random data serangan siber</span>
+                    </button>
+                    <button id="clearForm" class="glassmorphism text-[#f0f0f0] px-6 py-3 rounded-lg font-medium transition duration-300 hover-glow">
+                        🗑️ Clear Form
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Input Form Section -->
+    <section class="py-5 relative">
+        <div class="container mx-auto px-6">
+            <div class="glassmorphism rounded-xl p-8 max-w-6xl mx-auto fade-in">
+                <h2 class="text-2xl font-bold text-center mb-8 text-[#f0f0f0]">🔍 Input Network Traffic Data</h2>
+                
+                <form id="predictionForm" class="space-y-8">
+                    <!-- Basic Connection Info -->
+                    <div class="border-l-4 border-[#c084fc] pl-6">
+                        <h3 class="text-lg font-medium text-[#f0f0f0] mb-4">📡 Basic Connection Information</h3>
+                        <div class="grid md:grid-cols-4 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Duration (sec)</label>
+                                <input type="number" id="dur" name="dur" step="0.01" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="0.12">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Rate (bps)</label>
+                                <input type="number" id="rate" name="rate" step="0.01" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="31.61">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Protocol</label>
+                                <select id="proto" name="proto" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] focus:outline-none">
+                                    <option value="">Select Protocol</option>
+                                    <option value="tcp">TCP</option>
+                                    <option value="udp">UDP</option>
+                                    <option value="icmp">ICMP</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Service</label>
+                                <input type="text" id="service" name="service" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="http">
+                            </div>
+                        </div>
+                        <div class="grid md:grid-cols-1 gap-4 mt-4">
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">State</label>
+                                <input type="text" id="state" name="state" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="FIN">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Packet Information -->
+                    <div class="border-l-4 border-green-500 pl-6">
+                        <h3 class="text-lg font-medium text-[#f0f0f0] mb-4">📦 Packet Information</h3>
+                        <div class="grid md:grid-cols-4 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Source Packets</label>
+                                <input type="number" id="spkts" name="spkts" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="10">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Destination Packets</label>
+                                <input type="number" id="dpkts" name="dpkts" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="8">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Source Bytes</label>
+                                <input type="number" id="sbytes" name="sbytes" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="534">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Destination Bytes</label>
+                                <input type="number" id="dbytes" name="dbytes" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="354">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TTL Information -->
+                    <div class="border-l-4 border-yellow-500 pl-6">
+                        <h3 class="text-lg font-medium text-[#f0f0f0] mb-4">⏳ TTL & Load Information</h3>
+                        <div class="grid md:grid-cols-4 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Source TTL</label>
+                                <input type="number" id="sttl" name="sttl" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="254">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Destination TTL</label>
+                                <input type="number" id="dttl" name="dttl" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="252">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Source Load</label>
+                                <input type="number" id="sload" name="sload" step="0.01" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="7154.54">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Destination Load</label>
+                                <input type="number" id="dload" name="dload" step="0.01" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="4611.04">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Loss & Timing Information -->
+                    <div class="border-l-4 border-purple-500 pl-6">
+                        <h3 class="text-lg font-medium text-[#f0f0f0] mb-4">📉 Loss & Timing Information</h3>
+                        <div class="grid md:grid-cols-4 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Destination Loss</label>
+                                <input type="number" id="dloss" name="dloss" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="1">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Source Inter-packet Time</label>
+                                <input type="number" id="sinpkt" name="sinpkt" step="0.01" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="59.67">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Dest Inter-packet Time</label>
+                                <input type="number" id="dinpkt" name="dinpkt" step="0.01" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="68.35">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Jitter Information -->
+                    <div class="border-l-4 border-red-500 pl-6">
+                        <h3 class="text-lg font-medium text-[#f0f0f0] mb-4">📊 Jitter & Window Information</h3>
+                        <div class="grid md:grid-cols-4 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Source Jitter</label>
+                                <input type="number" id="sjit" name="sjit" step="0.01" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="3893.40">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Destination Jitter</label>
+                                <input type="number" id="djit" name="djit" step="0.01" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="104.84">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Source Window</label>
+                                <input type="number" id="swin" name="swin" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="255">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Destination Window</label>
+                                <input type="number" id="dwin" name="dwin" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="255">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TCP Information -->
+                    <div class="border-l-4 border-indigo-500 pl-6">
+                        <h3 class="text-lg font-medium text-[#f0f0f0] mb-4">🔗 TCP Information</h3>
+                        <div class="grid md:grid-cols-4 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Source TCP Base</label>
+                                <input type="number" id="stcpb" name="stcpb" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="1082242371">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Dest TCP Base</label>
+                                <input type="number" id="dtcpb" name="dtcpb" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="490886647">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">TCP RTT</label>
+                                <input type="number" id="tcprtt" name="tcprtt" step="0.01" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="0.11">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">SYN-ACK Time</label>
+                                <input type="number" id="synack" name="synack" step="0.01" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="0.06">
+                            </div>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-4 mt-4">
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">ACK-DATA Time</label>
+                                <input type="number" id="ackdat" name="ackdat" step="0.01" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="0.06">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Packet Size Information -->
+                    <div class="border-l-4 border-pink-500 pl-6">
+                        <h3 class="text-lg font-medium text-[#f0f0f0] mb-4">📏 Packet Size Information</h3>
+                        <div class="grid md:grid-cols-4 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Source Mean</label>
+                                <input type="number" id="smean" name="smean" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="53">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Destination Mean</label>
+                                <input type="number" id="dmean" name="dmean" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="44">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Transaction Depth</label>
+                                <input type="number" id="trans_depth" name="trans_depth" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="0">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Response Body Length</label>
+                                <input type="number" id="response_body_len" name="response_body_len" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Count Features -->
+                    <div class="border-l-4 border-orange-500 pl-6">
+                        <h3 class="text-lg font-medium text-[#f0f0f0] mb-4">📊 Connection Count Features</h3>
+                        <div class="grid md:grid-cols-4 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">CT Srv Src</label>
+                                <input type="number" id="ct_srv_src" name="ct_srv_src" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="43">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">CT State TTL</label>
+                                <input type="number" id="ct_state_ttl" name="ct_state_ttl" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="1">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">CT Dst LTM</label>
+                                <input type="number" id="ct_dst_ltm" name="ct_dst_ltm" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="2">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">CT Src DPort LTM</label>
+                                <input type="number" id="ct_src_dport_ltm" name="ct_src_dport_ltm" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="2">
+                            </div>
+                        </div>
+                        <div class="grid md:grid-cols-4 gap-4 mt-4">
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">CT Dst Sport LTM</label>
+                                <input type="number" id="ct_dst_sport_ltm" name="ct_dst_sport_ltm" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="1">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">CT Dst Src LTM</label>
+                                <input type="number" id="ct_dst_src_ltm" name="ct_dst_src_ltm" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="40">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">CT Src LTM</label>
+                                <input type="number" id="ct_src_ltm" name="ct_src_ltm" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="2">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">CT Srv Dst</label>
+                                <input type="number" id="ct_srv_dst" name="ct_srv_dst" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="39">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Boolean Features -->
+                    <div class="border-l-4 border-gray-500 pl-6">
+                        <h3 class="text-lg font-medium text-[#f0f0f0] mb-4">✅ Boolean Features</h3>
+                        <div class="grid md:grid-cols-4 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Is FTP Login</label>
+                                <select id="is_ftp_login" name="is_ftp_login" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] focus:outline-none">
+                                    <option value="0">No (0)</option>
+                                    <option value="1">Yes (1)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">CT FTP CMD</label>
+                                <input type="number" id="ct_ftp_cmd" name="ct_ftp_cmd" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="0">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">CT Flow HTTP Method</label>
+                                <input type="number" id="ct_flw_http_mthd" name="ct_flw_http_mthd" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none" placeholder="0">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#a0a0a0] mb-2">Is Small IPs Ports</label>
+                                <select id="is_sm_ips_ports" name="is_sm_ips_ports" class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] focus:outline-none">
+                                    <option value="0">No (0)</option>
+                                    <option value="1">Yes (1)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="text-center pt-6">
+                        <button type="submit" class="gradient-bg text-white px-12 py-4 rounded-lg font-semibold text-lg hover-glow transition-all duration-300 transform hover:scale-105">
+                            🔍 Analisis Traffic Jaringan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <div id="resultSection" class="py-12 hidden result-card">
+        <div class="container mx-auto px-6">
+            <div class="glassmorphism rounded-xl p-8 max-w-4xl mx-auto">
+                <h2 class="text-2xl font-bold text-center mb-8 gradient-text">📊 Hasil Deteksi</h2>
+                <div id="resultContent" class="space-y-6">
+                    <!-- Results will be displayed here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="glassmorphism rounded-lg p-8 text-center max-w-md">
+            <div class="animate-spin rounded-full h-16 w-16 border-4 border-[#c084fc] border-t-transparent mx-auto mb-6"></div>
+            <h3 class="text-xl font-semibold text-[#f0f0f0] mb-2">Menganalisis Traffic Jaringan...</h3>
+            <p class="text-[#a0a0a0] mb-4">AI Pipeline sedang bekerja untuk mendeteksi dan mengklasifikasi potensi ancaman</p>
+            <div class="text-sm text-[#a0a0a0] space-y-1">
+                <div>🔍 Binary Classification: Normal vs Attack</div>
+                <div>🎯 Multiclass Detection: Jenis Serangan Spesifik</div>
+                <div>🤖 AI Recommendations: Rekomendasi Mitigasi</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Typewriter utilities
+        function escapeHTML(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+        }
+
+        // Start typewriter effect on an element by id
+    function startTypewriter(elementId, text, speed = 30, onComplete) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            el.innerHTML = '';
+
+            const contentSpan = document.createElement('span');
+            const cursorSpan = document.createElement('span');
+            cursorSpan.className = 'type-cursor';
+            cursorSpan.textContent = '|';
+            el.appendChild(contentSpan);
+            el.appendChild(cursorSpan);
+
+            const safe = escapeHTML(text);
+            let i = 0;
+            const typeNext = () => {
+                if (i <= safe.length) {
+                    // render with line breaks
+                    contentSpan.innerHTML = safe.slice(0, i).replace(/\n/g, '<br>');
+                    i++;
+                    setTimeout(typeNext, speed);
+                } else {
+                    cursorSpan.remove();
+                    if (typeof onComplete === 'function') {
+                        try {
+                            onComplete(el, text);
+                        } catch (_) { /* noop */ }
+                    }
+                }
+            };
+            typeNext();
+        }
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Convert proto input to lowercase
+        const protoSelect = document.getElementById('proto');
+        if (protoSelect) {
+            protoSelect.addEventListener('change', function() {
+                this.value = this.value.toLowerCase();
+            });
+        }
+
+        // Sample data loading
+        document.getElementById('loadNormalData').addEventListener('click', async function() {
+            try {
+                const response = await fetch('/get_sample_data/normal');
+                const data = await response.json();
+                fillForm(data);
+                showNotification('Random normal traffic data loaded from UNSW-NB15!', 'success');
+            } catch (error) {
+                showNotification('Error loading normal data', 'error');
+            }
+        });
+
+        document.getElementById('loadAttackData').addEventListener('click', async function() {
+            try {
+                const response = await fetch('/get_sample_data/attack');
+                const data = await response.json();
+                fillForm(data);
+                showNotification('Random attack traffic data loaded from UNSW-NB15!', 'success');
+            } catch (error) {
+                showNotification('Error loading attack data', 'error');
+            }
+        });
+
+        document.getElementById('clearForm').addEventListener('click', function() {
+            document.getElementById('predictionForm').reset();
+            document.getElementById('resultSection').classList.add('hidden');
+            showNotification('Form cleared!', 'info');
+        });
+
+        // Fill form with data
+        function fillForm(data) {
+            Object.keys(data).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.value = data[key];
+                }
+            });
+        }
+
+        // Form submission
+        document.getElementById('predictionForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Show loading spinner
+            document.getElementById('loadingSpinner').classList.remove('hidden');
+            
+            // Collect form data
+            const formData = new FormData(this);
+            
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const result = await response.json();
+                displayResults(result);
+                
+            } catch (error) {
+                console.error('Prediction error:', error);
+                showNotification('Error making prediction: ' + error.message, 'error');
+            } finally {
+                // Hide loading spinner
+                document.getElementById('loadingSpinner').classList.add('hidden');
+            }
+        });
+
+        // Display results
+        function displayResults(result) {
+            console.log('Full result object:', result); // Debug log
+            console.log('Mitigation data:', result.mitigation, 'Type:', typeof result.mitigation); // Debug log
+            
+            const resultSection = document.getElementById('resultSection');
+            const resultContent = document.getElementById('resultContent');
+            
+            const isAttack = result.is_attack;
+            const binaryResult = result.binary_prediction;
+            const binaryConfidence = result.binary_confidence;
+            const multiclassAvailable = result.multiclass_available !== false;
+            let mitigationTextForTyping = null;
+            
+            let resultsHTML = `
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="glassmorphism rounded-lg p-6 border-l-4 ${isAttack ? 'border-red-500' : 'border-green-500'}">
+                        <h3 class="text-xl font-semibold mb-4 ${isAttack ? 'text-red-400' : 'text-green-400'}">
+                            🔍 Binary Classification
+                        </h3>
+                        <div class="mb-4">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-[#f0f0f0] font-medium">Prediksi:</span>
+                                <span class="font-bold ${isAttack ? 'text-red-400' : 'text-green-400'}">${binaryResult}</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-3">
+                                <div class="h-3 rounded-full ${isAttack ? 'bg-red-500' : 'bg-green-500'}" style="width: ${binaryConfidence}%"></div>
+                            </div>
+                            <div class="text-right text-sm text-[#a0a0a0] mt-1">${binaryConfidence.toFixed(1)}% confidence</div>
+                        </div>
+                        <p class="text-[#a0a0a0] text-sm">
+                            ${isAttack ? 
+                                'Traffic jaringan menunjukkan pola yang mencurigakan dan teridentifikasi sebagai serangan.' : 
+                                'Traffic jaringan terlihat normal dan tidak menunjukkan tanda-tanda serangan.'
+                            }
+                        </p>
+                    </div>
+            `;
+            
+            if (isAttack) {
+                if (multiclassAvailable && result.multiclass_prediction) {
+                    resultsHTML += `
+                        <div class="glassmorphism rounded-lg p-6 border-l-4 border-orange-500">
+                            <h3 class="text-xl font-semibold text-orange-400 mb-4">🎯 Attack Classification</h3>
+                            <div class="mb-4">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-[#f0f0f0] font-medium">Jenis Serangan:</span>
+                                    <span class="font-bold text-orange-400">${result.multiclass_prediction}</span>
+                                </div>
+                                ${result.multiclass_confidence ? `
+                                    <div class="w-full bg-gray-700 rounded-full h-3">
+                                        <div class="h-3 rounded-full bg-orange-500" style="width: ${result.multiclass_confidence}%"></div>
+                                    </div>
+                                    <div class="text-right text-sm text-[#a0a0a0] mt-1">${result.multiclass_confidence.toFixed(1)}% confidence</div>
+                                ` : ''}
+                            </div>
+                            <p class="text-[#a0a0a0] text-sm">
+                                Sistem berhasil mengidentifikasi jenis serangan spesifik untuk memberikan respons yang tepat.
+                            </p>
+                        </div>
+                    `;
+                } else {
+                    resultsHTML += `
+                        <div class="glassmorphism rounded-lg p-6 border-l-4 border-yellow-500">
+                            <h3 class="text-xl font-semibold text-yellow-400 mb-4">⚠️ Classification Info</h3>
+                            <p class="text-[#a0a0a0] text-sm">
+                                Serangan terdeteksi, namun klasifikasi detail sedang diproses. Sistem binary classification telah mengkonfirmasi adanya ancaman.
+                            </p>
+                        </div>
+                    `;
+                }
+            } else {
+                resultsHTML += `
+                    <div class="glassmorphism rounded-lg p-6 border-l-4 border-blue-500">
+                        <h3 class="text-xl font-semibold text-blue-400 mb-4">✅ Status Normal</h3>
+                        <p class="text-[#a0a0a0] text-sm">
+                            Traffic jaringan dalam kondisi normal. Tidak diperlukan tindakan khusus, sistem akan terus memantau aktivitas jaringan.
+                        </p>
+                    </div>
+                `;
+            }
+            
+            resultsHTML += `
+                </div>
+                <div class="mt-6 text-sm text-[#a0a0a0] text-center">
+                    <span class="text-[#c084fc]">Pipeline Status:</span> ${result.pipeline_status || 'completed'} • 
+                    <span class="text-[#c084fc]">Timestamp:</span> ${new Date(result.timestamp).toLocaleString()}
+                </div>
+            `;
+            
+            if (isAttack && result.mitigation) {
+                // Handle mitigation data - ensure it's a string
+                let mitigationText = '';
+                console.log('Raw mitigation data:', result.mitigation); // Debug log
+                
+                try {
+                    if (typeof result.mitigation === 'string') {
+                        // If it's already a string, use it directly
+                        mitigationText = result.mitigation;
+                    } else if (typeof result.mitigation === 'object') {
+                        // If it's an object, try to extract the actual mitigation content
+                        if (result.mitigation.mitigation) {
+                            // Case: { "mitigation": "markdown content", "source": "...", "success": true }
+                            mitigationText = result.mitigation.mitigation;
+                        } else if (result.mitigation.content) {
+                            mitigationText = result.mitigation.content;
+                        } else if (result.mitigation.text) {
+                            mitigationText = result.mitigation.text;
+                        } else if (result.mitigation.message) {
+                            mitigationText = result.mitigation.message;
+                        } else {
+                            // Fallback: stringify the object
+                            mitigationText = JSON.stringify(result.mitigation, null, 2);
+                        }
+                    } else {
+                        mitigationText = String(result.mitigation);
+                    }
+                    
+                    console.log('Processed mitigation text:', mitigationText); // Debug log
+                    mitigationTextForTyping = mitigationText;
+                    resultsHTML += `
+                        <div class="mt-8 glassmorphism rounded-lg p-6 border-l-4 border-purple-500">
+                            <h3 class="text-xl font-semibold text-purple-400 mb-4">🤖 AI Recommendations</h3>
+                            <div id="mitigationTypewriter" class="markdown-content text-[#f0f0f0]"></div>
+                            <div class="mt-4 p-4 rounded-lg flex items-center space-x-3 bg-yellow-900 bg-opacity-40 border border-yellow-500 text-yellow-300">
+                                <span>
+                                    <svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z' /></svg>
+                                </span>
+                                <p class="text-sm">Peringatan: Rekomendasi ini dihasilkan oleh AI (LLM) dan ditujukan sebagai panduan mitigasi dini. Selalu verifikasi dan sesuaikan dengan kebijakan keamanan Anda sebelum mengambil tindakan.</p>
+                            </div>
+                        </div>
+                    `;
+                } catch (markdownError) {
+                    console.error('Markdown parsing error:', markdownError);
+                    console.error('Failed mitigation text:', mitigationText);
+                    // Fallback to plain text if markdown parsing fails
+                    resultsHTML += `
+                        <div class="mt-8 glassmorphism rounded-lg p-6 border-l-4 border-purple-500">
+                            <h3 class="text-xl font-semibold text-purple-400 mb-4">🤖 AI Recommendations</h3>
+                            <div class="text-[#f0f0f0]">
+                                <pre class="whitespace-pre-wrap">${mitigationText}</pre>
+                            </div>
+                            <div class="mt-4 p-4 rounded-lg flex items-center space-x-3 bg-yellow-900 bg-opacity-40 border border-yellow-500 text-yellow-300">
+                                <span>
+                                    <svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z' /></svg>
+                                </span>
+                                <p class="text-sm">Peringatan: Rekomendasi ini dihasilkan oleh AI (LLM) dan ditujukan sebagai panduan mitigasi dini. Selalu verifikasi dan sesuaikan dengan kebijakan keamanan Anda sebelum mengambil tindakan.</p>
+                            </div>
+                        </div>
+                    `;
+                }
+            } else if (isAttack) {
+                resultsHTML += `
+                    <div class="mt-8 glassmorphism rounded-lg p-6 border-l-4 border-red-500">
+                        <h3 class="text-xl font-semibold text-red-400 mb-4">🚨 Immediate Action Required</h3>
+                        <div class="space-y-3">
+                            <p class="text-[#f0f0f0]">Serangan terdeteksi! Berikut langkah-langkah mitigasi umum yang disarankan:</p>
+                            <ul class="text-[#a0a0a0] space-y-2 ml-6">
+                                <li>• Isolasi sistem yang terdampak dari jaringan</li>
+                                <li>• Blokir alamat IP sumber serangan</li>
+                                <li>• Aktifkan monitoring keamanan tambahan</li>
+                                <li>• Lakukan analisis forensik lebih lanjut</li>
+                                <li>• Update semua sistem keamanan</li>
+                            </ul>
+                        </div>
+                        <div class="mt-4 p-4 rounded-lg flex items-center space-x-3 bg-yellow-900 bg-opacity-40 border border-yellow-500 text-yellow-300">
+                            <span>
+                                <svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z' /></svg>
+                            </span>
+                            <p class="text-sm">Peringatan: Rekomendasi ini dihasilkan oleh AI (LLM) dan ditujukan sebagai panduan mitigasi dini. Selalu verifikasi dan sesuaikan dengan kebijakan keamanan Anda sebelum mengambil tindakan.</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                resultsHTML += `
+                    <div class="mt-8 glassmorphism rounded-lg p-6 border-l-4 border-green-500">
+                        <h3 class="text-xl font-semibold text-green-400 mb-4">✅ All Clear</h3>
+                        <div class="space-y-3">
+                            <p class="text-[#f0f0f0]">Traffic jaringan dalam kondisi normal. Rekomendasi pemeliharaan:</p>
+                            <ul class="text-[#a0a0a0] space-y-2 ml-6">
+                                <li>• Lanjutkan monitoring rutin</li>
+                                <li>• Pastikan sistem keamanan tetap update</li>
+                                <li>• Review log secara berkala</li>
+                                <li>• Maintain backup data terbaru</li>
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            resultContent.innerHTML = resultsHTML;
+            resultSection.classList.remove('hidden');
+            resultSection.scrollIntoView({ behavior: 'smooth' });
+
+            // Trigger typewriter if we have LLM mitigation text
+            if (mitigationTextForTyping) {
+                startTypewriter('mitigationTypewriter', mitigationTextForTyping, 20, (el, rawText) => {
+                    // After typing finishes, render markdown for better readability
+                    try {
+                        el.innerHTML = marked.parse(String(rawText));
+                    } catch (_) {
+                        // Fallback to plain text with line breaks
+                        el.textContent = String(rawText);
+                    }
+                });
+            }
+        }
+
+        // Notification system
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            const colors = {
+                success: 'bg-green-600',
+                error: 'bg-red-600',
+                info: 'bg-blue-600',
+                warning: 'bg-yellow-600'
+            };
+            
+            notification.className = `fixed top-20 right-4 ${colors[type]} text-white px-6 py-3 rounded-lg shadow-lg z-50 transform transition-all duration-300 glassmorphism`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Form validation
+        document.querySelectorAll('input, select').forEach(element => {
+            element.addEventListener('blur', function() {
+                if (this.required && !this.value) {
+                    this.classList.add('border-red-500');
+                } else {
+                    this.classList.remove('border-red-500');
+                }
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

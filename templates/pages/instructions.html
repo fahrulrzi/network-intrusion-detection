@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panduan Penggunaan - CyberGuard AI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body class="bg-[#05020a] text-[#f0f0f0] overflow-x-hidden">
+  <!-- Navbar -->
+  <header class="fixed top-0 w-full z-50 glassmorphism">
+    <div id="navbar-placeholder"></div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative pt-28 pb-10 hero-bg">
+    <div class="container mx-auto px-6 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-2 gradient-text">📚 Panduan Penggunaan</h1>
+      <p class="text-[#a0a0a0] max-w-3xl mx-auto">Instruksi dan deskripsi fitur sistem deteksi serangan siber</p>
+      <div class="mt-4">
+        <a href="/" class="gradient-bg text-white px-6 py-2 rounded-lg font-medium hover-glow inline-block">← Kembali ke Sistem Deteksi</a>
+      </div>
+    </div>
+  </section>
+
+  <main class="container mx-auto px-6 pb-14 space-y-8">
+    <!-- Instruksi Penggunaan -->
+    <section class="glassmorphism rounded-xl p-6">
+      <h2 class="text-2xl font-semibold mb-6 gradient-text">🔧 Instruksi Penggunaan</h2>
+
+      <!-- Analisis Traffic Pribadi -->
+      <div class="mb-8">
+        <h3 class="text-xl font-medium text-[#f0f0f0] mb-4">📡 Untuk Analisis Network Traffic Pribadi</h3>
+  <div class="glassmorphism border border-white/10 rounded-lg p-6">
+          <p class="text-[#a0a0a0] mb-4">Untuk menggunakan sistem ini dengan data network traffic pribadi, Anda perlu menginstall network traffic analyzer terlebih dahulu:</p>
+
+          <h4 class="font-semibold text-[#f0f0f0] mb-3">Step 1: Install Network Traffic Capturer</h4>
+          <p class="text-[#a0a0a0] mb-3">Pilih salah satu tools berikut:</p>
+          <ul class="list-disc list-inside text-[#a0a0a0] mb-4 space-y-2">
+            <li><strong class="text-[#c084fc]">Zeek (Bro)</strong> - Recommended untuk analisis mendalam
+              <pre class="mt-2 p-3 rounded bg-[#0b0a10] border border-rgba(255,255,255,0.1) text-[#e2e8f0] overflow-x-auto"># Ubuntu/Debian 
+sudo apt-get install zeek
+
+# CentOS/RHEL 
+sudo yum install zeek</pre>
+            </li>
+            <li><strong class="text-[#c084fc]">Wireshark</strong> - GUI-based network analyzer</li>
+            <li><strong class="text-[#c084fc]">tcpdump</strong> - Command-line packet analyzer</li>
+            <li><strong class="text-[#c084fc]">nfcapd</strong> - NetFlow capture daemon</li>
+          </ul>
+
+          <h4 class="font-semibold text-[#f0f0f0] mb-3">Step 2: Capture Network Traffic</h4>
+          <pre class="mb-4 p-3 rounded bg-[#0b0a10] border border-rgba(255,255,255,0.1) text-[#e2e8f0] overflow-x-auto"># Contoh menggunakan Zeek 
+zeek -i eth0 local
+
+# Contoh menggunakan tcpdump
+sudo tcpdump -i eth0 -w capture.pcap        
+
+# Contoh menggunakan Wireshark (GUI)
+# File -> Capture -> Start capturing on interface</pre>
+
+          <h4 class="font-semibold text-[#f0f0f0] mb-3">Step 3: Extract Features</h4>
+          <p class="text-[#a0a0a0] mb-3">Ekstrak fitur-fitur berikut dari hasil capture menggunakan tools analisis:</p>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="glassmorphism p-4 rounded-lg">
+              <h5 class="font-medium text-[#f0f0f0] mb-2">Basic Features:</h5>
+              <ul class="text-sm text-[#a0a0a0] space-y-1">
+                <li>• Protocol (proto)</li>
+                <li>• Service (service)</li>
+                <li>• Connection state (state)</li>
+                <li>• Packet counts (spkts, dpkts)</li>
+                <li>• Byte counts (sbytes, dbytes)</li>
+              </ul>
+            </div>
+            <div class="glassmorphism p-4 rounded-lg">
+              <h5 class="font-medium text-[#f0f0f0] mb-2">Advanced Features:</h5>
+              <ul class="text-sm text-[#a0a0a0] space-y-1">
+                <li>• Timing features (TTL, jitter)</li>
+                <li>• TCP window sizes</li>
+                <li>• Connection statistics</li>
+                <li>• Load calculations</li>
+              </ul>
+            </div>
+          </div>
+
+          <h4 class="font-semibold text-[#f0f0f0] mb-3 mt-4">Step 4: Input ke Sistem</h4>
+          <p class="text-[#a0a0a0]">Masukkan nilai-nilai fitur yang telah diekstrak ke dalam form pada halaman utama sistem deteksi.</p>
+        </div>
+      </div>
+
+      <!-- Demo -->
+      <div class="mb-2">
+        <h3 class="text-xl font-medium text-[#22c55e] mb-4">🎮 Untuk Keperluan Demonstrasi Model</h3>
+         <div class="glassmorphism border border-white/10 p-6 rounded-lg">
+          <p class="text-[#a0a0a0] mb-4">Untuk tujuan demonstrasi dan testing model, gunakan fitur <strong class="text-[#c084fc]">Load Data</strong> yang tersedia:</p>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="glassmorphism p-4 rounded-lg">
+              <h4 class="font-semibold text-[#22c55e] mb-3">📈 Load Normal Traffic</h4>
+              <p class="text-sm text-[#a0a0a0] mb-3">Memuat data traffic normal dari dataset UNSW-NB15 testing set yang tidak digunakan selama pelatihan model.</p>
+              <ul class="text-sm text-[#a0a0a0] space-y-1">
+                <li>• Data legitimate network traffic</li>
+                <li>• Berbagai protokol (TCP, UDP, HTTP)</li>
+                <li>• Connection states normal</li>
+                <li>• Prediksi: Normal Traffic</li>
+              </ul>
+            </div>
+            <div class="glassmorphism p-4 rounded-lg">
+              <h4 class="font-semibold text-[#f87171] mb-3">⚠️ Load Attack Traffic</h4>
+              <p class="text-sm text-[#a0a0a0] mb-3">Memuat data traffic serangan dari dataset UNSW-NB15 testing set dengan berbagai jenis attack.</p>
+              <ul class="text-sm text-[#a0a0a0] space-y-1">
+                <li>• DoS (Denial of Service)</li>
+                <li>• Reconnaissance attacks</li>
+                <li>• Exploits dan Backdoors</li>
+                <li>• Prediksi: Attack Detected</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mt-4 p-4 rounded-lg glassmorphism border border-white/10">
+            <h4 class="font-semibold text-[#f0f0f0] mb-2">📊 Dataset Information</h4>
+            <p class="text-[#a0a0a0] text-sm">Data testing diambil dari <strong class="text-[#c084fc]">UNSW-NB15 testing dataset</strong> yang tersedia di 
+              <a href="https://www.kaggle.com/datasets/mrwellsdavid/unsw-nb15/data?select=UNSW_NB15_testing-set.csv" class="underline text-[#c084fc]" target="_blank">Kaggle</a>.
+              Data ini tidak pernah digunakan selama proses pelatihan model, sehingga memberikan evaluasi yang objektif.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Deskripsi Fitur -->
+    <section class="glassmorphism rounded-xl p-6">
+      <h2 class="text-2xl font-semibold mb-6 gradient-text">📋 Deskripsi Fitur</h2>
+      <p class="text-[#a0a0a0] mb-6">Sistem menggunakan 41 fitur yang telah diseleksi dari 47 fitur total dalam dataset UNSW-NB15. Berikut adalah penjelasan detail setiap fitur:</p>
+
+      <!-- Basic Connection -->
+  <div class="mb-8">
+        <h3 class="text-lg font-medium text-[#60a5fa] mb-4 border-b border-rgba(255,255,255,0.1) pb-2">🔗 Basic Connection Information</h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="space-y-3">
+            <div class="glassmorphism p-4 rounded-lg">
+              <h4 class="font-semibold text-[#f0f0f0]">proto (Protocol)</h4>
+              <p class="text-sm text-[#a0a0a0]">Protokol transport yang digunakan dalam koneksi.<br><strong>Contoh:</strong> tcp, udp, unas, arp, ospf, irtp, 3pc, mhrp, rdp</p>
+            </div>
+            <div class="glassmorphism p-4 rounded-lg">
+              <h4 class="font-semibold text-[#f0f0f0]">service (Service)</h4>
+              <p class="text-sm text-[#a0a0a0]">Layanan jaringan yang digunakan.<br><strong>Contoh:</strong> http, dns, smtp, ftp, ssh, ssl, snmp, atau "-" jika tidak teridentifikasi</p>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <div class="glassmorphism p-4 rounded-lg">
+              <h4 class="font-semibold text-[#f0f0f0]">state (Connection State)</h4>
+              <p class="text-sm text-[#a0a0a0]">Status koneksi saat ini.<br><strong>Nilai:</strong> FIN, INT, CON, REQ, ACC, RST, CLO</p>
+            </div>
+            <div class="glassmorphism p-4 rounded-lg">
+              <h4 class="font-semibold text-[#f0f0f0]">rate (Connection Rate)</h4>
+              <p class="text-sm text-[#a0a0a0]">Jumlah paket per detik dalam koneksi.<br><strong>Satuan:</strong> packets/second</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Packet Information -->
+  <div class="mb-8">
+        <h3 class="text-lg font-medium text-[#22c55e] mb-4 border-b border-rgba(255,255,255,0.1) pb-2">📦 Packet Information</h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="space-y-3">
+            <div class="glassmorphism p-4 rounded-lg">
+              <h4 class="font-semibold text-[#f0f0f0]">spkts / dpkts</h4>
+              <p class="text-sm text-[#a0a0a0]">Jumlah paket source→dest (spkts) dan sebaliknya (dpkts).</p>
+            </div>
+            <div class="glassmorphism p-4 rounded-lg">
+              <h4 class="font-semibold text-[#f0f0f0]">sbytes / dbytes</h4>
+              <p class="text-sm text-[#a0a0a0]">Jumlah bytes source→dest (sbytes) dan sebaliknya (dbytes). Satuan: Bytes</p>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <div class="glassmorphism p-4 rounded-lg">
+              <h4 class="font-semibold text-[#f0f0f0]">smean / dmean</h4>
+              <p class="text-sm text-[#a0a0a0]">Rata-rata ukuran paket source (smean) dan destination (dmean). Satuan: Bytes/paket</p>
+            </div>
+            <div class="glassmorphism p-4 rounded-lg">
+              <h4 class="font-semibold text-[#f0f0f0]">sload / dload</h4>
+              <p class="text-sm text-[#a0a0a0]">Kecepatan transfer data source (sload) dan dest (dload). Satuan: bits/s</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TTL & Timing -->
+  <div class="mb-8">
+        <h3 class="text-lg font-medium text-[#f59e0b] mb-4 border-b border-rgba(255,255,255,0.1) pb-2">⏱️ TTL & Timing Information</h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="space-y-3">
+            <div class="glassmorphism p-4 rounded-lg">
+              <h4 class="font-semibold text-[#f0f0f0]">sttl / dttl</h4>
+              <p class="text-sm text-[#a0a0a0]">TTL paket dari source (sttl) dan destination (dttl). Untuk anomali routing dan OS fingerprinting.</p>
+            </div>
+            <div class="glassmorphism p-4 rounded-lg">
+              <h4 class="font-semibold text-[#f0f0f0]">sinpkt / dinpkt</h4>
+              <p class="text-sm text-[#a0a0a0]">Waktu antar kedatangan paket untuk source dan destination. Satuan: ms</p>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <div class="glassmorphism p-4 rounded-lg">
+              <h4 class="font-semibold text-[#f0f0f0]">sjit / djit</h4>
+              <p class="text-sm text-[#a0a0a0]">Jitter (variasi waktu) paket source dan destination. Satuan: ms</p>
+            </div>
+            <div class="glassmorphism p-4 rounded-lg">
+              <h4 class="font-semibold text-[#f0f0f0]">dloss</h4>
+              <p class="text-sm text-[#a0a0a0]">Jumlah paket yang hilang/retransmit pada destination. Indikator kualitas koneksi.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TCP -->
+      <div class="mb-8">
+        <h3 class="text-lg font-medium text-[#a78bfa] mb-4 border-b border-rgba(255,255,255,0.1) pb-2">🔌 TCP Information</h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="space-y-3">
+            <div class="glassmorphism p-4 rounded-lg">
+              <h4 class="font-semibold text-[#f0f0f0]">swin / dwin</h4>
+              <p class="text-sm text-[#a0a0a0]">TCP window size advertisement untuk source dan destination.</p>
+            </div>
+            <div class="glassmorphism p-4 rounded-lg">
+              <h4 class="font-semibold text-[#f0f0f0]">stcpb / dtcpb</h4>
+              <p class="text-sm text-[#a0a0a0]">TCP base sequence number untuk source dan destination.</p>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <div class="glassmorphism p-4 rounded-lg">
+              <h4 class="font-semibold text-[#f0f0f0]">tcprtt</h4>
+              <p class="text-sm text-[#a0a0a0]">TCP setup round-trip time (synack + ackdat). Satuan: detik</p>
+            </div>
+            <div class="glassmorphism p-4 rounded-lg">
+              <h4 class="font-semibold text-[#f0f0f0]">synack / ackdat</h4>
+              <p class="text-sm text-[#a0a0a0]">Waktu setup TCP: SYN→SYN_ACK (synack) dan SYN_ACK→ACK (ackdat). Satuan: detik</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HTTP & App -->
+      <div class="mb-8">
+        <h3 class="text-lg font-medium text-[#f87171] mb-4 border-b border-rgba(255,255,255,0.1) pb-2">🌐 HTTP & Application Features</h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="space-y-3">
+            <div class="glassmorphism p-4 rounded-lg">
+              <h4 class="font-semibold text-[#f0f0f0]">trans_depth</h4>
+              <p class="text-sm text-[#a0a0a0]">Kedalaman pipeline dalam HTTP request/response. Deteksi HTTP pipelining abuse.</p>
+            </div>
+            <div class="glassmorphism p-4 rounded-lg">
+              <h4 class="font-semibold text-[#f0f0f0]">response_body_len</h4>
+              <p class="text-sm text-[#a0a0a0]">Ukuran uncompressed content dari HTTP server response. Satuan: Bytes</p>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <div class="glassmorphism p-4 rounded-lg">
+              <h4 class="font-semibold text-[#f0f0f0]">ct_flw_http_mthd</h4>
+              <p class="text-sm text-[#a0a0a0]">Jumlah flow dengan HTTP methods (GET, POST, dll). Deteksi HTTP method abuse.</p>
+            </div>
+            <div class="glassmorphism p-4 rounded-lg">
+              <h4 class="font-semibold text-[#f0f0f0]">is_ftp_login / ct_ftp_cmd</h4>
+              <p class="text-sm text-[#a0a0a0]">FTP login status (1/0) dan jumlah FTP commands. Deteksi FTP brute force/abuse.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Count Features -->
+      <div class="mb-8">
+        <h3 class="text-lg font-medium text-[#818cf8] mb-4 border-b border-rgba(255,255,255,0.1) pb-2">📊 Connection Count Features</h3>
+  <div class="glassmorphism p-6 rounded-lg">
+          <p class="text-[#a0a0a0] mb-4">Fitur-fitur berikut menghitung jumlah koneksi dengan karakteristik tertentu dalam 100 koneksi terakhir:</p>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="space-y-2">
+              <div class="glassmorphism p-3 rounded">
+                <h4 class="font-semibold text-[#f0f0f0] text-sm">ct_srv_src / ct_srv_dst</h4>
+                <p class="text-xs text-[#a0a0a0]">Koneksi dengan service dan source/destination address yang sama</p>
+              </div>
+              <div class="glassmorphism p-3 rounded">
+                <h4 class="font-semibold text-[#f0f0f0] text-sm">ct_dst_ltm / ct_src_ltm</h4>
+                <p class="text-xs text-[#a0a0a0]">Koneksi dengan destination/source address yang sama</p>
+              </div>
+              <div class="glassmorphism p-3 rounded">
+                <h4 class="font-semibold text-[#f0f0f0] text-sm">ct_src_dport_ltm</h4>
+                <p class="text-xs text-[#a0a0a0]">Koneksi dengan source address dan destination port yang sama</p>
+              </div>
+            </div>
+            <div class="space-y-2">
+              <div class="glassmorphism p-3 rounded">
+                <h4 class="font-semibold text-[#f0f0f0] text-sm">ct_dst_sport_ltm</h4>
+                <p class="text-xs text-[#a0a0a0]">Koneksi dengan destination address dan source port yang sama</p>
+              </div>
+              <div class="glassmorphism p-3 rounded">
+                <h4 class="font-semibold text-[#f0f0f0] text-sm">ct_dst_src_ltm</h4>
+                <p class="text-xs text-[#a0a0a0]">Koneksi dengan source dan destination address yang sama</p>
+              </div>
+              <div class="glassmorphism p-3 rounded">
+                <h4 class="font-semibold text-[#f0f0f0] text-sm">ct_state_ttl</h4>
+                <p class="text-xs text-[#a0a0a0]">Koneksi dengan state dan TTL range yang sama</p>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 p-3 rounded glassmorphism border border-white/10">
+            <p class="text-sm text-[#a0a0a0]"><strong class="text-[#c084fc]">📈 Pentingnya Count Features:</strong> Fitur-fitur ini penting untuk mendeteksi pola serangan seperti port scanning, DDoS, dan reconnaissance activities.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Boolean -->
+      <div>
+        <h3 class="text-lg font-medium text-[#94a3b8] mb-4 border-b border-rgba(255,255,255,0.1) pb-2">✅ Boolean Features</h3>
+  <div class="glassmorphism p-6 rounded-lg">
+          <div class="glassmorphism p-4 rounded-lg">
+            <h4 class="font-semibold text-[#f0f0f0]">is_sm_ips_ports</h4>
+            <p class="text-sm text-[#a0a0a0] mb-2">Menunjukkan apakah source dan destination IP address serta port numbers sama.</p>
+            <div class="text-xs text-[#a0a0a0]">
+              <strong>Nilai:</strong> 1 = Ya (sama), 0 = Tidak (berbeda)<br>
+              <strong>Penggunaan:</strong> Deteksi loopback attacks dan self-connection anomalies
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+  <script src="/static/js/main.js"></script>
+</body>
+</html>
