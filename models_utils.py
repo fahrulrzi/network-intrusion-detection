@@ -288,7 +288,7 @@ def load_model_ecosystem(model_dir, model_type='binary'):
         
         # First attempt: Standard joblib loading
         try:
-            components['model'] = joblib.load(model_path)
+            components['model'] = load_model_with_fix(model_path)
             logger.info(f"SUCCESS: {model_type} model loaded from {model_path}")
         except Exception as e:
             logger.warning(f"Standard joblib loading failed: {e}")
@@ -301,7 +301,7 @@ def load_model_ecosystem(model_dir, model_type='binary'):
                 try:
                     import numpy as np
                     # Try loading with older numpy compatibility
-                    components['model'] = joblib.load(model_path)
+                    components['model'] = load_model_with_fix(model_path)
                     logger.info(f"SUCCESS: {model_type} model loaded with numpy compatibility")
                 except Exception as e2:
                     logger.warning(f"Numpy compatibility loading failed: {e2}")
@@ -328,7 +328,7 @@ def load_model_ecosystem(model_dir, model_type='binary'):
         encoder_path = f"{model_dir}/{target_encoder_filename}"
         # Try joblib first, then pickle
         try:
-            components['target_encoder'] = joblib.load(encoder_path)
+            components['target_encoder'] = load_model_with_fix(encoder_path)
         except Exception:
             with open(encoder_path, 'rb') as f:
                 components['target_encoder'] = pickle.load(f)
@@ -385,7 +385,7 @@ def load_model_ecosystem(model_dir, model_type='binary'):
             label_encoder_path = f"{model_dir}/label_encoder.pkl"
             if os.path.exists(label_encoder_path):
                 try:
-                    components['label_encoder'] = joblib.load(label_encoder_path)
+                    components['label_encoder'] = load_model_with_fix(label_encoder_path)
                 except Exception:
                     with open(label_encoder_path, 'rb') as f:
                         components['label_encoder'] = pickle.load(f)
@@ -397,7 +397,7 @@ def load_model_ecosystem(model_dir, model_type='binary'):
         try:
             preprocessor_path = f"{model_dir}/preprocessor.joblib"
             if os.path.exists(preprocessor_path):
-                components['preprocessor'] = joblib.load(preprocessor_path)
+                components['preprocessor'] = load_model_with_fix(preprocessor_path)
                 logger.info("SUCCESS: Preprocessor loaded")
             else:
                 logger.warning("Preprocessor not found - categorical features may need manual encoding")
@@ -609,7 +609,6 @@ def preprocess_data_for_model(new_data, target_encoder, config, model_type='bina
     logger.debug(f"Final features: {list(processed_data.columns)}")
     
     return processed_data
-
 
 class CustomUnpickler(pickle.Unpickler):
     def find_class(self, module, name):
