@@ -8,6 +8,7 @@ import sys
 import warnings
 import logging
 from flask import Flask
+from flask_cors import CORS
 
 # Suppress warnings
 warnings.filterwarnings('ignore')
@@ -66,7 +67,8 @@ def initialize_models():
 def create_app():
     """Create and configure Flask application"""
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = 'your-secret-key-here'
+    CORS(app)
+    app.config['SECRET_KEY'] = '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'
     
     # Initialize models
     initialize_models()
