@@ -1,228 +1,755 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CyberGuard AI - Deteksi Cerdas, Respon Cepat</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/static/css/style.css" />
-</head>
-<body class="bg-[#05020a] text-[#f0f0f0] overflow-x-hidden">
-  <!-- Navbar -->
-  <header class="fixed top-0 w-full z-50 glassmorphism">
-    <div id="navbar-placeholder"></div>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CyberGuard AI - Deteksi Cerdas, Respon Cepat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/css/style.css" />
+  </head>
+  <body class="bg-[#05020a] text-[#f0f0f0] overflow-x-hidden">
+    <!-- Navbar -->
+    <header class="fixed top-0 w-full z-50 glassmorphism">
+      <div id="navbar-placeholder"></div>
+    </header>
 
-  <!-- Hero Section -->
-  <section id="home" class="relative min-h-screen flex items-center justify-center hero-bg">
-    <div class="container mx-auto px-6 text-center relative z-10">
-      <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight fade-in">
-        Deteksi Cerdas, Respon Cepat:<br>
-        <span class="gradient-text">Memperkuat Keamanan Siber Indonesia</span>
-      </h1>
-      <p class="text-lg md:text-xl text-[#a0a0a0] mb-12 max-w-4xl mx-auto leading-relaxed fade-in fade-in-delay-1">
-        Platform cerdas yang mengintegrasikan Machine Learning untuk deteksi akurat dan Large Language Model untuk rekomendasi mitigasi instan.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-6 justify-center items-center fade-in fade-in-delay-2">
-        <a href="/predict" class="gradient-bg text-white px-8 py-4 rounded-lg font-semibold hover-glow transition-all duration-300">Coba Platform Prediksi</a>
-        <a href="/metodologi" class="glassmorphism text-[#f0f0f0] px-8 py-4 rounded-lg font-semibold hover-glow transition-all duration-300">Pelajari Metodologi Kami</a>
+    <!-- Hero Section -->
+    <section
+      id="home"
+      class="relative min-h-screen flex items-center justify-center hero-bg"
+    >
+      <div class="container mx-auto px-0 text-center relative z-10">
+        <h1
+          class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight fade-in"
+        >
+          Deteksi Cerdas, Respon Cepat:<br />
+          <span class="gradient-text">Memperkuat Keamanan Siber Indonesia</span>
+        </h1>
+        <p
+          class="text-lg md:text-xl text-[#a0a0a0] mb-12 max-w-4xl mx-auto leading-relaxed fade-in fade-in-delay-1"
+        >
+          Platform cerdas yang mengintegrasikan Machine Learning untuk deteksi
+          akurat dan Large Language Model untuk rekomendasi mitigasi instan.
+        </p>
+        <div
+          class="flex flex-col sm:flex-row gap-6 justify-center items-center fade-in fade-in-delay-2"
+        >
+          <a
+            href="/predict"
+            class="gradient-bg text-white px-8 py-4 rounded-lg font-semibold hover-glow transition-all duration-300"
+            >Coba Platform Prediksi</a
+          >
+          <a
+            href="/metodologi"
+            class="glassmorphism text-[#f0f0f0] px-8 py-4 rounded-lg font-semibold hover-glow transition-all duration-300"
+            >Pelajari Metodologi Kami</a
+          >
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- Hasil Kinerja Model -->
+    <section id="hasil-kinerja" class="py-20 relative">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl md:text-5xl font-bold text-center mb-12 fade-in">
+          <span class="gradient-text"
+            >Terbukti Akurat: Hasil Kinerja Model Kami</span
+          >
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <!-- Card 1: Shield Recall -->
+          <div
+            class="glassmorphism rounded-xl p-8 hover-glow fade-in border-l-4 border-purple-500/40"
+          >
+            <div class="flex items-start gap-6">
+              <div
+                class="shrink-0 relative drop-shadow-[0_0_24px_rgba(192,132,252,0.35)]"
+              >
+                <svg
+                  viewBox="0 0 160 160"
+                  class="w-28 h-28"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <defs>
+                    <linearGradient id="gradPurple" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#c084fc" />
+                      <stop offset="100%" stop-color="#7c3aed" />
+                    </linearGradient>
+                  </defs>
+                  <!-- Subtle glow circle -->
+                  <circle
+                    cx="80"
+                    cy="80"
+                    r="60"
+                    fill="rgba(192,132,252,0.08)"
+                  />
+                  <!-- Shield shape -->
+                  <path
+                    d="M80 10c-8 8-28 14-40 16v40c0 40 28 62 40 70 12-8 40-30 40-70V26c-12-2-32-8-40-16z"
+                    fill="rgba(192,132,252,0.18)"
+                    stroke="url(#gradPurple)"
+                    stroke-width="3"
+                  />
+                  <!-- Percent Text (emphasis) -->
+                  <text
+                    x="80"
+                    y="95"
+                    font-family="Inter, sans-serif"
+                    font-size="28"
+                    font-weight="800"
+                    text-anchor="middle"
+                    fill="#c084fc"
+                  >
+                    97.65%
+                  </text>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <div class="mb-2">
+                  <span
+                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/15 text-purple-300 border border-purple-400/20 text-xs font-semibold tracking-wide"
+                  >
+                    <span
+                      class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"
+                    ></span>
+                    PENTING • Recall Tertinggi
+                  </span>
+                </div>
+                <h3 class="text-2xl font-semibold mb-2 text-[#f0f0f0]">
+                  Keandalan Deteksi <span class="text-[#c084fc]">97.65%</span>
+                </h3>
+                <p class="text-[#a0a0a0] leading-relaxed">
+                  Model 'Penjaga Gerbang' kami mencapai
+                  <span class="text-[#c084fc] font-semibold"
+                    >Recall 97.65%</span
+                  >
+                  — menangkap hampir semua potensi ancaman yang masuk, sehingga
+                  serangan sulit lolos dari deteksi awal.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Bars Comparison -->
+          <div
+            class="glassmorphism rounded-xl p-8 hover-glow fade-in fade-in-delay-1 border-l-4 border-purple-500/40"
+          >
+            <div class="mb-2">
+              <span
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/15 text-purple-300 border border-purple-400/20 text-xs font-semibold tracking-wide"
+                >Hasil Kunci</span
+              >
+            </div>
+            <h3 class="text-2xl font-semibold mb-2 text-[#f0f0f0]">
+              Inovasi yang <span class="text-[#c084fc]">Terbukti Efektif</span>
+            </h3>
+            <p class="text-[#a0a0a0] leading-relaxed mb-6">
+              Untuk deteksi jenis serangan, strategi inovatif Hybrid Multi-Tier
+              Rebalancing kami terbukti mengungguli pendekatan standar. Model
+              'Spesialis' kami yang dilatih dengan metode ini mencapai performa
+              tertinggi.
+            </p>
+            <div class="w-full max-w-lg mx-auto">
+              <svg
+                viewBox="0 0 420 220"
+                class="w-full h-auto"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <defs>
+                  <linearGradient id="barAccent" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#c084fc" />
+                    <stop offset="100%" stop-color="#7c3aed" />
+                  </linearGradient>
+                </defs>
+                <!-- Axes -->
+                <line
+                  x1="40"
+                  y1="180"
+                  x2="400"
+                  y2="180"
+                  stroke="#3a3a3a"
+                  stroke-width="2"
+                />
+                <line
+                  x1="40"
+                  y1="30"
+                  x2="40"
+                  y2="180"
+                  stroke="#3a3a3a"
+                  stroke-width="2"
+                />
+
+                <!-- Bars -->
+                <!-- Without Rebalancing -->
+                <rect
+                  x="80"
+                  y="110"
+                  width="60"
+                  height="70"
+                  rx="6"
+                  fill="#3b3b3b"
+                />
+                <!-- value label -->
+                <text
+                  x="110"
+                  y="105"
+                  text-anchor="middle"
+                  fill="#a0a0a0"
+                  font-size="12"
+                >
+                  78.85%
+                </text>
+                <!-- SMOTE Standard -->
+                <rect
+                  x="190"
+                  y="95"
+                  width="60"
+                  height="85"
+                  rx="6"
+                  fill="#555"
+                />
+                <!-- value label -->
+                <text
+                  x="220"
+                  y="90"
+                  text-anchor="middle"
+                  fill="#a0a0a0"
+                  font-size="12"
+                >
+                  77.82%
+                </text>
+                <!-- Our Hybrid Innovation (highest) -->
+                <rect
+                  x="300"
+                  y="70"
+                  width="60"
+                  height="110"
+                  rx="6"
+                  fill="url(#barAccent)"
+                  filter="drop-shadow(0 0 10px rgba(192,132,252,0.45))"
+                />
+                <!-- crown/star marker -->
+                <text
+                  x="330"
+                  y="62"
+                  text-anchor="middle"
+                  font-size="14"
+                  fill="#c084fc"
+                >
+                  ★
+                </text>
+                <!-- value label -->
+                <text
+                  x="330"
+                  y="65"
+                  text-anchor="middle"
+                  fill="#c084fc"
+                  font-size="12"
+                  font-weight="600"
+                >
+                  80.24%
+                </text>
+
+                <!-- Labels -->
+                <text
+                  x="110"
+                  y="200"
+                  text-anchor="middle"
+                  fill="#a0a0a0"
+                  font-size="12"
+                >
+                  Tanpa Rebalancing
+                </text>
+                <!-- text below label -->
+                <text
+                  x="110"
+                  y="215"
+                  text-anchor="middle"
+                  fill="#a0a0a0"
+                  font-size="12"
+                >
+                  (Performa tertinggi: 78.85% Weighted f1-score)
+                </text>
+                <text
+                  x="220"
+                  y="200"
+                  text-anchor="middle"
+                  fill="#a0a0a0"
+                  font-size="12"
+                >
+                  SMOTE Standar
+                </text>
+                <text
+                  x="220"
+                  y="215"
+                  text-anchor="middle"
+                  fill="#a0a0a0"
+                  font-size="12"
+                >
+                  (Performa tertinggi: 77.82% Weighted f1-score)
+                </text>
+                <text
+                  x="330"
+                  y="200"
+                  text-anchor="middle"
+                  fill="#c084fc"
+                  font-size="12"
+                  font-weight="600"
+                >
+                  Inovasi Hibrida Kami
+                </text>
+                <text
+                  x="330"
+                  y="215"
+                  text-anchor="middle"
+                  fill="#c084fc"
+                  font-size="12"
+                  font-weight="600"
+                >
+                  (Performa tertinggi: 80.24% Weighted f1-score)
+                </text>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Problem Statement Section -->
     <section id="problem" class="py-20 relative">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 fade-in">
-                Ancaman Siber di Era Digital: <span class="gradient-text">Mengapa Ini Penting?</span>
-            </h2>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Financial Loss -->
-                <div class="glassmorphism rounded-xl p-8 text-center hover-glow fade-in fade-in-delay-1">
-                    <div class="w-16 h-16 mx-auto mb-6 text-[#c084fc]">
-                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M32 8C18.745 8 8 18.745 8 32s10.745 24 24 24 24-10.745 24-24S45.255 8 32 8zm0 4c11.046 0 20 8.954 20 20s-8.954 20-20 20S12 43.046 12 32 20.954 12 32 12z" fill="currentColor"/>
-                            <path d="M28 20v4h-4v4h4v8h-4v4h4v4h8v-4h4v-4h-4v-8h4v-4h-4v-4h-8zm4 8v8h-4v-8h4z" fill="currentColor"/>
-                            <path d="M24 28h4v8h-4v-8zm12 0h4v8h-4v-8z" fill="currentColor"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-4 text-[#f0f0f0]">Kerugian Finansial Signifikan</h3>
-                    <p class="text-[#a0a0a0] leading-relaxed">
-                        Rata-rata kerugian akibat kebocoran data mencapai $4.88 juta.
-                    </p>
-                </div>
-                
-                <!-- Public Service Disruption -->
-                <div class="glassmorphism rounded-xl p-8 text-center hover-glow fade-in fade-in-delay-2">
-                    <div class="w-16 h-16 mx-auto mb-6 text-[#c084fc]">
-                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8 12v40h48V12H8zm4 4h40v32H12V16z" fill="currentColor"/>
-                            <path d="M16 20h32v4H16v-4zm0 8h32v4H16v-4zm0 8h24v4H16v-4z" fill="currentColor"/>
-                            <path d="M44 36h4v4h-4v-4z" fill="currentColor"/>
-                            <path d="M32 4L24 12h16L32 4z" fill="currentColor"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-4 text-[#f0f0f0]">Lumpuhnya Layanan Publik</h3>
-                    <p class="text-[#a0a0a0] leading-relaxed">
-                        Serangan ransomware pada Pusat Data Nasional menjadi bukti nyata dampak luasnya.
-                    </p>
-                </div>
-                
-                <!-- Outdated Methods -->
-                <div class="glassmorphism rounded-xl p-8 text-center hover-glow fade-in fade-in-delay-3">
-                    <div class="w-16 h-16 mx-auto mb-6 text-[#c084fc]">
-                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M32 8C18.745 8 8 18.745 8 32s10.745 24 24 24 24-10.745 24-24S45.255 8 32 8zm0 4c11.046 0 20 8.954 20 20s-8.954 20-20 20S12 43.046 12 32 20.954 12 32 12z" fill="currentColor"/>
-                            <path d="M32 16v12l8 8-4 4-12-12V16h8z" fill="currentColor"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-4 text-[#f0f0f0]">Metode Konvensional Tertinggal</h3>
-                    <p class="text-[#a0a0a0] leading-relaxed">
-                        Deteksi berbasis signature tidak mampu menangani serangan zero-day yang semakin canggih.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 fade-in">
+          Ancaman Siber di Era Digital:
+          <span class="gradient-text">Mengapa Ini Penting?</span>
+        </h2>
 
-        <!-- Core Innovations Section -->
-    <section id="metodologi" class="py-20 relative">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 fade-in">
-                <span class="gradient-text">Solusi Inovatif Kami</span>
-            </h2>
-            
-            <!-- Two-Stage Classifier Innovation -->
-            <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
-                <div class="fade-in">
-                    <h3 class="text-2xl md:text-3xl font-bold mb-6 text-[#f0f0f0]">
-                        Arsitektur Two-Stage Classifier untuk Keandalan Maksimal
-                    </h3>
-                    <p class="text-[#a0a0a0] leading-relaxed text-lg mb-6">
-                        Kami tidak hanya membangun satu model. Kami merancang arsitektur cerdas dua tahap. 
-                        <span class="text-[#c084fc]">Tahap Pertama (Klasifikasi Biner: Normal vs Serangan)</span> berfungsi sebagai 'Penjaga Gerbang' dengan keandalan deteksi sangat tinggi untuk menyaring semua potensi ancaman.
-                    </p>
-                    <p class="text-[#a0a0a0] leading-relaxed text-lg">
-                        Jika ancaman terdeteksi, data akan diteruskan ke <span class="text-[#c084fc]">Tahap Kedua (Klasifikasi Multiclass: DoS, Exploits, Fuzzers, dsb)</span>, yaitu model 'Spesialis' yang sangat akurat dalam mengidentifikasi jenis serangan spesifik. Pendekatan ini memastikan deteksi yang lebih andal dan identifikasi yang lebih fokus.
-                    </p>
-                </div>
-                
-                <div class="glassmorphism rounded-xl p-8 fade-in fade-in-delay-1">
-                    <div class="w-full max-w-md mx-auto">
-                        <svg viewBox="0 0 400 300" class="w-full h-auto text-[#f0f0f0]">
-                            <!-- Input Data -->
-                            <rect x="20" y="20" width="80" height="40" rx="8" fill="rgba(192, 132, 252, 0.2)" stroke="#c084fc" stroke-width="2"/>
-                            <text x="60" y="45" text-anchor="middle" fill="#f0f0f0" font-size="12" font-family="Inter">Input Data</text>
-                            
-                            <!-- Arrow 1 -->
-                            <path d="M 110 40 L 140 40" stroke="#c084fc" stroke-width="2" marker-end="url(#arrowhead)"/>
-                            
-                            <!-- Stage 1 -->
-                            <rect x="150" y="10" width="100" height="60" rx="8" fill="rgba(124, 58, 237, 0.2)" stroke="#7c3aed" stroke-width="2"/>
-                            <text x="200" y="30" text-anchor="middle" fill="#f0f0f0" font-size="11" font-family="Inter">Stage 1:</text>
-                            <text x="200" y="45" text-anchor="middle" fill="#f0f0f0" font-size="11" font-family="Inter">Anomaly</text>
-                            <text x="200" y="60" text-anchor="middle" fill="#f0f0f0" font-size="11" font-family="Inter">Detection</text>
-                            
-                            <!-- Arrow 2 -->
-                            <path d="M 260 40 L 290 40" stroke="#c084fc" stroke-width="2" marker-end="url(#arrowhead)"/>
-                            
-                            <!-- Stage 2 -->
-                            <rect x="300" y="10" width="100" height="60" rx="8" fill="rgba(192, 132, 252, 0.2)" stroke="#c084fc" stroke-width="2"/>
-                            <text x="350" y="30" text-anchor="middle" fill="#f0f0f0" font-size="11" font-family="Inter">Stage 2:</text>
-                            <text x="350" y="45" text-anchor="middle" fill="#f0f0f0" font-size="11" font-family="Inter">Attack</text>
-                            <text x="350" y="60" text-anchor="middle" fill="#f0f0f0" font-size="11" font-family="Inter">Identification</text>
-                            
-                            <!-- Benefits -->
-                            <text x="200" y="120" text-anchor="middle" fill="#c084fc" font-size="14" font-family="Inter" font-weight="600">Keunggulan Arsitektur</text>
-                            <text x="200" y="145" text-anchor="middle" fill="#a0a0a0" font-size="12" font-family="Inter">✓ Keandalan deteksi tinggi</text>
-                            <text x="200" y="165" text-anchor="middle" fill="#a0a0a0" font-size="12" font-family="Inter">✓ Identifikasi serangan spesifik</text>
-                            <text x="200" y="185" text-anchor="middle" fill="#a0a0a0" font-size="12" font-family="Inter">✓ Efisiensi komputasi optimal</text>
-                            
-                            <!-- Arrow marker definition -->
-                            <defs>
-                                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                                    <polygon points="0 0, 10 3.5, 0 7" fill="#c084fc"/>
-                                </marker>
-                            </defs>
-                        </svg>
-                    </div>
-                </div>
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Financial Loss -->
+          <div
+            class="glassmorphism rounded-xl p-8 text-center hover-glow fade-in fade-in-delay-1"
+          >
+            <div class="w-16 h-16 mx-auto mb-6 text-[#c084fc]">
+              <svg
+                viewBox="0 0 64 64"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M32 8C18.745 8 8 18.745 8 32s10.745 24 24 24 24-10.745 24-24S45.255 8 32 8zm0 4c11.046 0 20 8.954 20 20s-8.954 20-20 20S12 43.046 12 32 20.954 12 32 12z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M28 20v4h-4v4h4v8h-4v4h4v4h8v-4h4v-4h-4v-8h4v-4h-4v-4h-8zm4 8v8h-4v-8h4z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M24 28h4v8h-4v-8zm12 0h4v8h-4v-8z"
+                  fill="currentColor"
+                />
+              </svg>
             </div>
-            
-            <!-- LLM Integration Innovation -->
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="glassmorphism rounded-xl p-8 fade-in order-2 lg:order-1">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Detection Alert -->
-                        <div class="glassmorphism rounded-lg p-4 border-l-4 border-red-500">
-                            <div class="flex items-center mb-3">
-                                <div class="w-3 h-3 bg-red-500 rounded-full mr-2 animate-pulse"></div>
-                                <span class="text-red-400 font-semibold text-sm">ALERT</span>
-                            </div>
-                            <h4 class="text-[#f0f0f0] font-semibold mb-2">Serangan DoS Terdeteksi!</h4>
-                            <p class="text-[#a0a0a0] text-sm">Aktivitas mencurigakan pada port 80</p>
-                        </div>
-                        
-                        <!-- Mitigation Recommendations -->
-                        <div class="glassmorphism rounded-lg p-4">
-                            <h4 class="text-[#c084fc] font-semibold mb-3 text-sm">Rekomendasi Mitigasi:</h4>
-                            <div class="space-y-2 text-xs">
-                                <div class="flex items-start">
-                                    <span class="text-green-400 mr-2">1.</span>
-                                    <span class="text-[#a0a0a0]">Aktifkan rate limiting</span>
-                                </div>
-                                <div class="flex items-start">
-                                    <span class="text-green-400 mr-2">2.</span>
-                                    <span class="text-[#a0a0a0]">Blokir IP sumber serangan</span>
-                                </div>
-                                <div class="flex items-start">
-                                    <span class="text-green-400 mr-2">3.</span>
-                                    <span class="text-[#a0a0a0]">Monitoring traffic real-time</span>
-                                </div>
-                                <div class="flex items-start">
-                                    <span class="text-green-400 mr-2">4.</span>
-                                    <span class="text-[#a0a0a0]">Update firewall rules</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="fade-in fade-in-delay-1 order-1 lg:order-2">
-                    <h3 class="text-2xl md:text-3xl font-bold mb-6 text-[#f0f0f0]">
-                        Dari Deteksi ke Aksi: Rekomendasi Mitigasi Berbasis LLM
-                    </h3>
-                    <p class="text-[#a0a0a0] leading-relaxed text-lg mb-6">
-                        Deteksi saja tidak cukup. Platform kami melangkah lebih jauh dengan mengintegrasikan 
-                        <span class="text-[#c084fc]">Large Language Model (LLM)</span> untuk memberikan panduan yang dapat ditindaklanjuti.
-                    </p>
-                    <p class="text-[#a0a0a0] leading-relaxed text-lg">
-                        Saat serangan terdeteksi, sistem secara otomatis menghasilkan rekomendasi langkah-langkah mitigasi yang praktis dan relevan. Fitur ini membantu pengguna merespons ancaman lebih cepat dan lebih percaya diri.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
+            <h3 class="text-xl font-semibold mb-4 text-[#f0f0f0]">
+              Kerugian Finansial Signifikan
+            </h3>
+            <p class="text-[#a0a0a0] leading-relaxed">
+              Rata-rata kerugian akibat kebocoran data mencapai $4.88 juta.
+            </p>
+          </div>
 
-  <!-- CTA Platform -->
-  <section id="platform" class="py-20 relative">
-    <div class="container mx-auto px-6 text-center">
-      <h2 class="text-3xl md:text-5xl font-bold mb-8 fade-in">Platform <span class="gradient-text">CyberGuard AI</span></h2>
-      <p class="text-xl text-[#a0a0a0] mb-12 max-w-3xl mx-auto fade-in fade-in-delay-1">Rasakan kekuatan deteksi intrusi cerdas dengan teknologi Machine Learning terdepan</p>
-      <div class="glassmorphism rounded-xl p-8 max-w-2xl mx-auto fade-in fade-in-delay-2">
-        <h3 class="text-2xl font-semibold mb-6 text-[#f0f0f0]">Demo Platform Tersedia</h3>
-        <p class="text-[#a0a0a0] mb-8">Integrasikan data jaringan Anda dan dapatkan analisis keamanan real-time.</p>
-        <a href="/predict" class="gradient-bg text-white px-8 py-4 rounded-lg font-semibold hover-glow transition-all duration-300 inline-block">Akses Platform Demo</a>
+          <!-- Public Service Disruption -->
+          <div
+            class="glassmorphism rounded-xl p-8 text-center hover-glow fade-in fade-in-delay-2"
+          >
+            <div class="w-16 h-16 mx-auto mb-6 text-[#c084fc]">
+              <svg
+                viewBox="0 0 64 64"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8 12v40h48V12H8zm4 4h40v32H12V16z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M16 20h32v4H16v-4zm0 8h32v4H16v-4zm0 8h24v4H16v-4z"
+                  fill="currentColor"
+                />
+                <path d="M44 36h4v4h-4v-4z" fill="currentColor" />
+                <path d="M32 4L24 12h16L32 4z" fill="currentColor" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-4 text-[#f0f0f0]">
+              Lumpuhnya Layanan Publik
+            </h3>
+            <p class="text-[#a0a0a0] leading-relaxed">
+              Serangan ransomware pada Pusat Data Nasional menjadi bukti nyata
+              dampak luasnya.
+            </p>
+          </div>
+
+          <!-- Outdated Methods -->
+          <div
+            class="glassmorphism rounded-xl p-8 text-center hover-glow fade-in fade-in-delay-3"
+          >
+            <div class="w-16 h-16 mx-auto mb-6 text-[#c084fc]">
+              <svg
+                viewBox="0 0 64 64"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M32 8C18.745 8 8 18.745 8 32s10.745 24 24 24 24-10.745 24-24S45.255 8 32 8zm0 4c11.046 0 20 8.954 20 20s-8.954 20-20 20S12 43.046 12 32 20.954 12 32 12z"
+                  fill="currentColor"
+                />
+                <path d="M32 16v12l8 8-4 4-12-12V16h8z" fill="currentColor" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-4 text-[#f0f0f0]">
+              Metode Konvensional Tertinggal
+            </h3>
+            <p class="text-[#a0a0a0] leading-relaxed">
+              Deteksi berbasis signature tidak mampu menangani serangan zero-day
+              yang semakin canggih.
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Footer -->
-  <div id="footer-placeholder"></div>
-  <script src="/static/js/main.js"></script>
-</body>
+    <!-- Core Innovations Section -->
+    <section id="metodologi" class="py-20 relative">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 fade-in">
+          <span class="gradient-text">Solusi Inovatif Kami</span>
+        </h2>
+
+        <!-- Two-Stage Classifier Innovation -->
+        <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
+          <div class="fade-in">
+            <h3 class="text-2xl md:text-3xl font-bold mb-6 text-[#f0f0f0]">
+              Arsitektur Two-Stage Classifier untuk Keandalan Maksimal
+            </h3>
+            <p class="text-[#a0a0a0] leading-relaxed text-lg mb-6">
+              Kami tidak hanya membangun satu model. Kami merancang arsitektur
+              cerdas dua tahap.
+              <span class="text-[#c084fc]"
+                >Tahap Pertama (Klasifikasi Biner: Normal vs Serangan)</span
+              >
+              berfungsi sebagai 'Penjaga Gerbang' dengan keandalan deteksi
+              sangat tinggi untuk menyaring semua potensi ancaman.
+            </p>
+            <p class="text-[#a0a0a0] leading-relaxed text-lg">
+              Jika ancaman terdeteksi, data akan diteruskan ke
+              <span class="text-[#c084fc]"
+                >Tahap Kedua (Klasifikasi Multiclass: DoS, Exploits, Fuzzers,
+                dsb)</span
+              >, yaitu model 'Spesialis' yang sangat akurat dalam
+              mengidentifikasi jenis serangan spesifik. Pendekatan ini
+              memastikan deteksi yang lebih andal dan identifikasi yang lebih
+              fokus.
+            </p>
+          </div>
+
+          <div class="glassmorphism rounded-xl p-8 fade-in fade-in-delay-1">
+            <div class="w-full max-w-md mx-auto">
+              <svg viewBox="0 0 400 300" class="w-full h-auto text-[#f0f0f0]">
+                <!-- Input Data -->
+                <rect
+                  x="20"
+                  y="20"
+                  width="80"
+                  height="40"
+                  rx="8"
+                  fill="rgba(192, 132, 252, 0.2)"
+                  stroke="#c084fc"
+                  stroke-width="2"
+                />
+                <text
+                  x="60"
+                  y="45"
+                  text-anchor="middle"
+                  fill="#f0f0f0"
+                  font-size="12"
+                  font-family="Inter"
+                >
+                  Input Data
+                </text>
+
+                <!-- Arrow 1 -->
+                <path
+                  d="M 110 40 L 140 40"
+                  stroke="#c084fc"
+                  stroke-width="2"
+                  marker-end="url(#arrowhead)"
+                />
+
+                <!-- Stage 1 -->
+                <rect
+                  x="150"
+                  y="10"
+                  width="100"
+                  height="60"
+                  rx="8"
+                  fill="rgba(124, 58, 237, 0.2)"
+                  stroke="#7c3aed"
+                  stroke-width="2"
+                />
+                <text
+                  x="200"
+                  y="30"
+                  text-anchor="middle"
+                  fill="#f0f0f0"
+                  font-size="11"
+                  font-family="Inter"
+                >
+                  Stage 1:
+                </text>
+                <text
+                  x="200"
+                  y="45"
+                  text-anchor="middle"
+                  fill="#f0f0f0"
+                  font-size="11"
+                  font-family="Inter"
+                >
+                  Anomaly
+                </text>
+                <text
+                  x="200"
+                  y="60"
+                  text-anchor="middle"
+                  fill="#f0f0f0"
+                  font-size="11"
+                  font-family="Inter"
+                >
+                  Detection
+                </text>
+
+                <!-- Arrow 2 -->
+                <path
+                  d="M 260 40 L 290 40"
+                  stroke="#c084fc"
+                  stroke-width="2"
+                  marker-end="url(#arrowhead)"
+                />
+
+                <!-- Stage 2 -->
+                <rect
+                  x="300"
+                  y="10"
+                  width="100"
+                  height="60"
+                  rx="8"
+                  fill="rgba(192, 132, 252, 0.2)"
+                  stroke="#c084fc"
+                  stroke-width="2"
+                />
+                <text
+                  x="350"
+                  y="30"
+                  text-anchor="middle"
+                  fill="#f0f0f0"
+                  font-size="11"
+                  font-family="Inter"
+                >
+                  Stage 2:
+                </text>
+                <text
+                  x="350"
+                  y="45"
+                  text-anchor="middle"
+                  fill="#f0f0f0"
+                  font-size="11"
+                  font-family="Inter"
+                >
+                  Attack
+                </text>
+                <text
+                  x="350"
+                  y="60"
+                  text-anchor="middle"
+                  fill="#f0f0f0"
+                  font-size="11"
+                  font-family="Inter"
+                >
+                  Identification
+                </text>
+
+                <!-- Benefits -->
+                <text
+                  x="200"
+                  y="120"
+                  text-anchor="middle"
+                  fill="#c084fc"
+                  font-size="14"
+                  font-family="Inter"
+                  font-weight="600"
+                >
+                  Keunggulan Arsitektur
+                </text>
+                <text
+                  x="200"
+                  y="145"
+                  text-anchor="middle"
+                  fill="#a0a0a0"
+                  font-size="12"
+                  font-family="Inter"
+                >
+                  ✓ Keandalan deteksi tinggi
+                </text>
+                <text
+                  x="200"
+                  y="165"
+                  text-anchor="middle"
+                  fill="#a0a0a0"
+                  font-size="12"
+                  font-family="Inter"
+                >
+                  ✓ Identifikasi serangan spesifik
+                </text>
+                <text
+                  x="200"
+                  y="185"
+                  text-anchor="middle"
+                  fill="#a0a0a0"
+                  font-size="12"
+                  font-family="Inter"
+                >
+                  ✓ Efisiensi komputasi optimal
+                </text>
+
+                <!-- Arrow marker definition -->
+                <defs>
+                  <marker
+                    id="arrowhead"
+                    markerWidth="10"
+                    markerHeight="7"
+                    refX="9"
+                    refY="3.5"
+                    orient="auto"
+                  >
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#c084fc" />
+                  </marker>
+                </defs>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- LLM Integration Innovation -->
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div class="glassmorphism rounded-xl p-8 fade-in order-2 lg:order-1">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Detection Alert -->
+              <div
+                class="glassmorphism rounded-lg p-4 border-l-4 border-red-500"
+              >
+                <div class="flex items-center mb-3">
+                  <div
+                    class="w-3 h-3 bg-red-500 rounded-full mr-2 animate-pulse"
+                  ></div>
+                  <span class="text-red-400 font-semibold text-sm">ALERT</span>
+                </div>
+                <h4 class="text-[#f0f0f0] font-semibold mb-2">
+                  Serangan DoS Terdeteksi!
+                </h4>
+                <p class="text-[#a0a0a0] text-sm">
+                  Aktivitas mencurigakan pada port 80
+                </p>
+              </div>
+
+              <!-- Mitigation Recommendations -->
+              <div class="glassmorphism rounded-lg p-4">
+                <h4 class="text-[#c084fc] font-semibold mb-3 text-sm">
+                  Rekomendasi Mitigasi:
+                </h4>
+                <div class="space-y-2 text-xs">
+                  <div class="flex items-start">
+                    <span class="text-green-400 mr-2">1.</span>
+                    <span class="text-[#a0a0a0]">Aktifkan rate limiting</span>
+                  </div>
+                  <div class="flex items-start">
+                    <span class="text-green-400 mr-2">2.</span>
+                    <span class="text-[#a0a0a0]"
+                      >Blokir IP sumber serangan</span
+                    >
+                  </div>
+                  <div class="flex items-start">
+                    <span class="text-green-400 mr-2">3.</span>
+                    <span class="text-[#a0a0a0]"
+                      >Monitoring traffic real-time</span
+                    >
+                  </div>
+                  <div class="flex items-start">
+                    <span class="text-green-400 mr-2">4.</span>
+                    <span class="text-[#a0a0a0]">Update firewall rules</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fade-in fade-in-delay-1 order-1 lg:order-2">
+            <h3 class="text-2xl md:text-3xl font-bold mb-6 text-[#f0f0f0]">
+              Dari Deteksi ke Aksi: Rekomendasi Mitigasi Berbasis LLM
+            </h3>
+            <p class="text-[#a0a0a0] leading-relaxed text-lg mb-6">
+              Deteksi saja tidak cukup. Platform kami melangkah lebih jauh
+              dengan mengintegrasikan
+              <span class="text-[#c084fc]">Large Language Model (LLM)</span>
+              untuk memberikan panduan yang dapat ditindaklanjuti.
+            </p>
+            <p class="text-[#a0a0a0] leading-relaxed text-lg">
+              Saat serangan terdeteksi, sistem secara otomatis menghasilkan
+              rekomendasi langkah-langkah mitigasi yang praktis dan relevan.
+              Fitur ini membantu pengguna merespons ancaman lebih cepat dan
+              lebih percaya diri.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Platform -->
+    <section id="platform" class="py-20 relative">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl md:text-5xl font-bold mb-8 fade-in">
+          Platform <span class="gradient-text">CyberGuard AI</span>
+        </h2>
+        <p
+          class="text-xl text-[#a0a0a0] mb-12 max-w-3xl mx-auto fade-in fade-in-delay-1"
+        >
+          Rasakan kekuatan deteksi intrusi cerdas dengan teknologi Machine
+          Learning terdepan
+        </p>
+        <div
+          class="glassmorphism rounded-xl p-8 max-w-2xl mx-auto fade-in fade-in-delay-2"
+        >
+          <h3 class="text-2xl font-semibold mb-6 text-[#f0f0f0]">
+            Demo Platform Tersedia
+          </h3>
+          <p class="text-[#a0a0a0] mb-8">
+            Integrasikan data jaringan Anda dan dapatkan analisis keamanan
+            real-time.
+          </p>
+          <a
+            href="/predict"
+            class="gradient-bg text-white px-8 py-4 rounded-lg font-semibold hover-glow transition-all duration-300 inline-block"
+            >Akses Platform Demo</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+    <script src="/static/js/main.js"></script>
+  </body>
 </html>
