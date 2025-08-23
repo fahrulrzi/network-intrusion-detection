@@ -307,31 +307,18 @@ class CustomUnpickler(pickle.Unpickler):
 def load_model_with_fix(filepath):
     """
     Load model/encoder files with proper unpickling for custom classes
-    Uses CustomUnpickler for .pkl files and joblib.load for .joblib files
+    Uses aggressive module injection for .pkl files to handle Gunicorn context
     """
-    logger.debug(f"Loading file: {filepath}")
+    print(f"[DEBUG] Loading file: {filepath}")  # Use print to ensure visibility
     
     if not os.path.exists(filepath):
         raise FileNotFoundError(f"File not found: {filepath}")
     
     if filepath.endswith('.pkl'):
-        # Use custom unpickler for .pkl files (usually encoders/custom classes)
-        logger.debug(f"Using CustomUnpickler for .pkl file: {filepath}")
+        print(f"[DEBUG] Processing .pkl file: {filepath}")
         
-        # APPROACH 1: Try CustomUnpickler
+        # AGGRESSIVE APPROACH: Inject classes into all relevant modules FIRST
         try:
-            with open(filepath, 'rb') as f:
-                obj = CustomUnpickler(f).load()
-            logger.debug(f"SUCCESS: Loaded .pkl file with CustomUnpickler: {filepath}")
-            logger.debug(f"Loaded object type: {type(obj)}")
-            return obj
-        except Exception as e:
-            logger.warning(f"CustomUnpickler failed for {filepath}: {e}")
-        
-        # APPROACH 2: Try with module injection
-        logger.debug(f"Trying module injection approach for: {filepath}")
-        try:
-            # Temporarily inject our classes into __main__ and gunicorn modules
             import sys
             current_module = sys.modules[__name__]
             
@@ -339,58 +326,72 @@ def load_model_with_fix(filepath):
             target_encoder_class = getattr(current_module, 'TargetEncoder', None)
             multiclass_encoder_class = getattr(current_module, 'MulticlassTargetEncoder', None)
             
-            # Inject into __main__
-            if '__main__' in sys.modules:
-                if target_encoder_class:
-                    setattr(sys.modules['__main__'], 'TargetEncoder', target_encoder_class)
-                if multiclass_encoder_class:
-                    setattr(sys.modules['__main__'], 'MulticlassTargetEncoder', multiclass_encoder_class)
+            print(f"[DEBUG] Found TargetEncoder: {target_encoder_class}")
+            print(f"[DEBUG] Found MulticlassTargetEncoder: {multiclass_encoder_class}")
             
-            # Inject into gunicorn.__main__
-            for module_name in sys.modules:
-                if 'gunicorn' in module_name and '__main__' in module_name:
-                    gunicorn_main = sys.modules[module_name]
-                    if target_encoder_class:
-                        setattr(gunicorn_main, 'TargetEncoder', target_encoder_class)
-                    if multiclass_encoder_class:
-                        setattr(gunicorn_main, 'MulticlassTargetEncoder', multiclass_encoder_class)
+            # Inject into ALL possible modules that pickle might look for
+            modules_to_inject = ['__main__']
             
-            # Try loading with regular pickle after injection
+            # Find gunicorn modules
+            for module_name in list(sys.modules.keys()):
+                if 'gunicorn' in module_name:
+                    modules_to_inject.append(module_name)
+                    print(f"[DEBUG] Found gunicorn module: {module_name}")
+            
+            # Perform injection
+            for module_name in modules_to_inject:
+                if module_name in sys.modules:
+                    target_module = sys.modules[module_name]
+                    if target_encoder_class and not hasattr(target_module, 'TargetEncoder'):
+                        setattr(target_module, 'TargetEncoder', target_encoder_class)
+                        print(f"[DEBUG] Injected TargetEncoder into {module_name}")
+                    if multiclass_encoder_class and not hasattr(target_module, 'MulticlassTargetEncoder'):
+                        setattr(target_module, 'MulticlassTargetEncoder', multiclass_encoder_class)
+                        print(f"[DEBUG] Injected MulticlassTargetEncoder into {module_name}")
+            
+            # NOW try to load with regular pickle (should work after injection)
+            print(f"[DEBUG] Attempting pickle.load after module injection")
             with open(filepath, 'rb') as f:
                 obj = pickle.load(f)
-            logger.debug(f"SUCCESS: Loaded .pkl file with module injection: {filepath}")
-            logger.debug(f"Loaded object type: {type(obj)}")
+            print(f"[DEBUG] SUCCESS: Loaded .pkl file with module injection: {filepath}")
+            print(f"[DEBUG] Loaded object type: {type(obj)}")
             return obj
             
-        except Exception as e2:
-            logger.warning(f"Module injection approach failed for {filepath}: {e2}")
+        except Exception as e:
+            print(f"[DEBUG] Module injection approach failed: {e}")
+            import traceback
+            print(f"[DEBUG] Full traceback: {traceback.format_exc()}")
         
-        # APPROACH 3: Regular pickle as last resort
-        logger.debug(f"Trying regular pickle as last resort for: {filepath}")
+        # If injection fails, try CustomUnpickler
+        print(f"[DEBUG] Trying CustomUnpickler as fallback")
+        try:
+            with open(filepath, 'rb') as f:
+                obj = CustomUnpickler(f).load()
+            print(f"[DEBUG] SUCCESS: Loaded .pkl file with CustomUnpickler: {filepath}")
+            return obj
+        except Exception as e2:
+            print(f"[DEBUG] CustomUnpickler failed: {e2}")
+        
+        # Last resort: regular pickle
+        print(f"[DEBUG] Trying regular pickle as last resort")
         try:
             with open(filepath, 'rb') as f:
                 obj = pickle.load(f)
-            logger.debug(f"SUCCESS: Loaded .pkl file with regular pickle: {filepath}")
-            logger.debug(f"Loaded object type: {type(obj)}")
+            print(f"[DEBUG] SUCCESS: Loaded .pkl file with regular pickle: {filepath}")
             return obj
         except Exception as e3:
-            logger.error(f"All pickle methods failed for {filepath}")
-            logger.error(f"CustomUnpickler error: {e}")
-            logger.error(f"Module injection error: {e2}")
-            logger.error(f"Regular pickle error: {e3}")
+            print(f"[DEBUG] All methods failed for {filepath}")
             raise e3
             
     else:
         # Use joblib.load for other files (usually models .joblib)
-        logger.debug(f"Using joblib for non-.pkl file: {filepath}")
+        print(f"[DEBUG] Using joblib for non-.pkl file: {filepath}")
         try:
             obj = joblib.load(filepath)
-            logger.debug(f"SUCCESS: Loaded with joblib: {filepath}")
-            logger.debug(f"Loaded object type: {type(obj)}")
+            print(f"[DEBUG] SUCCESS: Loaded with joblib: {filepath}")
             return obj
         except Exception as e:
-            logger.error(f"Joblib loading failed for {filepath}: {e}")
-            logger.error(f"Joblib full traceback: ", exc_info=True)
+            print(f"[DEBUG] Joblib loading failed: {e}")
             raise e
 
 
@@ -403,6 +404,7 @@ def load_model_ecosystem(model_dir, model_type='binary'):
     Load all components needed for inference
     Uses load_model_with_fix for proper unpickling of custom classes
     """
+    print(f"[DEBUG] load_model_ecosystem called with model_dir={model_dir}, model_type={model_type}")
     logger.info(f"Loading {model_type} model from: {model_dir}")
     
     if not os.path.exists(model_dir):
@@ -450,10 +452,13 @@ def load_model_ecosystem(model_dir, model_type='binary'):
     # Load target encoder using load_model_with_fix
     try:
         encoder_path = f"{model_dir}/{target_encoder_filename}"
+        print(f"[DEBUG] About to load target encoder from: {encoder_path}")
         logger.debug(f"Attempting to load target encoder from: {encoder_path}")
         components['target_encoder'] = load_model_with_fix(encoder_path)
+        print(f"[DEBUG] Successfully loaded target encoder!")
         logger.info(f"SUCCESS: {model_type} target encoder loaded")
     except Exception as e:
+        print(f"[DEBUG] Target encoder loading failed: {e}")
         logger.error(f"ERROR: Loading {model_type} target encoder failed - {e}")
         logger.error(f"Full traceback: ", exc_info=True)
         return None
