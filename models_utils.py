@@ -7,7 +7,6 @@ import json
 import joblib
 import pickle
 import logging
-import sys
 import numpy as np
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.model_selection import KFold, StratifiedKFold
@@ -286,9 +285,22 @@ def load_model_ecosystem(model_dir, model_type='binary'):
         model_path = f"{model_dir}/{model_filename}"
         logger.debug(f"Attempting to load model from: {model_path}")
         
+        # Early guard: detect Git LFS pointer files (not yet checked out)
+        try:
+            with open(model_path, 'rb') as _f:
+                head = _f.read(120)
+            if head.startswith(b'version https://git-lfs.github.com/spec/v1'):
+                logger.error(
+                    "Model file appears to be a Git LFS pointer, not the real binary. "
+                    "Run 'git lfs pull' and 'git lfs checkout' in the repository root to fetch large files."
+                )
+                return None
+        except Exception as e_head:
+            logger.debug(f"Could not check LFS pointer header: {e_head}")
+        
         # First attempt: Standard joblib loading
         try:
-            components['model'] = load_model_with_fix(model_path)
+            components['model'] = joblib.load(model_path)
             logger.info(f"SUCCESS: {model_type} model loaded from {model_path}")
         except Exception as e:
             logger.warning(f"Standard joblib loading failed: {e}")
@@ -301,7 +313,7 @@ def load_model_ecosystem(model_dir, model_type='binary'):
                 try:
                     import numpy as np
                     # Try loading with older numpy compatibility
-                    components['model'] = load_model_with_fix(model_path)
+                    components['model'] = joblib.load(model_path)
                     logger.info(f"SUCCESS: {model_type} model loaded with numpy compatibility")
                 except Exception as e2:
                     logger.warning(f"Numpy compatibility loading failed: {e2}")
@@ -328,7 +340,7 @@ def load_model_ecosystem(model_dir, model_type='binary'):
         encoder_path = f"{model_dir}/{target_encoder_filename}"
         # Try joblib first, then pickle
         try:
-            components['target_encoder'] = load_model_with_fix(encoder_path)
+            components['target_encoder'] = joblib.load(encoder_path)
         except Exception:
             with open(encoder_path, 'rb') as f:
                 components['target_encoder'] = pickle.load(f)
@@ -385,7 +397,7 @@ def load_model_ecosystem(model_dir, model_type='binary'):
             label_encoder_path = f"{model_dir}/label_encoder.pkl"
             if os.path.exists(label_encoder_path):
                 try:
-                    components['label_encoder'] = load_model_with_fix(label_encoder_path)
+                    components['label_encoder'] = joblib.load(label_encoder_path)
                 except Exception:
                     with open(label_encoder_path, 'rb') as f:
                         components['label_encoder'] = pickle.load(f)
@@ -397,7 +409,7 @@ def load_model_ecosystem(model_dir, model_type='binary'):
         try:
             preprocessor_path = f"{model_dir}/preprocessor.joblib"
             if os.path.exists(preprocessor_path):
-                components['preprocessor'] = load_model_with_fix(preprocessor_path)
+                components['preprocessor'] = joblib.load(preprocessor_path)
                 logger.info("SUCCESS: Preprocessor loaded")
             else:
                 logger.warning("Preprocessor not found - categorical features may need manual encoding")
@@ -435,6 +447,11 @@ def preprocess_data_for_model(new_data, target_encoder, config, model_type='bina
         logger.debug(f"Required features: {required_features}")
         logger.debug(f"Input data columns: {list(processed_data.columns)}")
         
+        # Ensure 'sloss' is not used in binary path
+        if 'sloss' in processed_data.columns:
+            logger.debug("Dropping 'sloss' for binary prediction")
+            processed_data = processed_data.drop('sloss', axis=1)
+
         # Check for missing features
         missing_features = set(required_features) - set(processed_data.columns)
         if missing_features:
@@ -449,10 +466,7 @@ def preprocess_data_for_model(new_data, target_encoder, config, model_type='bina
             }
             
             for feature in missing_features:
-                if feature in defaults:
-                    processed_data[feature] = defaults[feature]
-                else:
-                    processed_data[feature] = 0
+                processed_data[feature] = defaults.get(feature, 0.0)
             
             logger.debug("SUCCESS: Missing features filled with defaults")
         
@@ -470,8 +484,8 @@ def preprocess_data_for_model(new_data, target_encoder, config, model_type='bina
                 
                 logger.debug(f"SUCCESS: 'proto' encoded successfully")
             except Exception as e:
-                logger.error(f"ERROR: Failed to encode 'proto': {e}")
-                processed_data['proto_encoded'] = 0.5  # neutral fallback
+                logger.warning(f"Proto encoding failed for binary: {e}")
+                processed_data['proto_encoded'] = 0.0  # neutral fallback
                 processed_data = processed_data.drop('proto', axis=1, errors='ignore')
         
         # Reorder columns to match expected order
@@ -533,6 +547,11 @@ def preprocess_data_for_model(new_data, target_encoder, config, model_type='bina
             if 'sloss' in expected_numeric:
                 processed_data['sloss'] = 0.0  # Default value
                 logger.debug("Added missing 'sloss' column with default value 0.0")
+
+        # Ensure 'is_sm_ips_ports' is not used in multiclass path
+        if 'is_sm_ips_ports' in processed_data.columns:
+            logger.debug("Dropping 'is_sm_ips_ports' for multiclass prediction")
+            processed_data = processed_data.drop('is_sm_ips_ports', axis=1)
         
         # Step 3: Apply preprocessor if available
         if preprocessor is not None:
