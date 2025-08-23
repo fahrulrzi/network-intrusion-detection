@@ -261,163 +261,49 @@ class MulticlassTargetEncoder(BaseEstimator, TransformerMixin):
 
 def load_model_ecosystem(model_dir, model_type='binary'):
     """
-    Load all components needed for inference
+    Memuat semua komponen menggunakan pemuat khusus yang sudah diperbaiki.
     """
     logger.info(f"Loading {model_type} model from: {model_dir}")
-    
     if not os.path.exists(model_dir):
         logger.error(f"Model directory not found: {model_dir}")
         return None
     
     components = {}
     
-    # Set filenames based on model type
-    if model_type == 'binary':
-        model_filename = 'binary_classifiers_model.joblib'
-        target_encoder_filename = 'target_encoder.pkl'
-        config_filename = 'feature_config.json'
-    else:  # multiclass
-        model_filename = 'multiclass_gradientboosting_model.joblib'
-        target_encoder_filename = 'multiclass_target_encoder.pkl'
-        config_filename = None  # We'll create config from features
-    
-    # Load main model
     try:
-        model_path = f"{model_dir}/{model_filename}"
-        logger.debug(f"Attempting to load model from: {model_path}")
-        
-        # Early guard: detect Git LFS pointer files (not yet checked out)
-        try:
-            with open(model_path, 'rb') as _f:
-                head = _f.read(120)
-            if head.startswith(b'version https://git-lfs.github.com/spec/v1'):
-                logger.error(
-                    "Model file appears to be a Git LFS pointer, not the real binary. "
-                    "Run 'git lfs pull' and 'git lfs checkout' in the repository root to fetch large files."
-                )
-                return None
-        except Exception as e_head:
-            logger.debug(f"Could not check LFS pointer header: {e_head}")
-        
-        # First attempt: Standard joblib loading
-        try:
-            components['model'] = joblib.load(model_path)
-            logger.info(f"SUCCESS: {model_type} model loaded from {model_path}")
-        except Exception as e:
-            logger.warning(f"Standard joblib loading failed: {e}")
-            
-            # Check if this is a numpy compatibility issue
-            if "_mt19937" in str(e) or "BitGenerator" in str(e) or "numpy.random" in str(e):
-                logger.warning(f"Numpy compatibility issue detected: {e}")
-                
-                # Try with different compatibility settings
-                try:
-                    import numpy as np
-                    # Try loading with older numpy compatibility
-                    components['model'] = joblib.load(model_path)
-                    logger.info(f"SUCCESS: {model_type} model loaded with numpy compatibility")
-                except Exception as e2:
-                    logger.warning(f"Numpy compatibility loading failed: {e2}")
-                    
-                    # Try direct pickle loading as last resort
-                    try:
-                        with open(model_path, 'rb') as f:
-                            components['model'] = pickle.load(f)
-                        logger.info(f"SUCCESS: {model_type} model loaded with pickle fallback")
-                    except Exception as e3:
-                        logger.error(f"All loading methods failed: joblib={e}, numpy_compat={e2}, pickle={e3}")
-                        return None
-            else:
-                # Not a numpy issue, re-raise
-                logger.error(f"Model loading failed with non-numpy error: {e}")
-                return None
-                
-    except Exception as e:
-        logger.error(f"ERROR: Loading {model_type} model failed - {e}")
-        return None
-    
-    # Load target encoder
-    try:
-        encoder_path = f"{model_dir}/{target_encoder_filename}"
-        # Try joblib first, then pickle
-        try:
-            components['target_encoder'] = joblib.load(encoder_path)
-        except Exception:
-            with open(encoder_path, 'rb') as f:
-                components['target_encoder'] = pickle.load(f)
-        logger.info(f"SUCCESS: {model_type} target encoder loaded")
-    except Exception as e:
-        logger.error(f"ERROR: Loading {model_type} target encoder failed - {e}")
-        return None
-    
-    # Load or create feature config
-    if config_filename and os.path.exists(f"{model_dir}/{config_filename}"):
-        try:
-            with open(f"{model_dir}/{config_filename}", 'r') as f:
+        if model_type == 'binary':
+            # Muat semua komponen binary menggunakan fungsi bantuan
+            model_path = os.path.join(model_dir, 'binary_classifiers_model.joblib')
+            encoder_path = os.path.join(model_dir, 'target_encoder.pkl')
+            config_path = os.path.join(model_dir, 'feature_config.json')
+
+            components['model'] = load_model_with_fix(model_path)
+            components['target_encoder'] = load_model_with_fix(encoder_path)
+            with open(config_path, 'r') as f:
                 components['config'] = json.load(f)
-            logger.info(f"SUCCESS: {model_type} feature configuration loaded")
-        except Exception as e:
-            logger.error(f"ERROR: Loading {model_type} feature config failed - {e}")
-            return None
-    else:
-        # For multiclass, try to load the feature_config.json file that should exist
-        if model_type == 'multiclass':
-            config_path = f"{model_dir}/feature_config.json"
-            if os.path.exists(config_path):
-                try:
-                    with open(config_path, 'r') as f:
-                        components['config'] = json.load(f)
-                    logger.info(f"SUCCESS: Loaded multiclass feature configuration from {config_path}")
-                except Exception as e:
-                    logger.error(f"ERROR: Loading multiclass feature config failed - {e}")
-                    return None
-            else:
-                logger.error(f"ERROR: Multiclass feature config not found at {config_path}")
-                return None
-        else:
-            # Create config from predefined features for binary
-            from config import Config
-            features = Config.BINARY_FEATURES
-            numeric_features = [f for f in features if f not in ['proto', 'service', 'state']]
-            categorical_features = ['service', 'state']
-            
-            # Add proto_encoded to numeric features (since proto gets encoded)
-            if 'proto' in features:
-                numeric_features.append('proto_encoded')
-            
-            components['config'] = {
-                'numeric_features': numeric_features,
-                'categorical_features': categorical_features,
-                'original_columns': features
-            }
-            logger.info(f"SUCCESS: Created {model_type} feature configuration")
-    
-    # Load label encoder for multiclass if available
-    if model_type == 'multiclass':
-        try:
-            label_encoder_path = f"{model_dir}/label_encoder.pkl"
-            if os.path.exists(label_encoder_path):
-                try:
-                    components['label_encoder'] = joblib.load(label_encoder_path)
-                except Exception:
-                    with open(label_encoder_path, 'rb') as f:
-                        components['label_encoder'] = pickle.load(f)
-                logger.info("SUCCESS: Label encoder loaded")
-        except Exception as e:
-            logger.warning(f"Label encoder not found or failed to load: {e}")
+
+        else:  # multiclass
+            # Muat semua komponen multiclass menggunakan fungsi bantuan
+            model_path = os.path.join(model_dir, 'multiclass_gradientboosting_model.joblib')
+            target_encoder_path = os.path.join(model_dir, 'multiclass_target_encoder.pkl')
+            label_encoder_path = os.path.join(model_dir, 'label_encoder.pkl')
+            preprocessor_path = os.path.join(model_dir, 'preprocessor.joblib')
+            config_path = os.path.join(model_dir, 'feature_config.json')
+
+            components['model'] = load_model_with_fix(model_path)
+            components['target_encoder'] = load_model_with_fix(target_encoder_path)
+            components['label_encoder'] = load_model_with_fix(label_encoder_path)
+            components['preprocessor'] = load_model_with_fix(preprocessor_path)
+            with open(config_path, 'r') as f:
+                components['config'] = json.load(f)
         
-        # Load preprocessor for multiclass if available
-        try:
-            preprocessor_path = f"{model_dir}/preprocessor.joblib"
-            if os.path.exists(preprocessor_path):
-                components['preprocessor'] = joblib.load(preprocessor_path)
-                logger.info("SUCCESS: Preprocessor loaded")
-            else:
-                logger.warning("Preprocessor not found - categorical features may need manual encoding")
-        except Exception as e:
-            logger.warning(f"Preprocessor loading failed: {e}")
-    
-    return components
+        logger.info(f"SUCCESS: All components for {model_type} model loaded successfully.")
+        return components
+
+    except Exception as e:
+        logger.error(f"ERROR: Failed to load a component for '{model_type}' model. Reason: {e}", exc_info=True)
+        return None
+
 
 
 def preprocess_data_for_model(new_data, target_encoder, config, model_type='binary', preprocessor=None):
