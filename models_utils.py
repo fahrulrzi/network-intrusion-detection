@@ -4,6 +4,7 @@ Model utilities and custom classes for network intrusion detection
 
 import os
 import json
+import sys
 import joblib
 import pickle
 import logging
