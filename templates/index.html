@@ -353,7 +353,7 @@
                     type="number"
                     id="dur"
                     name="dur"
-                    step="0.01"
+                    step="any"
                     class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none"
                     placeholder="0.12"
                   />
@@ -366,7 +366,7 @@
                     type="number"
                     id="rate"
                     name="rate"
-                    step="0.01"
+                    step="any"
                     class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none"
                     placeholder="31.61"
                   />
@@ -375,28 +375,38 @@
                   <label class="block text-sm font-medium text-[#a0a0a0] mb-2"
                     >Protocol</label
                   >
-                  <select
+                  <input
+                    type="text"
                     id="proto"
                     name="proto"
-                    class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] focus:outline-none"
-                  >
-                    <option value="">Select Protocol</option>
-                    <option value="tcp">TCP</option>
-                    <option value="udp">UDP</option>
-                    <option value="icmp">ICMP</option>
-                  </select>
+                    class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none"
+                    placeholder="tcp"
+                  />
                 </div>
                 <div>
                   <label class="block text-sm font-medium text-[#a0a0a0] mb-2"
                     >Service</label
                   >
-                  <input
-                    type="text"
+                  <select
                     id="service"
                     name="service"
-                    class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none"
-                    placeholder="http"
-                  />
+                    class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] focus:outline-none"
+                  >
+                    <option value="" disabled selected>Pilih service</option>
+                    <option value="-">-</option>
+                    <option value="dns">dns</option>
+                    <option value="http">http</option>
+                    <option value="smtp">smtp</option>
+                    <option value="ftp-data">ftp-data</option>
+                    <option value="ftp">ftp</option>
+                    <option value="ssh">ssh</option>
+                    <option value="pop3">pop3</option>
+                    <option value="dhcp">dhcp</option>
+                    <option value="snmp">snmp</option>
+                    <option value="ssl">ssl</option>
+                    <option value="irc">irc</option>
+                    <option value="radius">radius</option>
+                  </select>
                 </div>
               </div>
               <div class="grid md:grid-cols-1 gap-4 mt-4">
@@ -404,22 +414,24 @@
                   <label class="block text-sm font-medium text-[#a0a0a0] mb-2"
                     >State</label
                   >
-                  <input
-                    type="text"
+                  <select
                     id="state"
                     name="state"
-                    class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none"
-                    placeholder="FIN"
-                  />
+                    class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] focus:outline-none"
+                  >
+                    <option value="" disabled selected>Pilih state</option>
+                    <option value="INT">INT</option>
+                    <option value="FIN">FIN</option>
+                    <option value="CON">CON</option>
+                    <option value="REQ">REQ</option>
+                    <option value="RST">RST</option>
+                    <option value="ECO">ECO</option>
+                    <option value="PAR">PAR</option>
+                    <option value="URN">URN</option>
+                    <option value="no">no</option>
+                  </select>
                 </div>
               </div>
-            </div>
-
-            <!-- Packet Information -->
-            <div class="border-l-4 border-green-500 pl-6">
-              <h3 class="text-lg font-medium text-[#f0f0f0] mb-4">
-                📦 Packet Information
-              </h3>
               <div class="grid md:grid-cols-4 gap-4">
                 <div>
                   <label class="block text-sm font-medium text-[#a0a0a0] mb-2"
@@ -510,7 +522,7 @@
                     type="number"
                     id="sload"
                     name="sload"
-                    step="0.01"
+                    step="any"
                     class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none"
                     placeholder="7154.54"
                   />
@@ -523,7 +535,7 @@
                     type="number"
                     id="dload"
                     name="dload"
-                    step="0.01"
+                    step="any"
                     class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none"
                     placeholder="4611.04"
                   />
@@ -539,12 +551,26 @@
               <div class="grid md:grid-cols-4 gap-4">
                 <div>
                   <label class="block text-sm font-medium text-[#a0a0a0] mb-2"
+                    >Source Loss</label
+                  >
+                  <input
+                    type="number"
+                    id="sloss"
+                    name="sloss"
+                    step="any"
+                    class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none"
+                    placeholder="0"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-[#a0a0a0] mb-2"
                     >Destination Loss</label
                   >
                   <input
                     type="number"
                     id="dloss"
                     name="dloss"
+                    step="any"
                     class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none"
                     placeholder="1"
                   />
@@ -557,7 +583,7 @@
                     type="number"
                     id="sinpkt"
                     name="sinpkt"
-                    step="0.01"
+                    step="any"
                     class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none"
                     placeholder="59.67"
                   />
@@ -570,7 +596,7 @@
                     type="number"
                     id="dinpkt"
                     name="dinpkt"
-                    step="0.01"
+                    step="any"
                     class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none"
                     placeholder="68.35"
                   />
@@ -592,7 +618,7 @@
                     type="number"
                     id="sjit"
                     name="sjit"
-                    step="0.01"
+                    step="any"
                     class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none"
                     placeholder="3893.40"
                   />
@@ -605,7 +631,7 @@
                     type="number"
                     id="djit"
                     name="djit"
-                    step="0.01"
+                    step="any"
                     class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none"
                     placeholder="104.84"
                   />
@@ -675,7 +701,7 @@
                     type="number"
                     id="tcprtt"
                     name="tcprtt"
-                    step="0.01"
+                    step="any"
                     class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none"
                     placeholder="0.11"
                   />
@@ -688,7 +714,7 @@
                     type="number"
                     id="synack"
                     name="synack"
-                    step="0.01"
+                    step="any"
                     class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none"
                     placeholder="0.06"
                   />
@@ -703,7 +729,7 @@
                     type="number"
                     id="ackdat"
                     name="ackdat"
-                    step="0.01"
+                    step="any"
                     class="w-full px-3 py-2 input-field rounded-lg text-[#f0f0f0] placeholder-[#a0a0a0] focus:outline-none"
                     placeholder="0.06"
                   />
@@ -1110,6 +1136,19 @@
 
           // Show loading spinner
           document.getElementById("loadingSpinner").classList.remove("hidden");
+
+          // Normalize decimal commas in number inputs and ensure step allows any decimals
+          try {
+            document.querySelectorAll('input[type="number"]').forEach((el) => {
+              if (!el.step || el.step === "0.0000001") {
+                el.step = "any";
+              }
+              el.setAttribute("inputmode", "decimal");
+              if (typeof el.value === "string" && el.value.includes(",")) {
+                el.value = el.value.replace(/,/g, ".");
+              }
+            });
+          } catch (_) {}
 
           // Collect form data
           const formData = new FormData(this);

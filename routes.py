@@ -79,6 +79,11 @@ def register_routes(app):
             else:
                 input_data = request.form.to_dict()
             
+            # Remove fields that are not part of prediction input if provided accidentally
+            for drop_key in ("id", "label", "attack_cat"):
+                if drop_key in input_data:
+                    input_data.pop(drop_key, None)
+
             logger.debug(f"Received form data: {list(input_data.keys())}")
             
             # Convert numeric fields
@@ -89,13 +94,17 @@ def register_routes(app):
                 'smean', 'dmean', 'trans_depth', 'response_body_len', 'ct_srv_src',
                 'ct_state_ttl', 'ct_dst_ltm', 'ct_src_dport_ltm', 'ct_dst_sport_ltm',
                 'ct_dst_src_ltm', 'ct_src_ltm', 'ct_srv_dst', 'is_ftp_login',
-                'ct_ftp_cmd', 'ct_flw_http_mthd', 'is_sm_ips_ports'
+                'ct_ftp_cmd', 'ct_flw_http_mthd', 'is_sm_ips_ports', 'sloss'
             ]
             
             for field in numeric_fields:
                 if field in input_data:
                     try:
-                        input_data[field] = float(input_data[field])
+                        # Normalize decimal comma to dot just in case
+                        val = input_data[field]
+                        if isinstance(val, str):
+                            val = val.replace(',', '.')
+                        input_data[field] = float(val)
                     except (ValueError, TypeError):
                         input_data[field] = 0.0
             
