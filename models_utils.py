@@ -256,8 +256,59 @@ class MulticlassTargetEncoder(BaseEstimator, TransformerMixin):
 
 
 # ================================================================================================
-# MODEL LOADING FUNCTIONS
+# CUSTOM UNPICKLER AND MODEL LOADING FUNCTIONS
 # ================================================================================================
+
+class CustomUnpickler(pickle.Unpickler):
+    """Custom unpickler to handle module path issues"""
+    
+    def find_class(self, module, name):
+        # Handle classes from main module that are now in this module
+        if module == "__main__":
+            current_module = sys.modules[__name__]
+            if hasattr(current_module, name):
+                return getattr(current_module, name)
+        
+        # Handle gunicorn module path issues
+        if 'gunicorn' in module:
+            # Try to find the class in current module
+            current_module = sys.modules[__name__]
+            if hasattr(current_module, name):
+                return getattr(current_module, name)
+        
+        return super().find_class(module, name)
+
+
+def safe_load_pickle(filepath):
+    """
+    Safely load pickle files with custom unpickler to handle module path issues
+    """
+    try:
+        with open(filepath, 'rb') as f:
+            return CustomUnpickler(f).load()
+    except Exception as e:
+        logger.warning(f"CustomUnpickler failed: {e}")
+        # Fallback to standard pickle
+        with open(filepath, 'rb') as f:
+            return pickle.load(f)
+
+
+def safe_load_joblib(filepath):
+    """
+    Safely load joblib files with error handling
+    """
+    try:
+        return joblib.load(filepath)
+    except Exception as e:
+        logger.warning(f"Standard joblib loading failed: {e}")
+        
+        # Try with pickle as fallback
+        try:
+            return safe_load_pickle(filepath)
+        except Exception as e2:
+            logger.error(f"All loading methods failed: joblib={e}, pickle={e2}")
+            raise e
+
 
 def load_model_ecosystem(model_dir, model_type='binary'):
     """
@@ -299,38 +350,9 @@ def load_model_ecosystem(model_dir, model_type='binary'):
         except Exception as e_head:
             logger.debug(f"Could not check LFS pointer header: {e_head}")
         
-        # First attempt: Standard joblib loading
-        try:
-            components['model'] = load_model_with_fix(model_path)
-            logger.info(f"SUCCESS: {model_type} model loaded from {model_path}")
-        except Exception as e:
-            logger.warning(f"Standard joblib loading failed: {e}")
-            
-            # Check if this is a numpy compatibility issue
-            if "_mt19937" in str(e) or "BitGenerator" in str(e) or "numpy.random" in str(e):
-                logger.warning(f"Numpy compatibility issue detected: {e}")
-                
-                # Try with different compatibility settings
-                try:
-                    import numpy as np
-                    # Try loading with older numpy compatibility
-                    components['model'] = load_model_with_fix(model_path)
-                    logger.info(f"SUCCESS: {model_type} model loaded with numpy compatibility")
-                except Exception as e2:
-                    logger.warning(f"Numpy compatibility loading failed: {e2}")
-                    
-                    # Try direct pickle loading as last resort
-                    try:
-                        with open(model_path, 'rb') as f:
-                            components['model'] = pickle.load(f)
-                        logger.info(f"SUCCESS: {model_type} model loaded with pickle fallback")
-                    except Exception as e3:
-                        logger.error(f"All loading methods failed: joblib={e}, numpy_compat={e2}, pickle={e3}")
-                        return None
-            else:
-                # Not a numpy issue, re-raise
-                logger.error(f"Model loading failed with non-numpy error: {e}")
-                return None
+        # Load the model
+        components['model'] = safe_load_joblib(model_path)
+        logger.info(f"SUCCESS: {model_type} model loaded from {model_path}")
                 
     except Exception as e:
         logger.error(f"ERROR: Loading {model_type} model failed - {e}")
@@ -339,12 +361,7 @@ def load_model_ecosystem(model_dir, model_type='binary'):
     # Load target encoder
     try:
         encoder_path = f"{model_dir}/{target_encoder_filename}"
-        # Try joblib first, then pickle
-        try:
-            components['target_encoder'] = load_model_with_fix(encoder_path)
-        except Exception:
-            with open(encoder_path, 'rb') as f:
-                components['target_encoder'] = pickle.load(f)
+        components['target_encoder'] = safe_load_pickle(encoder_path)
         logger.info(f"SUCCESS: {model_type} target encoder loaded")
     except Exception as e:
         logger.error(f"ERROR: Loading {model_type} target encoder failed - {e}")
@@ -397,11 +414,7 @@ def load_model_ecosystem(model_dir, model_type='binary'):
         try:
             label_encoder_path = f"{model_dir}/label_encoder.pkl"
             if os.path.exists(label_encoder_path):
-                try:
-                    components['label_encoder'] = load_model_with_fix(label_encoder_path)
-                except Exception:
-                    with open(label_encoder_path, 'rb') as f:
-                        components['label_encoder'] = pickle.load(f)
+                components['label_encoder'] = safe_load_pickle(label_encoder_path)
                 logger.info("SUCCESS: Label encoder loaded")
         except Exception as e:
             logger.warning(f"Label encoder not found or failed to load: {e}")
@@ -410,7 +423,7 @@ def load_model_ecosystem(model_dir, model_type='binary'):
         try:
             preprocessor_path = f"{model_dir}/preprocessor.joblib"
             if os.path.exists(preprocessor_path):
-                components['preprocessor'] = load_model_with_fix(preprocessor_path)
+                components['preprocessor'] = safe_load_joblib(preprocessor_path)
                 logger.info("SUCCESS: Preprocessor loaded")
             else:
                 logger.warning("Preprocessor not found - categorical features may need manual encoding")
@@ -629,29 +642,3 @@ def preprocess_data_for_model(new_data, target_encoder, config, model_type='bina
     logger.debug(f"Final features: {list(processed_data.columns)}")
     
     return processed_data
-
-class CustomUnpickler(pickle.Unpickler):
-    def find_class(self, module, name):
-        # Solusi untuk model yang disimpan saat skrip training adalah __main__
-        if module == "__main__":
-            # Dapatkan referensi ke modul saat ini (models_utils)
-            # dan cari kelas di dalamnya.
-            current_module = sys.modules[__name__]
-            if hasattr(current_module, name):
-                return getattr(current_module, name)
-        return super().find_class(module, name)
-
-def load_model_with_fix(filepath):
-    """
-    Memuat file. Menggunakan CustomUnpickler untuk file .pkl
-    dan load_model_with_fix untuk file .joblib.
-    """
-    # Periksa ekstensi file
-    if filepath.endswith('.pkl'):
-        # Gunakan unpickler khusus untuk file .pkl (biasanya untuk encoder/class kustom)
-        with open(filepath, 'rb') as f:
-            return CustomUnpickler(f).load()
-    else:
-        # Gunakan load_model_with_fix untuk file lain (biasanya model .joblib)
-        # Joblib lebih baik dalam menangani array numpy besar dan kompresi.
-        return load_model_with_fix(filepath)
