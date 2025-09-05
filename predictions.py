@@ -116,13 +116,28 @@ def get_llm_mitigation(attack_type, input_data=None):
 def get_fallback_mitigation(attack_type):
     """
     Get fallback mitigation recommendations from predefined templates
+    and format them into a markdown string.
     """
-    mitigation = Config.FALLBACK_MITIGATIONS.get(attack_type, Config.FALLBACK_MITIGATIONS['Generic'])
+    template = Config.FALLBACK_MITIGATIONS.get(attack_type, Config.FALLBACK_MITIGATIONS['Generic'])
+    
+    # Format the dictionary into a markdown string
+    mitigation_text = f"""
+        ## 1. Penjelasan Serangan
+        {template.get('description', 'No description available.')}
+
+        ## 2. Analisis Pola
+        {template.get('analysis', 'No analysis available.')}
+
+        ## 3. Rekomendasi Mitigasi
+        {template.get('mitigation', 'No mitigation steps available.')}
+        """
+    
     return {
         'success': True,
-        'mitigation': mitigation,
+        'mitigation': mitigation_text.strip(),
         'source': 'Predefined Template'
     }
+
 
 
 # ================================================================================================
