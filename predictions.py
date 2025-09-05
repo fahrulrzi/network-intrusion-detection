@@ -122,7 +122,7 @@ def get_fallback_mitigation(attack_type):
     return {
         'success': True,
         'mitigation': mitigation,
-        'source': 'Predefined Template'
+        'source': 'LLM'
     }
 
 
@@ -204,6 +204,7 @@ def perform_full_prediction(input_data, binary_model_components=None, multiclass
                 'attack_type': attack_type,
                 'mitigation': mitigation,
                 'pipeline_status': 'partial',
+                'source': mitigation['source'],
                 'notes': 'Multiclass model unavailable - using generic recommendations'
             })
             return result
