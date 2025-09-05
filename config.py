@@ -8,7 +8,7 @@ class Config:
     # API Configuration
     GROQ_API_KEY = os.getenv('GROQ_API_KEY')
     GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
-    GROQ_MODEL = "llama3-8b-8192"  # Updated to supported model
+    GROQ_MODEL="llama-3.1-8b-instant"  # Updated to supported model
     
     # Model Paths
     BINARY_MODEL_DIR = 'models/binary'
