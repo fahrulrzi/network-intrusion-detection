@@ -79,7 +79,7 @@ def get_llm_mitigation(attack_type, input_data=None):
                     'content': prompt
                 }
             ],
-            'model': 'llama3-8b-8192',  # Updated to supported model
+            'model': 'llama-3.1-8b-instant',  # Updated to supported model
             'temperature': 0.3,
             'max_tokens': 1000
         }
