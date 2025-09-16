@@ -35,36 +35,34 @@ def get_llm_mitigation(attack_type, input_data=None):
             - Service: {row.get('service', 'N/A')}
             """
         
-        prompt = f"""Anda adalah ahli keamanan siber. Analisis hasil deteksi intrusi jaringan ini dan berikan rekomendasi mitigasi dalam bahasa Indonesia.
-            HASIL DETEKSI:
-            - Jenis Serangan: {attack_type}
-            {network_summary}
-
-            Berikan response dalam format markdown yang BENAR dengan struktur:
-
-            ## 1. Penjelasan Serangan
-            Jelaskan dalam 1-2 kalimat singkat jenis serangan ini.
-
-            ## 2. TINDAKAN DARURAT
-            - Langkah pertama yang harus dilakukan
-            - Langkah kedua yang kritis  
-            - Langkah ketiga jika diperlukan
-
-            ## 3. Analisis Data Jaringan
-            Analisis pola lalu lintas dalam 2-3 kalimat berdasarkan data yang terdeteksi. Sebutkan angka data usernya (agar terlihat bahwa LLM dapat membaca data user yg diinputkan tersebut)
-
-            ## 4. LANGKAH INVESTIGASI
-            - Periksa log sistem dan keamanan
-            - Analisis traffic pattern lebih detail
-            - Identifikasi sumber dan dampak serangan
-
-            ## 5. PENCEGAHAN MASA DEPAN
-            - Konfigurasi firewall dan filtering
-            - Implementasi sistem monitoring
-            - Update keamanan dan patching
-
-            Gunakan format markdown yang benar dengan ## untuk header dan - untuk bullet points. Berikan rekomendasi yang praktis dan spesifik.
-            Langsung berikan jawabannya tanpa perlu kalimat pembuka respons (seperti:Here is the analysis and recommendation in markdown format:)"""
+        prompt = f"""
+            **Role:** Anda adalah seorang Ahli Respons Insiden Keamanan Siber dengan pengalaman 10 tahun.
+            **Instruction:** Buat laporan respons insiden yang komprehensif berdasarkan data deteksi intrusi yang disediakan.
+            **Steps:**
+                1.  Mulai dengan mengidentifikasi dan menjelaskan jenis serangan yang terdeteksi.
+                2.  Rumuskan tindakan darurat yang paling kritis untuk segera dilakukan.
+                3.  Analisis data jaringan yang diberikan, hubungkan angka-angka spesifik dengan karakteristik serangan tersebut.
+                4.  Susun langkah-langkah investigasi yang metodis.
+                5.  Berikan rekomendasi pencegahan jangka panjang yang strategis.
+                6.  Format seluruh output dalam markdown sesuai struktur yang diminta.
+            **End Goal:** Laporan akhir harus jelas, tajam, dan sangat praktis, memungkinkan seorang analis keamanan untuk segera bertindak dan memahami situasi dengan cepat.
+            **Narrowing (Batasan):**
+                -   Output harus dalam Bahasa Indonesia.
+                -   Gunakan data berikut:
+                    -   Jenis Serangan: {attack_type}
+                    -   Data Jaringan: {network_summary}
+            -   Struktur Output WAJIB mengikuti format di bawah ini:
+                ## 1. Penjelasan Serangan
+                ...
+                ## 2. TINDAKAN DARURAT
+                ...
+                ## 3. Analisis Data Jaringan
+                ...
+                ## 4. LANGKAH INVESTIGASI
+                ...
+                ## 5. PENCEGAHAN MASA DEPAN
+            Langsung berikan jawabannya tanpa kalimat pembuka. Gunakan format markdown yang benar dengan ## untuk header dan - untuk bullet points.
+        """
 
         # Call Groq API
         headers = {
